@@ -281,19 +281,19 @@ function displayImageResults(query) {
     
     const images = [
         {
-            src: 'https://via.placeholder.com/300x200/4285f4/ffffff?text=E-commerce+Design',
+            src: 'img/poster-promosi.png',
             title: 'Poster Promosi',
             source: 'davanico.com',
             link: '#'
         },
         {
-            src: 'https://via.placeholder.com/300x200/ea4335/ffffff?text=Mobile+App+UI',
+            src: 'img/logo-sederhana.png',
             title: 'Logo Sederhana',
             source: 'davanico.com',
             link: '#'
         },
         {
-            src: 'https://via.placeholder.com/300x200/34a853/ffffff?text=Brand+Identity',
+            src: 'img/konten-sosmed.png',
             title: 'Konten Sosial Media',
             source: 'davanico.com',
             link: '#'
