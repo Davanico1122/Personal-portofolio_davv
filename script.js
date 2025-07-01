@@ -416,7 +416,7 @@ function displayPortfolioResults(query) {
 
     const portfolioProjects = [
         {
-            title: " Design dan Pengembang web ",
+            title: "Design dan Pengembang web",
             description: "Seorang pengembang web pemula dengan semangat untuk menciptakan solusi digital yang tidak hanya fungsional tetapi juga estetis dan menarik secara visual. Saya antusias dalam menjelajahi berbagai teknologi web modern",
             link: "https://davanico18.vercel.app/"
         },
@@ -432,13 +432,16 @@ function displayPortfolioResults(query) {
         }
     ];
 
-    const filtered = portfolioProjects.filter(project =>
-        project.title.toLowerCase().includes(query.toLowerCase()) ||
-        project.description.toLowerCase().includes(query.toLowerCase())
-    );
+    // Jika query tidak kosong, filter berdasarkan query, jika kosong tampilkan semua
+    const filtered = query.trim()
+        ? portfolioProjects.filter(project =>
+            project.title.toLowerCase().includes(query.toLowerCase()) ||
+            project.description.toLowerCase().includes(query.toLowerCase())
+        )
+        : portfolioProjects;
 
     if (filtered.length === 0) {
-        resultsContainer.innerHTML = `<p style="color:white">Tidak ada proyek ditemukan.</p>`;
+        resultsContainer.innerHTML = `<p style="color:black">Tidak ada proyek ditemukan.</p>`;
         return;
     }
 
@@ -455,6 +458,9 @@ function displayPortfolioResults(query) {
         resultsContainer.appendChild(resultDiv);
     });
 }
+
+
+
 // Display about results
 function displayAboutResults(query) {
     const resultsContainer = document.getElementById('searchResults');
