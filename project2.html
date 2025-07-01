@@ -1,141 +1,724 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Manager Mobile App - Davanico Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Branding & Identitas Visual - Detail Proyek</title>
+    <style>
+        /* ========== Reset & Global ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1A1A1A; /* Teks utama menjadi hitam/abu gelap */
+            background: #F0F0F0; /* Latar belakang body: Abu-abu terang, seperti macOS */
+            overflow-x: hidden; /* Pastikan tidak ada scroll horizontal */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ========== Header ========== */
+        header {
+            background: rgba(45, 45, 45, 0.95); /* Abu-abu sangat gelap, sedikit transparan */
+            backdrop-filter: blur(10px); /* Efek blur seperti di macOS */
+            -webkit-backdrop-filter: blur(10px); /* Untuk Safari */
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow lembut */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: .3s;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #FFFFFF; /* Warna logo menjadi putih solid agar selalu terlihat jelas di header gelap */
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+            background-clip: unset;
+        }
+
+        .back-btn {
+            color:  #A0A0A0; /* Biru macOS */
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border: 2px solid #808080; /* Border biru macOS */
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            outline: none;
+            box-shadow: none;
+        }
+
+        .back-btn:hover {
+            background: #808080; /* Hover menjadi biru solid */
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 122, 255, 0.2); /* Bayangan lembut */
+        }
+
+        .back-btn:focus,
+        .back-btn:active {
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* ========== Hero Section ========== */
+        .project-hero {
+            background: #E8E8E8; /* Background hero juga terang, seperti halaman utama */
+            color: #1A1A1A; /* Warna teks hero menjadi gelap agar terlihat di background terang */
+            padding: 6rem 0 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* Efek grain dengan warna yang disesuaikan untuk background terang */
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(0,0,0,0.05)"/><circle cx="75" cy="75" r="1" fill="rgba(0,0,0,0.05)"/><circle cx="25" cy="75" r='1' fill='rgba(0,0,0,0.025)'/><circle cx='75' cy='25' r='1' fill='rgba(0,0,0,0.025)'/></pattern></defs><rect width='100' height='100' fill='url(%23grain)'/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .project-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-icon {
+            min-width: 160px;
+            min-height: 80px;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.6); /* Lebih transparan dan putih */
+            border-radius: 25px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 auto 2rem;
+            backdrop-filter: blur(15px); /* Blur sedikit lebih kuat */
+            border: 2px solid rgba(255, 255, 255, 0.4); /* Border lebih jelas */
+            white-space: nowrap;
+            color: #1A1A1A; /* Warna teks ikon gelap */
+        }
+
+        .project-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            /* Ganti gradient teks agar terlihat di background terang */
+            background:linear-gradient(135deg,#1A1A1A,#4A4A4A); /* Hitam ke abu gelap */
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-clip:text;
+        }
+
+        .project-hero .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            color: #4A4A4A; /* Subtitle abu gelap */
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            color: #4A4A4A; /* Warna teks meta info abu gelap */
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .meta-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1A1A1A; /* Nilai meta lebih gelap */
+        }
+
+        /* ========== Main Content ========== */
+        main {
+            background: #FFFFFF; /* Main content putih bersih */
+            margin-top: -2rem;
+            border-radius: 30px 30px 0 0;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.05); /* Bayangan di atas */
+        }
+
+        .content-section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            /* Ganti gradient teks agar terlihat di background terang */
+            background:linear-gradient(135deg,#1A1A1A,#4A4A4A); /* Hitam ke abu gelap */
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-clip:text;
+        }
+
+        /* ========== Overview Section ========== */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .overview-text {
+            font-size: 1.1rem;
+            color: #555; /* Teks abu-abu sedang */
+            line-height: 1.8;
+        }
+
+        .overview-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .project-stats {
+            background: #F8F8F8; /* Background stats abu-abu terang */
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid #E0E0E0; /* Border abu-abu tipis */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Shadow lembut */
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #D0D0D0; /* Border abu-abu sedang */
+        }
+
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .stat-value {
+            font-weight: 600;
+            color: #434445; /* Nilai stat biru macOS */
+        }
+
+        /* ========== Technology Stack ========== */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .tech-category {
+            background: #FFFFFF; /* Background kategori putih bersih */
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Shadow lebih lembut */
+            border: 1px solid #E0E0E0; /* Border abu-abu tipis */
+            transition: transform 0.3s ease;
+        }
+
+        .tech-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12); /* Shadow sedikit lebih kuat */
+        }
+
+        .tech-category h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            padding: 0.4rem 1rem;
+            background: #EBEBEB; /* Background tag teknologi lebih terang */
+            color: #555555; /* Warna teks tag teknologi */
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid #D0D0D0; /* Border tipis */
+        }
+
+        /* ========== Features Section ========== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: #FFFFFF; /* Kartu fitur putih bersih */
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Shadow lebih lembut */
+            border: 1px solid #E0E0E0; /* Border abu-abu tipis */
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #434445; /* Garis atas biru macOS */
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: #007AFF; /* Ikon fitur biru macOS */
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* ========== Screenshots Section ========== */
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .screenshot-card {
+            background: #FFFFFF; /* Kartu screenshot putih bersih */
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Shadow lembut */
+            border: 1px solid #E0E0E0; /* Border abu-abu tipis */
+            transition: transform 0.3s ease;
+        }
+
+        .screenshot-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12); /* Shadow sedikit lebih kuat */
+        }
+        
+        .screenshot-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .screenshot-placeholder { /* Ini adalah fallback jika gambar tidak dimuat */
+            height: 200px;
+            background: #D0D0D0; /* Placeholder abu-abu */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6A6A6A; /* Teks placeholder abu gelap */
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .screenshot-info {
+            padding: 1.5rem;
+        }
+
+        .screenshot-info h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .screenshot-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* ========== Call to Action ========== */
+        .cta-section {
+            background: #2A2A2A; /* Latar belakang CTA abu-abu gelap/hitam */
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #007AFF; /* Tombol biru solid */
+            color: white;
+            border: 2px solid #007AFF; /* Border biru solid */
+            box-shadow: 0 5px 15px rgba(0, 122, 255, 0.2); /* Bayangan biru */
+        }
+
+        .btn-primary:hover {
+            background: #005BBC; /* Biru lebih gelap saat hover */
+            transform: translateY(-2px);
+            box-shadow:0 8px 20px rgba(0,0,0,.2);
+        }
+
+        .btn-secondary {
+            background: transparent; /* Transparan */
+            color: #007AFF; /* Teks biru */
+            border: 2px solid #007AFF; /* Border biru */
+            box-shadow: 0 5px 15px rgba(0, 122, 255, 0.1); /* Bayangan lembut */
+        }
+
+        .btn-secondary:hover {
+            background: #007AFF; /* Hover menjadi biru solid */
+            color: white;
+            transform: translateY(-2px);
+            box-shadow:0 8px 20px rgba(0,0,0,.2);
+        }
+
+        /* ========== Responsive Design ========== */
+        @media (max-width: 768px) {
+            .project-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .project-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .tech-grid, .features-grid, .screenshots-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== Animations ========== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-    <div class="project-page">
-        <!-- Header with back navigation -->
-        <header class="project-header">
-            <div class="header-content">
-                <a href="search.html" class="back-link">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#1a0dab">
-                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-                    </svg>
-                    Back to results
-                </a>
-                
-                <div class="small-logo">
-                    <a href="index.html">
-                        <span class="letter-d">D</span>
-                        <span class="letter-a1">a</span>
-                        <span class="letter-v">v</span>
-                        <span class="letter-a2">a</span>
-                        <span class="letter-n">n</span>
-                        <span class="letter-i">i</span>
-                        <span class="letter-c">c</span>
-                        <span class="letter-o">o</span>
-                    </a>
+    <header>
+        <nav class="container">
+            <div class="logo">Davanico Ady Nugroho</div>
+            <a href="search.html" class="back-btn">KEMBALI</a>
+        </nav>
+    </header>
+
+    <section class="project-hero">
+        <div class="container">
+            <div class="project-hero-content">
+                <div class="project-icon">Brand</div>
+                <h1>Branding & Identitas Visual</h1>
+                <p class="subtitle">Membangun identitas merek yang kuat dan kohesif melalui eksplorasi logo, palet warna, tipografi, dan panduan gaya untuk berbagai klien dan kebutuhan.</p>
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Fokus Proyek</div>
+                        <div class="meta-value">Strategi Visual</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Output</div>
+                        <div class="meta-value">Panduan Merek</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Spesialisasi</div>
+                        <div class="meta-value">Desain Adaptif</div>
+                    </div>
                 </div>
             </div>
-        </header>
-        
-        <!-- Project content -->
-        <main class="project-content">
-            <div class="project-hero">
-                <h1>Task Manager Mobile App</h1>
-                <p class="project-subtitle">Intuitive mobile interface design for productivity and task management</p>
-                
-                <!-- Project image -->
-                <div class="project-image">
-                    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&crop=center" alt="Task Manager Mobile App">
-                </div>
-            </div>
-            
-            <div class="project-details">
-                <div class="project-info">
-                    <h2>Project Overview</h2>
-                    <p>This mobile application design project focused on creating an intuitive and efficient task management system for busy professionals. The design emphasizes simplicity, visual hierarchy, and seamless user interactions to help users stay organized and productive.</p>
-                    
-                    <h3>Key Features</h3>
-                    <ul>
-                        <li>Clean, minimalist interface design</li>
-                        <li>Gesture-based task management</li>
-                        <li>Smart categorization and filtering</li>
-                        <li>Progress tracking and analytics</li>
-                        <li>Collaborative team features</li>
-                        <li>Cross-platform synchronization</li>
-                    </ul>
-                    
-                    <h3>Design Principles</h3>
-                    <div class="principles-grid">
-                        <div class="principle-item">
-                            <h4>Simplicity</h4>
-                            <p>Clean interface with minimal cognitive load</p>
-                        </div>
-                        <div class="principle-item">
-                            <h4>Efficiency</h4>
-                            <p>Quick task creation and management</p>
-                        </div>
-                        <div class="principle-item">
-                            <h4>Accessibility</h4>
-                            <p>Inclusive design for all users</p>
+        </div>
+    </section>
+
+    <main>
+        <section class="content-section">
+            <div class="container">
+                <div class="overview-grid">
+                    <div class="overview-content fade-in">
+                        <h2 class="section-title">Tentang Proyek Branding</h2>
+                        <div class="overview-text">
+                            <p>
+                                Proyek ini didedikasikan untuk membangun identitas merek yang kuat dan tak terlupakan. Kami percaya bahwa branding bukan hanya tentang logo yang bagus, tetapi tentang menciptakan narasi visual yang kohesif, yang mampu berbicara langsung dengan target audiens. Ini adalah proses holistik yang mencakup riset pasar, pemahaman nilai inti merek, dan penerjemahan esensi tersebut ke dalam elemen visual yang konsisten.
+                            </p>
+                            <p>
+                                Kami memulai dengan eksplorasi mendalam terhadap visi dan misi klien, dilanjutkan dengan pengembangan konsep logo yang inovatif, pemilihan palet warna yang strategis, dan penentuan tipografi yang tepat untuk mencerminkan kepribadian merek. Hasil akhirnya adalah panduan gaya merek yang komprehensif, memastikan setiap aplikasi visual konsisten di semua titik sentuh.
+                            </p>
+                            <p>
+                                Tujuan kami adalah untuk memberdayakan merek Anda dengan fondasi visual yang solid, meningkatkan pengenalan merek, membangun kepercayaan, dan menciptakan koneksi emosional dengan konsumen. Ini adalah investasi jangka panjang yang akan membedakan merek Anda di pasar yang kompetitif.
+                            </p>
                         </div>
                     </div>
-                    
-                    <h3>User Research Insights</h3>
-                    <p>Through extensive user research, I discovered that most task management apps failed because they were either too complex or lacked essential features. Users wanted something that was both powerful and simple to use, with the ability to quickly capture thoughts and organize them efficiently.</p>
-                    
-                    <h3>Design System</h3>
-                    <p>I developed a comprehensive design system including color palette, typography, iconography, and component library to ensure consistency across all app screens and future updates.</p>
-                    
-                    <div class="color-palette">
-                        <h4>Color Palette</h4>
-                        <div class="color-swatches">
-                            <div class="color-swatch" style="background-color: #34A853;">
-                                <span>Primary Green</span>
-                            </div>
-                            <div class="color-swatch" style="background-color: #EA4335;">
-                                <span>Accent Red</span>
-                            </div>
-                            <div class="color-swatch" style="background-color: #4285F4;">
-                                <span>Info Blue</span>
-                            </div>
-                            <div class="color-swatch" style="background-color: #FBBC05;">
-                                <span>Warning Yellow</span>
-                            </div>
+                    <div class="project-stats fade-in">
+                        <h3 style="margin-bottom: 1.5rem; color: #333;">Dampak Branding & Statistik</h3>
+                        <div class="stat-item">
+                            <span class="stat-label">Peningkatan Brand Recognition</span>
+                            <span class="stat-value">60%+</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Peningkatan Kepercayaan Konsumen</span>
+                            <span class="stat-value">45%+</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Proyek Branding Selesai</span>
+                            <span class="stat-value">50+</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Tingkat Retensi Brand Message</span>
+                            <span class="stat-value">75%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Brand Guidelines Dibuat</span>
+                            <span class="stat-value">20+</span>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Additional project images -->
-                <div class="project-gallery">
-                    <h3>App Screens</h3>
-                    <div class="gallery-grid">
-                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=300&h=600&fit=crop&crop=center" alt="Home Screen">
-                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=300&h=600&fit=crop&crop=center" alt="Task List">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&h=600&fit=crop&crop=center" alt="Add Task">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=600&fit=crop&crop=center" alt="Analytics">
+            </div>
+        </section>
+
+        <section class="content-section" style="background: #F8F8F8;"> <div class="container">
+                <h2 class="section-title fade-in">Alat & Proses Kreatif</h2>
+                <div class="tech-grid">
+                    <div class="tech-category fade-in">
+                        <h3>Desain Logo & Konsep</h3>
+                        <div class="tech-list">
+                            <span class="tech-tag">Adobe Illustrator</span>
+                            <span class="tech-tag">Adobe Photoshop</span>
+                            <span class="tech-tag">Konseptualisasi</span>
+                            <span class="tech-tag">Sketching</span>
+                        </div>
+                    </div>
+                    <div class="tech-category fade-in">
+                        <h3>Pengembangan Visual</h3>
+                        <div class="tech-list">
+                            <span class="tech-tag">Figma</span>
+                            <span class="tech-tag">CorelDRAW</span>
+                            <span class="tech-tag">Palet Warna</span>
+                            <span class="tech-tag">Tipografi</span>
+                        </div>
+                    </div>
+                    <div class="tech-category fade-in">
+                        <h3>Panduan Merek</h3>
+                        <div class="tech-list">
+                            <span class="tech-tag">Adobe InDesign</span>
+                            <span class="tech-tag">Google Docs</span>
+                            <span class="tech-tag">Sistem Grid</span>
+                        </div>
+                    </div>
+                    <div class="tech-category fade-in">
+                        <h3>Kolaborasi & Riset</h3>
+                        <div class="tech-list">
+                            <span class="tech-tag">Miro</span>
+                            <span class="tech-tag">Google Meet</span>
+                            <span class="tech-tag">Riset Pasar</span>
+                            <span class="tech-tag">Analisis Kompetitor</span>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="user-flow">
-                    <h3>User Flow</h3>
-                    <p>The user flow was designed to minimize friction and allow users to quickly capture, organize, and complete tasks. The main flow includes:</p>
-                    <ol>
-                        <li>Quick task capture from any screen</li>
-                        <li>Smart categorization suggestions</li>
-                        <li>Priority and deadline assignment</li>
-                        <li>Progress tracking and completion</li>
-                        <li>Analytics and insights</li>
-                    </ol>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2 class="section-title fade-in">Layanan Inti</h2>
+                <div class="features-grid">
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">✨</div>
+                        <h3>Desain Logo & Logotype</h3>
+                        <p>Menciptakan identitas visual utama yang unik dan mudah diingat, merefleksikan esensi merek Anda.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">🎨</div>
+                        <h3>Pengembangan Palet Warna</h3>
+                        <p>Memilih kombinasi warna yang tepat untuk membangkitkan emosi, membedakan merek, dan menciptakan konsistensi visual.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">🅰️</div>
+                        <h3>Pemilihan & Hierarki Tipografi</h3>
+                        <p>Menentukan font yang sesuai dan hierarki teks untuk keterbacaan optimal di semua media.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">📘</div>
+                        <h3>Penyusunan Brand Guideline</h3>
+                        <p>Dokumen komprehensif yang memuat standar penggunaan logo, warna, tipografi, dan elemen visual lainnya.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">📦</div>
+                        <h3>Aplikasi Brand (Mockup)</h3>
+                        <p>Penerapan identitas visual pada berbagai media seperti kartu nama, merchandise, atau kemasan produk.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">📈</div>
+                        <h3>Strategi & Konsultasi Branding</h3>
+                        <p>Memberikan konsultasi strategis untuk membangun narasi merek yang kuat dan positioning di pasar.</p>
+                    </div>
                 </div>
             </div>
-            
-            <!-- Navigation to other projects -->
-            <div class="project-navigation">
-                <a href="project1.html" class="nav-prev">← Previous Project</a>
-                <a href="project3.html" class="nav-next">Next Project →</a>
+        </section>
+
+        <section class="content-section" style="background: #F8F8F8;"> <div class="container">
+                <h2 class="section-title fade-in">Studi Kasus & Preview Karya</h2>
+                <div class="screenshots-grid">
+                    <div class="screenshot-card fade-in">
+                        <div class="screenshot-placeholder">Desain Logo Akhir</div>
+                        <div class="screenshot-info">
+                            <h3>Contoh Logo Final</h3>
+                            <p>Tampilan logo yang telah disetujui dan siap digunakan dalam berbagai aplikasi.</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-card fade-in">
+                        <div class="screenshot-placeholder">Panduan Warna & Tipografi</div>
+                        <div class="screenshot-info">
+                            <h3>Detail Brand Guideline</h3>
+                            <p>Halaman contoh dari panduan merek yang menunjukkan penggunaan warna dan tipografi.</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-card fade-in">
+                        <div class="screenshot-placeholder">Aplikasi Desain pada Mockup</div>
+                        <div class="screenshot-info">
+                            <h3>Brand dalam Aplikasi Nyata</h3>
+                            <p>Visualisasi bagaimana identitas merek diterapkan pada merchandise atau materi pemasaran.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </main>
-    </div>
-    
-    <script src="script.js"></script>
+        </section>
+    </main>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: #FFFFFF;">Mari Bangun Identitas Merek Anda!</h2>
+            <p style="font-size: 1.2rem; opacity: 0.9; color: #D0D0D0;">
+                Siap menciptakan merek yang kuat dan tak terlupakan? Mari diskusikan visi Anda.
+            </p>
+            <div class="cta-buttons">
+                <a href="/not-found" class="btn btn-primary">Lihat Portofolio Branding</a>
+                <a href="/not-found" class="btn btn-secondary">Mulai Proyek Anda</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
