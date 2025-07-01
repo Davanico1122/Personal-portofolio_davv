@@ -410,7 +410,7 @@ function displayDesignResults(query) {
 }
 
 function displayPortfolioResults(query) {
-    const resultsContainer = document.getElementById("searchResults");
+    const resultsContainer = document.getElementById("searchResults"); // HARUS pakai id: searchResults
     resultsContainer.innerHTML = ""; // Bersihkan konten lama
 
     const portfolioProjects = [
@@ -437,7 +437,7 @@ function displayPortfolioResults(query) {
     );
 
     if (filtered.length === 0) {
-        resultsContainer.innerHTML = '<p style="color:white">Tidak ada proyek ditemukan.</p>';
+        resultsContainer.innerHTML = <p style="color:white">Tidak ada proyek ditemukan.</p>;
         return;
     }
 
@@ -454,7 +454,6 @@ function displayPortfolioResults(query) {
         resultsContainer.appendChild(resultDiv);
     });
 }
-
 // Display about results
 function displayAboutResults(query) {
     const resultsContainer = document.getElementById('searchResults');
