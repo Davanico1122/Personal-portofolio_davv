@@ -425,7 +425,7 @@ function displayAboutResults(query) {
     aboutSection.innerHTML = `
         <div class="about-profile">
         <div class="profile-image">
-            <img src="assets/img/profile.png" alt="Foto Profil Davanico" width="120" height="120" style="border-radius: 50%; object-fit: cover;" />
+            <img src="img/profile.png" alt="Foto Profil Davanico" width="120" height="120" style="border-radius: 50%; object-fit: cover;" />
         </div>
         <div class="profile-details">
             <h2>Davanico</h2>
