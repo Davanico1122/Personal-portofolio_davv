@@ -412,12 +412,12 @@ function displayDesignResults(query) {
  // portofolio
 function displayPortfolioResults(query) {
     const resultsContainer = document.getElementById("searchResults");
-    resultsContainer.innerHTML = ""; // Bersihkan konten lama
+    resultsContainer.innerHTML = "";
 
     const portfolioProjects = [
         {
             title: "Design dan Pengembang web",
-            description: "Seorang pengembang web pemula dengan semangat untuk menciptakan solusi digital yang tidak hanya fungsional tetapi juga estetis dan menarik secara visual. Saya antusias dalam menjelajahi berbagai teknologi web modern",
+            description: "Seorang pengembang web pemula dengan semangat untuk menciptakan solusi digital yang tidak hanya fungsional tetapi juga estetis dan menarik secara visual.",
             link: "https://davanico18.vercel.app/"
         },
         {
@@ -431,6 +431,38 @@ function displayPortfolioResults(query) {
             link: "projects/fintech-app"
         }
     ];
+
+    // Filter projek berdasarkan pencarian
+    const filtered = portfolioProjects.filter(project =>
+        !query || project.title.toLowerCase().includes(query.toLowerCase()) ||
+        project.description.toLowerCase().includes(query.toLowerCase())
+    );
+
+    // Selalu tampilkan semua jika query kosong atau hasil tetap ada
+    const projectsToShow = filtered.length > 0 ? filtered : portfolioProjects;
+
+    projectsToShow.forEach(project => {
+        const resultDiv = document.createElement("div");
+        resultDiv.classList.add("result-item");
+
+        resultDiv.innerHTML = `
+            <div class="result-url">${project.link}</div>
+            <a href="${project.link}" class="result-title">${project.title}</a>
+            <div class="result-description">${project.description}</div>
+        `;
+
+        resultsContainer.appendChild(resultDiv);
+    });
+
+    // Tambahkan pesan hanya jika benar-benar kosong (semua juga nggak cocok)
+    if (filtered.length === 0) {
+        const msg = document.createElement("p");
+        msg.style.color = "white";
+        msg.textContent = "Tidak ada proyek ditemukan, tapi berikut beberapa portofolio saya:";
+        resultsContainer.prepend(msg);
+    }
+}
+
 
     // Jika query tidak kosong, filter berdasarkan query, jika kosong tampilkan semua
     const filtered = query.trim()
