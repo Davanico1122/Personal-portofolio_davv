@@ -409,15 +409,16 @@ function displayDesignResults(query) {
     });
 }
 
+ // portofolio
 function displayPortfolioResults(query) {
     const resultsContainer = document.getElementById("searchResults");
     resultsContainer.innerHTML = ""; // Bersihkan konten lama
 
     const portfolioProjects = [
         {
-            title: "Branding & Identitas Visual",
-            description: "Membangun identitas merek melalui logo, warna, dan tipografi.",
-            link: "projects/branding"
+            title: " Design dan Pengembang web ",
+            description: "Seorang pengembang web pemula dengan semangat untuk menciptakan solusi digital yang tidak hanya fungsional tetapi juga estetis dan menarik secara visual. Saya antusias dalam menjelajahi berbagai teknologi web modern",
+            link: "https://davanico18.vercel.app/"
         },
         {
             title: "Memory Card Flip",
