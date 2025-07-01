@@ -409,9 +409,52 @@ function displayDesignResults(query) {
     });
 }
 
-// Display portfolio results
 function displayPortfolioResults(query) {
-    displayAllResults(query); // Same as all results for portfolio
+    const resultsContainer = document.getElementById("results");
+    resultsContainer.innerHTML = ""; // Bersihkan konten lama
+
+    const portfolioProjects = [
+        {
+            title: "Branding & Identitas Visual",
+            description: "Membangun identitas merek melalui logo, warna, dan tipografi.",
+            link: "projects/branding",
+            tags: ["branding", "visual", "design"]
+        },
+        {
+            title: "Memory Card Flip",
+            description: "Game sederhana untuk menguji daya ingatmu.",
+            link: "projects/Game,Card",
+            tags: ["game", "memory", "html"]
+        },
+        {
+            title: "FinTech Mobile App",
+            description: "Aplikasi banking digital dengan fitur AI dan tracking keuangan.",
+            link: "projects/fintech-app",
+            tags: ["fintech", "mobile", "uiux"]
+        }
+    ];
+
+    const filtered = portfolioProjects.filter(project =>
+        project.title.toLowerCase().includes(query.toLowerCase()) ||
+        project.description.toLowerCase().includes(query.toLowerCase())
+    );
+
+    if (filtered.length === 0) {
+        resultsContainer.innerHTML = <p style="color:white">Tidak ada proyek ditemukan.</p>;
+        return;
+    }
+
+    filtered.forEach(project => {
+        const resultDiv = document.createElement("div");
+        resultDiv.classList.add("search-result");
+
+        resultDiv.innerHTML = 
+            <a href="${project.link}">${project.title}</a>
+            <p>${project.description}</p>
+        ;
+
+        resultsContainer.appendChild(resultDiv);
+    });
 }
 
 // Display about results
