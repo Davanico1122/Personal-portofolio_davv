@@ -282,57 +282,57 @@ function displayImageResults(query) {
     const images = [
         {
             src: 'https://via.placeholder.com/300x200/4285f4/ffffff?text=E-commerce+Design',
-            title: 'E-commerce Platform Design',
+            title: 'Poster Promosi',
             source: 'davanico.com',
-            link: 'project1.html'
+            link: '#'
         },
         {
             src: 'https://via.placeholder.com/300x200/ea4335/ffffff?text=Mobile+App+UI',
-            title: 'Task Manager Mobile UI',
+            title: 'Logo Sederhana',
             source: 'davanico.com',
-            link: 'project2.html'
+            link: '#'
         },
         {
             src: 'https://via.placeholder.com/300x200/34a853/ffffff?text=Brand+Identity',
-            title: 'Brand Identity Package',
+            title: 'Konten Sosial Media',
             source: 'davanico.com',
-            link: 'project3.html'
+            link: '#'
         },
         {
             src: 'https://via.placeholder.com/300x200/fbbc05/ffffff?text=Web+Design',
-            title: 'Responsive Web Design',
+            title: 'Undangan Digital',
             source: 'davanico.com',
-            link: 'project1.html'
+            link: '#'
         },
         {
             src: 'https://via.placeholder.com/300x200/4285f4/ffffff?text=UI+Components',
-            title: 'UI Component Library',
+            title: 'Banner & Flyer',
             source: 'davanico.com',
-            link: 'project2.html'
+            link: '#'
         },
         {
             src: 'https://via.placeholder.com/300x200/ea4335/ffffff?text=Logo+Design',
-            title: 'Creative Logo Designs',
+            title: 'Template Presentasi',
             source: 'davanico.com',
-            link: 'project3.html'
+            link: '#'
         },
         {
             src: 'https://via.placeholder.com/300x200/9c27b0/ffffff?text=Social+Dashboard',
             title: 'Social Media Dashboard',
             source: 'davanico.com',
-            link: 'project4.html'
+            link: '#'
         },
         {
             src: 'https://via.placeholder.com/300x200/1a73e8/ffffff?text=FinTech+App',
             title: 'FinTech Mobile Banking',
             source: 'davanico.com',
-            link: 'project5.html'
+            link: '#'
         },
         {
             src: 'https://via.placeholder.com/300x200/ff6f00/ffffff?text=E-Learning',
             title: 'E-Learning Platform',
             source: 'davanico.com',
-            link: 'project6.html'
+            link: '#'
         }
     ];
     
