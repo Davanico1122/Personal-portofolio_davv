@@ -417,71 +417,40 @@ function displayPortfolioResults(query) {
     const portfolioProjects = [
         {
             title: "Design dan Pengembang web",
-            description: "Seorang pengembang web pemula dengan semangat untuk menciptakan solusi digital yang tidak hanya fungsional tetapi juga estetis dan menarik secara visual.",
+            description: "Web developer pemula dengan semangat menciptakan solusi digital yang estetis dan menarik.",
             link: "https://davanico18.vercel.app/"
         },
         {
             title: "Memory Card Flip",
-            description: "Game sederhana untuk menguji daya ingatmu.",
+            description: "Game kartu sederhana untuk melatih daya ingat.",
             link: "projects/Game,Card"
         },
         {
             title: "FinTech Mobile App",
-            description: "Aplikasi banking digital dengan fitur AI dan tracking keuangan.",
+            description: "Aplikasi keuangan digital dengan AI dan pelacak transaksi.",
             link: "projects/fintech-app"
         }
     ];
 
-    // Filter projek berdasarkan pencarian
-    const filtered = portfolioProjects.filter(project =>
+    let filtered = portfolioProjects.filter(project =>
         !query || project.title.toLowerCase().includes(query.toLowerCase()) ||
         project.description.toLowerCase().includes(query.toLowerCase())
     );
 
-    // Selalu tampilkan semua jika query kosong atau hasil tetap ada
-    const projectsToShow = filtered.length > 0 ? filtered : portfolioProjects;
-
-    projectsToShow.forEach(project => {
-        const resultDiv = document.createElement("div");
-        resultDiv.classList.add("result-item");
-
-        resultDiv.innerHTML = `
-            <div class="result-url">${project.link}</div>
-            <a href="${project.link}" class="result-title">${project.title}</a>
-            <div class="result-description">${project.description}</div>
-        `;
-
-        resultsContainer.appendChild(resultDiv);
-    });
-
-    // Tambahkan pesan hanya jika benar-benar kosong (semua juga nggak cocok)
+    // Jika tidak ada hasil cocok, tampilkan pesan dan tetap render semua project
     if (filtered.length === 0) {
         const msg = document.createElement("p");
         msg.style.color = "white";
-        msg.textContent = "Tidak ada proyek ditemukan, tapi berikut beberapa portofolio saya:";
-        resultsContainer.prepend(msg);
-    }
-}
-
-
-    // Jika query tidak kosong, filter berdasarkan query, jika kosong tampilkan semua
-    const filtered = query.trim()
-        ? portfolioProjects.filter(project =>
-            project.title.toLowerCase().includes(query.toLowerCase()) ||
-            project.description.toLowerCase().includes(query.toLowerCase())
-        )
-        : portfolioProjects;
-
-    if (filtered.length === 0) {
-        resultsContainer.innerHTML = `<p style="color:black">Tidak ada proyek ditemukan.</p>`;
-        return;
+        msg.textContent = `Tidak ada proyek ditemukan untuk "${query}", berikut beberapa portofolio saya:`;
+        resultsContainer.appendChild(msg);
+        filtered = portfolioProjects;
     }
 
     filtered.forEach(project => {
         const resultDiv = document.createElement("div");
         resultDiv.classList.add("result-item");
 
-        resultDiv.innerHTML = ` 
+        resultDiv.innerHTML = `
             <div class="result-url">${project.link}</div>
             <a href="${project.link}" class="result-title">${project.title}</a>
             <div class="result-description">${project.description}</div>
