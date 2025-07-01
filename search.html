@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Davanico - Search Results</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="search-page">
+        <!-- Header -->
+        <header class="search-header">
+            <div class="header-content">
+                <!-- Small logo -->
+                <div class="small-logo">
+                    <a href="index.html">
+                        <span class="letter-d">D</span>
+                        <span class="letter-a1">a</span>
+                        <span class="letter-v">v</span>
+                        <span class="letter-a2">a</span>
+                        <span class="letter-n">n</span>
+                        <span class="letter-i">i</span>
+                        <span class="letter-c">c</span>
+                        <span class="letter-o">o</span>
+                    </a>
+                </div>
+                
+                <!-- Search input -->
+                <div class="header-search">
+                    <div class="search-box">
+                        <input type="text" id="headerSearchInput" placeholder="Masukkan nama Anda..." autocomplete="off">
+                        <div class="search-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="#9aa0a6">
+                                <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Navigation tabs -->
+        <nav class="search-nav">
+            <div class="nav-tabs">
+                <button class="tab-btn active" data-tab="all">All</button>
+                <button class="tab-btn" data-tab="images">Images</button>
+                <button class="tab-btn" data-tab="design">Design</button>
+                <button class="tab-btn" data-tab="portfolio">Portfolio</button>
+                <button class="tab-btn" data-tab="about">About Me</button>
+            </div>
+        </nav>
+        
+        <!-- Search results info -->
+        <div class="results-info" id="resultsInfo"></div>
+        
+        <!-- Content area -->
+        <main class="search-content">
+            <!-- All tab content -->
+            <div id="all-content" class="tab-content active">
+                <div class="search-results">
+                    <div class="result-item">
+                        <h3><a href="project1.html">Modern E-commerce Platform Design</a></h3>
+                        <div class="result-url">https://davanico.portfolio/modern-ecommerce-design</div>
+                        <p>Complete redesign of an online retail platform with focus on mobile-first approach and conversion optimization. Features streamlined checkout process and advanced product filtering.</p>
+                    </div>
+                    
+                    <div class="result-item">
+                        <h3><a href="project2.html">Task Manager Mobile App Interface</a></h3>
+                        <div class="result-url">https://davanico.portfolio/task-manager-app-ui</div>
+                        <p>Intuitive mobile application design for productivity and task management with clean, modern interface. Includes gesture-based interactions and smart categorization features.</p>
+                    </div>
+                    
+                    <div class="result-item">
+                        <h3><a href="project3.html">Creative Agency Brand Identity</a></h3>
+                        <div class="result-url">https://davanico.portfolio/creative-agency-branding</div>
+                        <p>Complete brand identity design for a digital creative agency including logo, color system, typography, and marketing collateral. Focused on modern, professional aesthetic.</p>
+                    </div>
+                    
+                    <div class="result-item">
+                        <h3><a href="#">Corporate Website Redesign</a></h3>
+                        <div class="result-url">https://davanico.portfolio/corporate-website-redesign</div>
+                        <p>Professional website redesign for technology company featuring responsive design, improved user experience, and modern visual hierarchy.</p>
+                    </div>
+                    
+                    <div class="result-item">
+                        <h3><a href="#">Social Media Marketing Templates</a></h3>
+                        <div class="result-url">https://davanico.portfolio/social-media-templates</div>
+                        <p>Collection of social media post templates and graphics for various platforms including Instagram, Facebook, and LinkedIn. Modern, engaging designs.</p>
+                    </div>
+                    
+                    <div class="result-item">
+                        <h3><a href="#">Logo Design Portfolio</a></h3>
+                        <div class="result-url">https://davanico.portfolio/logo-design-collection</div>
+                        <p>Showcase of various logo designs for different industries including technology, healthcare, food & beverage, and creative services.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Images tab content -->
+            <div id="images-content" class="tab-content">
+                <div class="image-gallery">
+                    <div class="image-item">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&h=200&fit=crop&crop=center" alt="E-commerce Design" onclick="window.open('project1.html', '_blank')">
+                        <div class="image-info">
+                            <div class="image-title">Modern E-commerce Platform</div>
+                            <div class="image-url">davanico.portfolio</div>
+                        </div>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=300&h=200&fit=crop&crop=center" alt="Mobile App UI" onclick="window.open('project2.html', '_blank')">
+                        <div class="image-info">
+                            <div class="image-title">Task Manager Mobile App</div>
+                            <div class="image-url">davanico.portfolio</div>
+                        </div>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=300&h=200&fit=crop&crop=center" alt="Brand Identity" onclick="window.open('project3.html', '_blank')">
+                        <div class="image-info">
+                            <div class="image-title">Creative Agency Branding</div>
+                            <div class="image-url">davanico.portfolio</div>
+                        </div>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=300&h=200&fit=crop&crop=center" alt="Website Design" onclick="window.open('#', '_blank')">
+                        <div class="image-info">
+                            <div class="image-title">Corporate Website</div>
+                            <div class="image-url">davanico.portfolio</div>
+                        </div>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=300&h=200&fit=crop&crop=center" alt="Social Media Templates" onclick="window.open('#', '_blank')">
+                        <div class="image-info">
+                            <div class="image-title">Social Media Graphics</div>
+                            <div class="image-url">davanico.portfolio</div>
+                        </div>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=300&h=200&fit=crop&crop=center" alt="Logo Design" onclick="window.open('#', '_blank')">
+                        <div class="image-info">
+                            <div class="image-title">Logo Design Collection</div>
+                            <div class="image-url">davanico.portfolio</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design tab content -->
+            <div id="design-content" class="tab-content">
+                <div class="design-categories">
+                    <div class="category-item">
+                        <h3>Web Design</h3>
+                        <p>Modern, responsive websites with focus on user experience and conversion optimization.</p>
+                        <ul>
+                            <li>E-commerce platforms</li>
+                            <li>Corporate websites</li>
+                            <li>Landing pages</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="category-item">
+                        <h3>UI/UX Design</h3>
+                        <p>User interface and experience design for web and mobile applications.</p>
+                        <ul>
+                            <li>Mobile app interfaces</li>
+                            <li>Dashboard design</li>
+                            <li>User flow optimization</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="category-item">
+                        <h3>Brand Identity</h3>
+                        <p>Complete branding solutions from concept to implementation.</p>
+                        <ul>
+                            <li>Logo design</li>
+                            <li>Brand guidelines</li>
+                            <li>Marketing materials</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Portfolio tab content -->
+            <div id="portfolio-content" class="tab-content">
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <img src="https://via.placeholder.com/400x300/4285F4/ffffff?text=E-commerce+Design" alt="E-commerce Design">
+                        <div class="portfolio-info">
+                            <h3>Modern E-commerce Platform</h3>
+                            <p>Complete redesign of an online retail platform with focus on mobile-first approach and conversion optimization.</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Web Design</span>
+                                <span class="tag">UX/UI</span>
+                                <span class="tag">E-commerce</span>
+                            </div>
+                            <a href="project1.html" class="view-project">View Project</a>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-item">
+                        <img src="https://via.placeholder.com/400x300/34A853/ffffff?text=Mobile+App+UI" alt="Mobile App UI">
+                        <div class="portfolio-info">
+                            <h3>Task Manager Mobile App</h3>
+                            <p>Intuitive mobile application design for productivity and task management with clean, modern interface.</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Mobile Design</span>
+                                <span class="tag">UI/UX</span>
+                                <span class="tag">Productivity</span>
+                            </div>
+                            <a href="project2.html" class="view-project">View Project</a>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-item">
+                        <img src="https://via.placeholder.com/400x300/EA4335/ffffff?text=Brand+Identity" alt="Brand Identity">
+                        <div class="portfolio-info">
+                            <h3>Creative Agency Branding</h3>
+                            <p>Complete brand identity design including logo, color palette, and marketing collateral for a digital creative agency.</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Branding</span>
+                                <span class="tag">Logo Design</span>
+                                <span class="tag">Identity</span>
+                            </div>
+                            <a href="project3.html" class="view-project">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- About tab content -->
+            <div id="about-content" class="tab-content">
+                <div class="about-section">
+                    <div class="about-header">
+                        <div class="profile-container">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Davanico Profile" class="profile-image">
+                            <div class="profile-info">
+                                <h2>Davanico</h2>
+                                <p class="about-subtitle">Creative Designer & Developer</p>
+                                <div class="profile-location">📍 Jakarta, Indonesia</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-content-grid">
+                        <div class="about-bio">
+                            <h3>Biography</h3>
+                            <p>Passionate designer and developer with over 5 years of experience creating digital experiences that combine beautiful design with functional development. Specializing in web design, mobile UI/UX, and brand identity creation.</p>
+                            
+                            <p>My approach focuses on understanding user needs and business goals to create solutions that are both visually appealing and highly functional. I believe in the power of good design to solve real-world problems.</p>
+                        </div>
+                        
+                        <div class="about-skills">
+                            <h3>Skills & Expertise</h3>
+                            <div class="skills-list">
+                                <div class="skill-category">
+                                    <h4>Design</h4>
+                                    <ul>
+                                        <li>UI/UX Design</li>
+                                        <li>Web Design</li>
+                                        <li>Mobile App Design</li>
+                                        <li>Brand Identity</li>
+                                        <li>Logo Design</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="skill-category">
+                                    <h4>Development</h4>
+                                    <ul>
+                                        <li>HTML/CSS/JavaScript</li>
+                                        <li>Responsive Design</li>
+                                        <li>Frontend Frameworks</li>
+                                        <li>Prototyping</li>
+                                        <li>User Testing</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="about-contact">
+                            <h3>Get In Touch</h3>
+                            <div class="contact-info">
+                                <p><strong>Email:</strong> hello@davanico.com</p>
+                                <p><strong>Phone:</strong> +62 812 3456 7890</p>
+                                <p><strong>Location:</strong> Jakarta, Indonesia</p>
+                            </div>
+                            
+                            <div class="social-links">
+                                <h4>Follow Me</h4>
+                                <div class="social-buttons">
+                                    <a href="#" class="social-btn">Instagram</a>
+                                    <a href="#" class="social-btn">LinkedIn</a>
+                                    <a href="#" class="social-btn">Dribbble</a>
+                                    <a href="#" class="social-btn">Behance</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
