@@ -410,27 +410,24 @@ function displayDesignResults(query) {
 }
 
 function displayPortfolioResults(query) {
-    const resultsContainer = document.getElementById("results");
+    const resultsContainer = document.getElementById("searchResults");
     resultsContainer.innerHTML = ""; // Bersihkan konten lama
 
     const portfolioProjects = [
         {
             title: "Branding & Identitas Visual",
             description: "Membangun identitas merek melalui logo, warna, dan tipografi.",
-            link: "projects/branding",
-            tags: ["branding", "visual", "design"]
+            link: "projects/branding"
         },
         {
             title: "Memory Card Flip",
             description: "Game sederhana untuk menguji daya ingatmu.",
-            link: "projects/Game,Card",
-            tags: ["game", "memory", "html"]
+            link: "projects/Game,Card"
         },
         {
             title: "FinTech Mobile App",
             description: "Aplikasi banking digital dengan fitur AI dan tracking keuangan.",
-            link: "projects/fintech-app",
-            tags: ["fintech", "mobile", "uiux"]
+            link: "projects/fintech-app"
         }
     ];
 
@@ -446,11 +443,12 @@ function displayPortfolioResults(query) {
 
     filtered.forEach(project => {
         const resultDiv = document.createElement("div");
-        resultDiv.classList.add("search-result");
+        resultDiv.classList.add("result-item");
 
         resultDiv.innerHTML = 
-            <a href="${project.link}">${project.title}</a>
-            <p>${project.description}</p>
+            <div class="result-url">${project.link}</div>
+            <a href="${project.link}" class="result-title">${project.title}</a>
+            <div class="result-description">${project.description}</div>
         ;
 
         resultsContainer.appendChild(resultDiv);
