@@ -22,6 +22,8 @@ function initializeHomePage() {
         console.error('Homepage elements not found');
         return;
     }
+
+    searchInput.placeholder = 'type your name';
     
     // Handle search input
     searchInput.addEventListener('keypress', function(e) {
