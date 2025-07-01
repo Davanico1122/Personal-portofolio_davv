@@ -40,7 +40,7 @@ function initializeHomePage() {
     feelingLuckyBtn.addEventListener('click', function(e) {
         e.preventDefault();
         // Go to random project
-        const projects = ['project1.html', 'project2.html', 'project3.html', ' project4.html'];
+        const projects = ['project1.html', 'project2.html', 'project3.html', ' project4.html',];
         const randomProject = projects[Math.floor(Math.random() * projects.length)];
         window.location.href = randomProject;
     });
