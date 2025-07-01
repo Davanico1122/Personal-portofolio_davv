@@ -437,7 +437,7 @@ function displayPortfolioResults(query) {
     );
 
     if (filtered.length === 0) {
-        resultsContainer.innerHTML = <p style="color:white">Tidak ada proyek ditemukan.</p>;
+        resultsContainer.innerHTML = '<p style="color:white">Tidak ada proyek ditemukan.</p>';
         return;
     }
 
