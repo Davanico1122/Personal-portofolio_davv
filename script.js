@@ -424,19 +424,15 @@ function displayAboutResults(query) {
     aboutSection.className = 'about-me-section';
     aboutSection.innerHTML = `
         <div class="about-profile">
-            <div class="profile-image">
-                <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
-                    <circle cx="60" cy="60" r="60" fill="#4285f4"/>
-                    <circle cx="60" cy="45" r="20" fill="white"/>
-                    <path d="M20 100 C20 80, 35 65, 60 65 C85 65, 100 80, 100 100" fill="white"/>
-                </svg>
-            </div>
-            <div class="profile-details">
-                <h2>Davanico</h2>
-                <h3>Creative Professional & Digital Designer</h3>
-                <p>Passionate about creating innovative digital solutions that make a difference. Experienced in web development, UI/UX design, and brand identity creation.</p>
-            </div>
+        <div class="profile-image">
+            <img src="assets/img/profile.png" alt="Foto Profil Davanico" width="120" height="120" style="border-radius: 50%; object-fit: cover;" />
         </div>
+        <div class="profile-details">
+            <h2>Davanico</h2>
+            <h3>Creative Professional & Digital Designer</h3>
+            <p>Passionate about creating innovative digital solutions that make a difference. Experienced in web development, UI/UX design, and brand identity creation.</p>
+        </div>
+    </div>
         
         <div class="skills-overview">
             <h3>Skills & Expertise</h3>
