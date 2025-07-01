@@ -222,15 +222,15 @@ function displayAllResults(query) {
     
     const projects = [
         {
-            url: 'davanico.com/projects/ecommerce',
-            title: 'E-commerce Platform - Modern Online Store',
-            description: 'A comprehensive e-commerce solution featuring responsive design, secure payment integration, and advanced product catalog management. Built with modern web technologies.',
+            url: 'davanico.com/projects/Design',
+            title: 'Design & Proyek saya',
+            description: 'Menciptakan Solusi Visual Inovatif untuk Pengalaman Terbaik',
             link: 'project1.html'
         },
         {
-            url: 'davanico.com/projects/taskmanager',
-            title: 'Task Manager Mobile App - Productivity Solution',
-            description: 'An intuitive mobile application for task management and productivity tracking. Features include real-time collaboration, deadline reminders, and progress analytics.',
+            url: 'davanico.com/projects/Branding',
+            title: 'Branding & Identitas Visual',
+            description: 'Membangun identitas merek yang kuat dan kohesif melalui eksplorasi logo, palet warna, tipografi, dan panduan gaya untuk berbagai klien dan kebutuhan.',
             link: 'project2.html'
         },
         {
@@ -240,9 +240,9 @@ function displayAllResults(query) {
             link: 'project3.html'
         },
         {
-            url: 'davanico.com/projects/social-dashboard',
-            title: 'Social Media Dashboard - Analytics & Management Platform',
-            description: 'A comprehensive social media management dashboard that provides real-time analytics, content scheduling, and engagement tracking across multiple platforms.',
+            url: 'davanico.com/projects/Game,Card',
+            title: 'Memory Card Flip',
+            description: 'Uji daya ingatmu! Balik kartu dan cari pasangan yang cocok. Selesaikan semua pasangannya secepat mungkin dan buktikan seberapa tajam memorimu!',
             link: 'project4.html'
         },
         {
