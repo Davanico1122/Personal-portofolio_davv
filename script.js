@@ -227,7 +227,7 @@ function displayAllResults(query) {
             url: 'davanico.com/projects/Design',
             title: 'Design & Proyek saya',
             description: 'Menciptakan Solusi Visual Inovatif untuk Pengalaman Terbaik',
-            link: '"/desain.proyek'
+            link: '/desain'
         },
         {
             url: 'davanico.com/projects/Branding',
@@ -237,15 +237,15 @@ function displayAllResults(query) {
         },
         {
             url: 'davanico.com/projects/branding',
-            title: 'Brand Identity Design - Creative Branding Solutions',
-            description: 'Complete brand identity package including logo design, color schemes, typography, and brand guidelines. Professional creative services for businesses.',
-            link: 'project3.html'
+            title: 'Ilustrasi & Media Promosi',
+            description: 'Mengubah ide menjadi visual menarik melalui ilustrasi digital, desain poster, infografis, atau materi promosi lainnya untuk kampanye yang efektif.',
+            link: '/ilustrasi'
         },
         {
             url: 'davanico.com/projects/Game,Card',
             title: 'Memory Card Flip',
             description: 'Uji daya ingatmu! Balik kartu dan cari pasangan yang cocok. Selesaikan semua pasangannya secepat mungkin dan buktikan seberapa tajam memorimu!',
-            link: 'project4.html'
+            link: '"/memori.card'
         },
         {
             url: 'davanico.com/projects/fintech-app',
