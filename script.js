@@ -245,7 +245,7 @@ function displayAllResults(query) {
             url: 'davanico.com/projects/Game,Card',
             title: 'Memory Card Flip',
             description: 'Uji daya ingatmu! Balik kartu dan cari pasangan yang cocok. Selesaikan semua pasangannya secepat mungkin dan buktikan seberapa tajam memorimu!',
-            link: '"/memori.card'
+            link: '/memori.card'
         },
         {
             url: 'davanico.com/projects/fintech-app',
