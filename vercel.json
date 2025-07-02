@@ -6,7 +6,7 @@
     { "src": "/ilustrasi", "dest": "/project3.html" },
      { "src": "/game-interaktif", "dest": "/game.html" },
      { "src": "/The.Cube", "dest": "/game1.html" },
-     { "src": "/memori.card", "dest": "/game2.html" },
+     { "src": "/memori.card", "dest": "/project4.html" },
      { "src": "/Space.Defender", "dest": "/game3.html" },
     { "handle": "filesystem" },
     { "src": "/.*", "status": 404, "dest": "/not-found" }
