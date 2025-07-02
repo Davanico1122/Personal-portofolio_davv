@@ -5,7 +5,7 @@ let currentSearchQuery = '';
 document.addEventListener('DOMContentLoaded', function() {
     const currentPage = window.location.pathname;
     
-    if (currentPage.includes('search.html')) {
+    if (currentPage.includes('/search')) {
         initializeSearchPage();
     } else {
         initializeHomePage();
@@ -99,7 +99,7 @@ function performSearch() {
     if (query) {
         window.location.href = `search.html?q=${encodeURIComponent(query)}&tab=all`;
     } else {
-        window.location.href = 'search.html?tab=all';
+        window.location.href = '/search?tab=all';
     }
 }
 
