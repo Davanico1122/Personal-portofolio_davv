@@ -227,13 +227,13 @@ function displayAllResults(query) {
             url: 'davanico.com/projects/Design',
             title: 'Design & Proyek saya',
             description: 'Menciptakan Solusi Visual Inovatif untuk Pengalaman Terbaik',
-            link: 'project1.html'
+            link: '"/desain.proyek'
         },
         {
             url: 'davanico.com/projects/Branding',
             title: 'Branding & Identitas Visual',
             description: 'Membangun identitas merek yang kuat dan kohesif melalui eksplorasi logo, palet warna, tipografi, dan panduan gaya untuk berbagai klien dan kebutuhan.',
-            link: 'project2.html'
+            link: '/branding'
         },
         {
             url: 'davanico.com/projects/branding',
