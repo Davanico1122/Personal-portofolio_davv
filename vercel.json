@@ -1,6 +1,6 @@
 {
   "routes": [
-    { "src": "/desain.proyek", "dest": "/project1.html" },
+    { "src": "/desain", "dest": "/project1.html" },
     { "src": "/branding", "dest": "/project2.html" },
     { "src": "/ilustrasi", "dest": "/project3.html" },
      { "src": "/game-interaktif", "dest": "/game.html" },
