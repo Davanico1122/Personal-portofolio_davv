@@ -479,8 +479,9 @@ function displayAboutResults(query) {
         </div>
         <div class="profile-details">
             <h2>Davanico</h2>
-            <h3>Creative Professional & Digital Designer</h3>
-            <p>Passionate about creating innovative digital solutions that make a difference. Experienced in web development, UI/UX design, and brand identity creation.</p>
+            <h3>Desainer Digital & Profesional Kreatif</h3>
+            <p>I'm passionate about building digital experiences that are not only functional, but also visually meaningful. 
+            I specialize in web development, UI/UX design, and brand identity.</p>
         </div>
     </div>
         
@@ -490,12 +491,12 @@ function displayAboutResults(query) {
                 <span class="skill-tag">Frontend Development</span>
                 <span class="skill-tag">UI/UX Design</span>
                 <span class="skill-tag">Brand Identity</span>
-                <span class="skill-tag">React & Vue.js</span>
-                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">Corel Draw</span>
+                <span class="skill-tag">Photoshop</span>
                 <span class="skill-tag">Adobe Creative Suite</span>
                 <span class="skill-tag">Figma</span>
                 <span class="skill-tag">Web Design</span>
-                <span class="skill-tag">Mobile App Design</span>
+                <span class="skill-tag">Adobe Illustrator</span>
                 <span class="skill-tag">Logo Design</span>
             </div>
         </div>
