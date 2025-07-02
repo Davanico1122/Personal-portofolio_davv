@@ -42,7 +42,7 @@ function initializeHomePage() {
     feelingLuckyBtn.addEventListener('click', function(e) {
         e.preventDefault();
         // Go to random project
-        const projects =
+        const projects = ['.', '.', '.', ' .',];
         const randomProject = projects[Math.floor(Math.random() * projects.length)];
         window.location.href = randomProject;
     });
