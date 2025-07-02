@@ -255,9 +255,9 @@ function displayAllResults(query) {
         },
         {
             url: 'davanico.com/projects/learning-platform',
-            title: 'E-Learning Platform - Interactive Education Portal',
-            description: 'Comprehensive online learning platform featuring video courses, interactive quizzes, progress tracking, and collaborative learning tools.',
-            link: '/not-found'
+            title: 'Packaging Design',
+            description: 'Desain kemasan yang tidak hanya melindungi produk, tetapi juga menjadi media komunikasi visual yang kuat untuk membangun identitas brand dan menarik perhatian konsumen di pasar yang kompetitif.',
+            link: '/Packaging.Design'
         }
     ];
     
