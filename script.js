@@ -210,9 +210,9 @@ function updateResultsInfo(query) {
     const searchInfo = document.getElementById('searchInfo');
     if (searchInfo) {
         if (query) {
-            searchInfo.textContent = `About 3,420 results (0.52 seconds) for "${query}"`;
+            searchInfo.textContent = `About 25 results (0.52 seconds) for "${query}"`;
         } else {
-            searchInfo.textContent = 'About 3,420 results (0.52 seconds)';
+            searchInfo.textContent = 'About 25 results (0.52 seconds)';
         }
     }
 }
