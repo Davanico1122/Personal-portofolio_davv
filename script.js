@@ -249,9 +249,9 @@ function displayAllResults(query) {
         },
         {
             url: 'davanico.com/projects/fintech-app',
-            title: 'FinTech Mobile App - Digital Banking Solution',
-            description: 'Modern mobile banking application with secure transactions, budget tracking, investment management, and AI-powered financial insights.',
-            link: '/not-found'
+            title: 'Visual Storytelling',
+            description: 'Eksplorasi mendalam dalam dunia fotografi dan manipulasi digital - mengabadikan momen, menciptakan cerita, dan menghadirkan perspektif baru melalui lensa kreatif',
+            link: '/photography'
         },
         {
             url: 'davanico.com/projects/learning-platform',
