@@ -251,13 +251,13 @@ function displayAllResults(query) {
             url: 'davanico.com/projects/fintech-app',
             title: 'FinTech Mobile App - Digital Banking Solution',
             description: 'Modern mobile banking application with secure transactions, budget tracking, investment management, and AI-powered financial insights.',
-            link: 'project5.html'
+            link: '/not-found'
         },
         {
             url: 'davanico.com/projects/learning-platform',
             title: 'E-Learning Platform - Interactive Education Portal',
             description: 'Comprehensive online learning platform featuring video courses, interactive quizzes, progress tracking, and collaborative learning tools.',
-            link: 'project6.html'
+            link: '/not-found'
         }
     ];
     
