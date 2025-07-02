@@ -365,37 +365,37 @@ function displayDesignResults(query) {
             url: 'davanico.com/design/ui-ux',
             title: 'UI/UX Design Portfolio - User Experience Design',
             description: 'Comprehensive collection of user interface and user experience design projects. Featuring modern design principles, accessibility, and user-centered design approaches.',
-            link: 'project2.html'
+            link: '/not-found'
         },
         {
             url: 'davanico.com/design/branding',
             title: 'Brand Identity & Visual Design - Creative Solutions',
             description: 'Professional brand identity design services including logo creation, brand guidelines, and visual identity systems for businesses and organizations.',
-            link: 'project3.html'
+            link: '/not-found'
         },
         {
             url: 'davanico.com/design/web',
             title: 'Web Design & Development - Digital Solutions',
             description: 'Modern web design and development services focusing on responsive design, performance optimization, and seamless user experiences across all devices.',
-            link: 'project1.html'
+            link: '/not-found'
         },
         {
             url: 'davanico.com/design/dashboard',
             title: 'Dashboard Design - Data Visualization & Analytics',
             description: 'Professional dashboard designs for social media management and analytics platforms. Clean interfaces with intuitive data visualization and user-friendly controls.',
-            link: 'project4.html'
+            link: '/not-found'
         },
         {
             url: 'davanico.com/design/mobile-banking',
             title: 'Mobile Banking UI - FinTech App Design',
             description: 'Secure and user-friendly mobile banking interface design. Focus on accessibility, security features, and seamless financial transaction flows.',
-            link: 'project5.html'
+            link: '/not-found'
         },
         {
             url: 'davanico.com/design/education',
             title: 'Educational Platform Design - E-Learning Interface',
             description: 'Interactive e-learning platform design with engaging user interfaces, progress tracking, and collaborative learning tools for modern education.',
-            link: 'project6.html'
+            link: '/not-found'
         }
     ];
     
@@ -425,12 +425,12 @@ function displayPortfolioResults(query) {
         {
             title: "Memory Card Flip",
             description: "Game kartu sederhana untuk melatih daya ingat.",
-            link: "projects/Game,Card"
+            link: "/memori.card"
         },
         {
             title: "FinTech Mobile App",
             description: "Aplikasi keuangan digital dengan AI dan pelacak transaksi.",
-            link: "projects/fintech-app"
+            link: "/not-found"
         }
     ];
 
