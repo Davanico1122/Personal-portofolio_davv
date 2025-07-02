@@ -7,6 +7,7 @@
      { "src": "/game-interaktif", "dest": "/game.html" },
      { "src": "/The.Cube", "dest": "/game1.html" },
      { "src": "/memori.card", "dest": "/project4.html" },
+     { "src": "/photography", "dest": "/project5.html" },
      { "src": "/Space.Defender", "dest": "/game3.html" },
     { "handle": "filesystem" },
     { "src": "/.*", "status": 404, "dest": "/not-found" }
