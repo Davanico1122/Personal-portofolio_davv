@@ -33,8 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
     chatMessages.innerHTML = "";
     const greeting =
       languageSelect.value === "id"
-        ? "Halo! Saya AI Assistant. Ada yang bisa saya bantu? 😊"
-        : "Hello! I'm your AI Assistant. How can I help you? 😊";
+        ? "Halo! Saya bot Assistant. Ada yang bisa saya bantu? 😊"
+        : "Hello! I'm your bot Assistant. How can I help you? 😊";
     appendMessage(greeting, "bot");
   });
 
