@@ -1,16 +1,17 @@
 {
   "routes": [
     { "src": "/desain", "dest": "/project1.html" },
-     { "src": "/search", "dest": "/search.html" },
+    { "src": "/search", "dest": "/search.html" },
     { "src": "/branding", "dest": "/project2.html" },
     { "src": "/ilustrasi", "dest": "/project3.html" },
-     { "src": "/game-interaktif", "dest": "/game.html" },
-     { "src": "/The.Cube", "dest": "/game1.html" },
-     { "src": "/memori.card", "dest": "/project4.html" },
-     { "src": "/photography", "dest": "/project5.html" },
-     { "src": "/Space.Defender", "dest": "/game3.html" },
+    { "src": "/game-interaktif", "dest": "/game.html" },
+    { "src": "/The.Cube", "dest": "/game1.html" },
+    { "src": "/memori.card", "dest": "/project4.html" },
+    { "src": "/photography", "dest": "/project5.html" },
+    { "src": "/Space.Defender", "dest": "/game3.html" },
     { "src": "/Packaging.Design", "dest": "/project6.html" },
+    { "src": "/admin", "dest": "/admin.html" },
     { "handle": "filesystem" },
-    { "src": "/.*", "status": 404, "dest": "/not-found" }
+    { "src": "/.*", "status": 404, "dest": "/404.html" }
   ]
 }
