@@ -5,7 +5,7 @@ let currentSearchQuery = '';
 document.addEventListener('DOMContentLoaded', function() {
     const currentPage = window.location.pathname;
     
-    if (currentPage.includes('/search') || currentPage.includes('search.html')) {
+    if (currentPage.includes('/search')) {
         initializeSearchPage();
     } else {
         initializeHomePage();
@@ -18,12 +18,12 @@ function initializeHomePage() {
     const googleSearchBtn = document.getElementById('googleSearchBtn');
     const feelingLuckyBtn = document.getElementById('feelingLuckyBtn');
     
-    if (!searchInput) {
-        console.error('Search input not found');
+    if (!searchInput || !googleSearchBtn || !feelingLuckyBtn) {
+        console.error('Homepage elements not found');
         return;
     }
 
-    searchInput.placeholder = 'Cari nama Anda...';
+    searchInput.placeholder = 'type your name';
     
     // Handle search input
     searchInput.addEventListener('keypress', function(e) {
@@ -34,26 +34,18 @@ function initializeHomePage() {
     });
     
     // Handle button clicks
-    if (googleSearchBtn) {
-        googleSearchBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            performSearch();
-        });
-    }
+    googleSearchBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        performSearch();
+    });
     
-    if (feelingLuckyBtn) {
-        feelingLuckyBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            // Go to random project
-            const projects = getAllProjects();
-            if (projects.length > 0) {
-                const randomProject = projects[Math.floor(Math.random() * projects.length)];
-                window.location.href = randomProject.link;
-            } else {
-                window.location.href = 'search.html';
-            }
-        });
-    }
+    feelingLuckyBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Go to random project
+        const projects = ['.', '.', '.', ' .',];
+        const randomProject = projects[Math.floor(Math.random() * projects.length)];
+        window.location.href = randomProject;
+    });
     
     // Focus on search input
     searchInput.focus();
@@ -63,7 +55,7 @@ function initializeHomePage() {
 function initializeSearchPage() {
     // Get search query from URL
     const urlParams = new URLSearchParams(window.location.search);
-    const query = urlParams.get('q') || urlParams.get('nama') || '';
+    const query = urlParams.get('q') || '';
     const tab = urlParams.get('tab') || 'all';
     
     currentSearchQuery = query;
@@ -76,16 +68,11 @@ function initializeSearchPage() {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 const newQuery = this.value.trim();
-                updateSearchResults(newQuery, getActiveTab());
+                if (newQuery) {
+                    updateSearchResults(newQuery, getActiveTab());
+                }
             }
         });
-    }
-    
-    // Show welcome message if name is provided
-    const welcomeMessage = document.getElementById('welcomeMessage');
-    if (query && welcomeMessage) {
-        welcomeMessage.textContent = `Selamat datang, ${query}! Ini adalah portfolio saya.`;
-        welcomeMessage.style.display = 'block';
     }
     
     // Initialize tabs
@@ -110,9 +97,9 @@ function performSearch() {
     const query = searchInput ? searchInput.value.trim() : '';
     
     if (query) {
-        window.location.href = `search.html?nama=${encodeURIComponent(query)}&tab=all`;
+        window.location.href = `search.html?q=${encodeURIComponent(query)}&tab=all`;
     } else {
-        window.location.href = 'search.html?tab=all';
+        window.location.href = '/search?tab=all';
     }
 }
 
@@ -165,9 +152,9 @@ function getCurrentQuery() {
 function updateURL(query, tab) {
     const url = new URL(window.location);
     if (query) {
-        url.searchParams.set('nama', query);
+        url.searchParams.set('q', query);
     } else {
-        url.searchParams.delete('nama');
+        url.searchParams.delete('q');
     }
     url.searchParams.set('tab', tab);
     window.history.pushState({}, '', url);
@@ -178,7 +165,7 @@ function updateSearchResults(query, tab) {
     currentSearchQuery = query;
     
     const resultsContainer = document.getElementById('searchResults');
-    const searchInfo = document.querySelector('.search-info');
+    const searchInfo = document.getElementById('searchInfo');
     
     if (!resultsContainer) return;
     
@@ -189,98 +176,385 @@ function updateSearchResults(query, tab) {
     setTimeout(() => {
         hideLoading();
         
-        // Get projects based on tab
-        let projects = [];
-        switch (tab) {
-            case 'all':
-                projects = getAllProjects();
-                break;
-            case 'images':
-                projects = getProjectsByCategory('photography');
-                break;
-            case 'design':
-                projects = getProjectsByCategory('graphic-design');
-                break;
-            case 'portfolio':
-                projects = getProjectsByCategory('branding');
-                break;
-            case 'about':
-                projects = getProjectsByCategory('about');
-                break;
-            default:
-                projects = getAllProjects();
-        }
-        
-        // Filter by search query if provided
-        if (query) {
-            projects = projects.filter(project => 
-                project.title.toLowerCase().includes(query.toLowerCase()) ||
-                project.description.toLowerCase().includes(query.toLowerCase()) ||
-                project.category.toLowerCase().includes(query.toLowerCase())
-            );
-        }
-        
         // Update search info
-        if (searchInfo) {
-            const resultsCount = document.querySelector('.results-count');
-            if (resultsCount) {
-                resultsCount.textContent = `Sekitar ${projects.length} hasil portfolio`;
-            }
-        }
+        updateResultsInfo(query);
         
         // Clear previous results
         resultsContainer.innerHTML = '';
         
-        if (projects.length === 0) {
-            resultsContainer.innerHTML = `
-                <div style="text-align: center; padding: 40px; color: #70757a;">
-                    <h3>Tidak ada hasil yang ditemukan</h3>
-                    <p>Coba kata kunci yang berbeda atau lihat semua portfolio</p>
-                </div>
-            `;
-            return;
+        // Generate results based on tab
+        switch (tab) {
+            case 'all':
+                displayAllResults(query);
+                break;
+            case 'images':
+                displayImageResults(query);
+                break;
+            case 'design':
+                displayDesignResults(query);
+                break;
+            case 'portfolio':
+                displayPortfolioResults(query);
+                break;
+            case 'about':
+                displayAboutResults(query);
+                break;
+            default:
+                displayAllResults(query);
         }
-        
-        // Display results
-        projects.forEach(project => {
-            const resultElement = document.createElement('div');
-            resultElement.className = 'search-result';
-            resultElement.innerHTML = `
-                <div class="result-url">${project.url}</div>
-                <h3 class="result-title">
-                    <a href="${project.link}">${project.title}</a>
-                </h3>
-                <div class="result-description">${project.description}</div>
-            `;
-            resultsContainer.appendChild(resultElement);
-        });
-        
     }, 300);
 }
 
-// Show loading state
-function showLoading() {
-    const resultsContainer = document.getElementById('searchResults');
-    if (resultsContainer) {
-        resultsContainer.innerHTML = `
-            <div style="text-align: center; padding: 40px; color: #70757a;">
-                <div>Mencari...</div>
-            </div>
-        `;
+// Update results info text
+function updateResultsInfo(query) {
+    const searchInfo = document.getElementById('searchInfo');
+    if (searchInfo) {
+        if (query) {
+            searchInfo.textContent = `About 25 results (0.52 seconds) for "${query}"`;
+        } else {
+            searchInfo.textContent = 'About 25 results (0.52 seconds)';
+        }
     }
 }
 
-// Hide loading state
-function hideLoading() {
-    // Loading is hidden when results are displayed
+// Display all results
+function displayAllResults(query) {
+    const resultsContainer = document.getElementById('searchResults');
+    if (!resultsContainer) return;
+    
+    const projects = [
+        {
+            url: 'davanico.com/projects/Design',
+            title: 'Design & Proyek saya',
+            description: 'Menciptakan Solusi Visual Inovatif untuk Pengalaman Terbaik',
+            link: '/desain'
+        },
+        {
+            url: 'davanico.com/projects/Branding',
+            title: 'Branding & Identitas Visual',
+            description: 'Membangun identitas merek yang kuat dan kohesif melalui eksplorasi logo, palet warna, tipografi, dan panduan gaya untuk berbagai klien dan kebutuhan.',
+            link: '/branding'
+        },
+        {
+            url: 'davanico.com/projects/branding',
+            title: 'Ilustrasi & Media Promosi',
+            description: 'Mengubah ide menjadi visual menarik melalui ilustrasi digital, desain poster, infografis, atau materi promosi lainnya untuk kampanye yang efektif.',
+            link: '/ilustrasi'
+        },
+        {
+            url: 'davanico.com/projects/Game,Card',
+            title: 'Memory Card Flip',
+            description: 'Uji daya ingatmu! Balik kartu dan cari pasangan yang cocok. Selesaikan semua pasangannya secepat mungkin dan buktikan seberapa tajam memorimu!',
+            link: '/memori.card'
+        },
+        {
+            url: 'davanico.com/projects/fintech-app',
+            title: 'Visual Storytelling',
+            description: 'Eksplorasi mendalam dalam dunia fotografi dan manipulasi digital - mengabadikan momen, menciptakan cerita, dan menghadirkan perspektif baru melalui lensa kreatif',
+            link: '/photography'
+        },
+        {
+            url: 'davanico.com/projects/learning-platform',
+            title: 'Packaging Design',
+            description: 'Desain kemasan yang tidak hanya melindungi produk, tetapi juga menjadi media komunikasi visual yang kuat untuk membangun identitas brand dan menarik perhatian konsumen di pasar yang kompetitif.',
+            link: '/Packaging.Design'
+        }
+    ];
+    
+    projects.forEach(project => {
+        const resultItem = document.createElement('div');
+        resultItem.className = 'result-item';
+        resultItem.innerHTML = `
+            <div class="result-url">${project.url}</div>
+            <a href="${project.link}" class="result-title">${project.title}</a>
+            <div class="result-description">${project.description}</div>
+        `;
+        resultsContainer.appendChild(resultItem);
+    });
 }
 
-// Scroll to top
+// Display image results
+function displayImageResults(query) {
+    const resultsContainer = document.getElementById('searchResults');
+    if (!resultsContainer) return;
+    
+    const imagesGrid = document.createElement('div');
+    imagesGrid.className = 'images-grid';
+    
+    const images = [
+        {
+            src: 'img/poster-promosi.png',
+            title: 'Poster Promosi',
+            source: 'davanico.com',
+            link: '#'
+        },
+        {
+            src: 'img/logo-sederhana.png',
+            title: 'Logo Sederhana',
+            source: 'davanico.com',
+            link: '#'
+        },
+        {
+            src: 'img/konten-sosmed.png',
+            title: 'Konten Sosial Media',
+            source: 'davanico.com',
+            link: '#'
+        },
+        {
+            src: 'https://via.placeholder.com/300x200/fbbc05/ffffff?text=Web+Design',
+            title: 'Undangan Digital',
+            source: 'davanico.com',
+            link: '#'
+        },
+        {
+            src: 'https://via.placeholder.com/300x200/4285f4/ffffff?text=UI+Components',
+            title: 'Banner & Flyer',
+            source: 'davanico.com',
+            link: '#'
+        },
+        {
+            src: 'https://via.placeholder.com/300x200/ea4335/ffffff?text=Logo+Design',
+            title: 'Template Presentasi',
+            source: 'davanico.com',
+            link: '#'
+        },
+        {
+            src: 'https://via.placeholder.com/300x200/9c27b0/ffffff?text=Social+Dashboard',
+            title: 'Social Media Dashboard',
+            source: 'davanico.com',
+            link: '#'
+        },
+        {
+            src: 'https://via.placeholder.com/300x200/1a73e8/ffffff?text=FinTech+App',
+            title: 'FinTech Mobile Banking',
+            source: 'davanico.com',
+            link: '#'
+        },
+        {
+            src: 'https://via.placeholder.com/300x200/ff6f00/ffffff?text=E-Learning',
+            title: 'E-Learning Platform',
+            source: 'davanico.com',
+            link: '#'
+        }
+    ];
+    
+    images.forEach(image => {
+        const imageItem = document.createElement('div');
+        imageItem.className = 'image-item';
+        imageItem.innerHTML = `
+            <img src="${image.src}" alt="${image.title}">
+            <div class="image-info">
+                <div class="image-title">${image.title}</div>
+                <div class="image-source">${image.source}</div>
+            </div>
+        `;
+        imageItem.addEventListener('click', () => handleImageClick(image.link));
+        imagesGrid.appendChild(imageItem);
+    });
+    
+    resultsContainer.appendChild(imagesGrid);
+}
+
+// Display design results
+function displayDesignResults(query) {
+    const resultsContainer = document.getElementById('searchResults');
+    if (!resultsContainer) return;
+    
+    const designProjects = [
+        {
+            url: 'davanico.com/design/ui-ux',
+            title: 'UI/UX Design Portfolio - User Experience Design',
+            description: 'Comprehensive collection of user interface and user experience design projects. Featuring modern design principles, accessibility, and user-centered design approaches.',
+            link: '/not-found'
+        },
+        {
+            url: 'davanico.com/design/branding',
+            title: 'Brand Identity & Visual Design - Creative Solutions',
+            description: 'Professional brand identity design services including logo creation, brand guidelines, and visual identity systems for businesses and organizations.',
+            link: '/not-found'
+        },
+        {
+            url: 'davanico.com/design/web',
+            title: 'Web Design & Development - Digital Solutions',
+            description: 'Modern web design and development services focusing on responsive design, performance optimization, and seamless user experiences across all devices.',
+            link: '/not-found'
+        },
+        {
+            url: 'davanico.com/design/dashboard',
+            title: 'Dashboard Design - Data Visualization & Analytics',
+            description: 'Professional dashboard designs for social media management and analytics platforms. Clean interfaces with intuitive data visualization and user-friendly controls.',
+            link: '/not-found'
+        },
+        {
+            url: 'davanico.com/design/mobile-banking',
+            title: 'Mobile Banking UI - FinTech App Design',
+            description: 'Secure and user-friendly mobile banking interface design. Focus on accessibility, security features, and seamless financial transaction flows.',
+            link: '/not-found'
+        },
+        {
+            url: 'davanico.com/design/education',
+            title: 'Educational Platform Design - E-Learning Interface',
+            description: 'Interactive e-learning platform design with engaging user interfaces, progress tracking, and collaborative learning tools for modern education.',
+            link: '/not-found'
+        }
+    ];
+    
+    designProjects.forEach(project => {
+        const resultItem = document.createElement('div');
+        resultItem.className = 'result-item';
+        resultItem.innerHTML = `
+            <div class="result-url">${project.url}</div>
+            <a href="${project.link}" class="result-title">${project.title}</a>
+            <div class="result-description">${project.description}</div>
+        `;
+        resultsContainer.appendChild(resultItem);
+    });
+}
+
+ // portofolio
+function displayPortfolioResults(query) {
+    const resultsContainer = document.getElementById("searchResults");
+    resultsContainer.innerHTML = "";
+
+    const portfolioProjects = [
+        {
+            title: "Design dan Pengembang web",
+            description: "Web developer pemula dengan semangat menciptakan solusi digital yang estetis dan menarik.",
+            link: "https://davanico18.vercel.app/"
+        },
+        {
+            title: "Memory Card Flip",
+            description: "Game kartu sederhana untuk melatih daya ingat.",
+            link: "/memori.card"
+        },
+        {
+            title: "FinTech Mobile App",
+            description: "Aplikasi keuangan digital dengan AI dan pelacak transaksi.",
+            link: "/not-found"
+        }
+    ];
+
+    let filtered = portfolioProjects.filter(project =>
+        !query || project.title.toLowerCase().includes(query.toLowerCase()) ||
+        project.description.toLowerCase().includes(query.toLowerCase())
+    );
+
+    // Jika tidak ada hasil cocok, tampilkan pesan dan tetap render semua project
+    if (filtered.length === 0) {
+        const msg = document.createElement("p");
+        msg.style.color = "white";
+        msg.textContent = `Tidak ada proyek ditemukan untuk "${query}", berikut beberapa portofolio saya:`;
+        resultsContainer.appendChild(msg);
+        filtered = portfolioProjects;
+    }
+
+    filtered.forEach(project => {
+        const resultDiv = document.createElement("div");
+        resultDiv.classList.add("result-item");
+
+        resultDiv.innerHTML = `
+            <div class="result-url">${project.link}</div>
+            <a href="${project.link}" class="result-title">${project.title}</a>
+            <div class="result-description">${project.description}</div>
+        `;
+
+        resultsContainer.appendChild(resultDiv);
+    });
+}
+
+
+
+// Display about results
+function displayAboutResults(query) {
+    const resultsContainer = document.getElementById('searchResults');
+    if (!resultsContainer) return;
+    
+    // Create About Me profile section
+    const aboutSection = document.createElement('div');
+    aboutSection.className = 'about-me-section';
+    aboutSection.innerHTML = `
+        <div class="about-profile">
+        <div class="profile-image">
+            <img src="img/profile.png" alt="Foto Profil Davanico" width="120" height="120" style="border-radius: 50%; object-fit: cover;" />
+        </div>
+        <div class="profile-details">
+            <h2>Davanico</h2>
+            <h3>Desainer Digital & Profesional Kreatif</h3>
+            <p>I'm passionate about building digital experiences that are not only functional, but also visually meaningful. 
+            I specialize in web development, UI/UX design, and brand identity.</p>
+        </div>
+    </div>
+        
+        <div class="skills-overview">
+            <h3>Skills & Expertise</h3>
+            <div class="skills-tags">
+                <span class="skill-tag">Frontend Development</span>
+                <span class="skill-tag">UI/UX Design</span>
+                <span class="skill-tag">Brand Identity</span>
+                <span class="skill-tag">Corel Draw</span>
+                <span class="skill-tag">Photoshop</span>
+                <span class="skill-tag">Adobe Creative Suite</span>
+                <span class="skill-tag">Figma</span>
+                <span class="skill-tag">Web Design</span>
+                <span class="skill-tag">Adobe Illustrator</span>
+                <span class="skill-tag">Logo Design</span>
+            </div>
+        </div>
+        
+        <div class="contact-info">
+            <h3>Get In Touch</h3>
+            <div class="contact-links">
+                <div class="contact-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#4285f4">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    <span>@davanico.com</span>
+                </div>
+                <div class="contact-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#4285f4">
+                        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                    </svg>
+                    <span>linkedin.com/in/davanico</span>
+                </div>
+                <div class="contact-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#4285f4">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    <span>github.com/Davanico1122</span>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    resultsContainer.appendChild(aboutSection);
+}
+
+// Handle image click
+function handleImageClick(projectUrl) {
+    if (projectUrl && projectUrl !== '#') {
+        window.location.href = projectUrl;
+    }
+}
+
+// Show loading indicator
+function showLoading() {
+    const resultsContainer = document.getElementById('searchResults');
+    if (resultsContainer) {
+        resultsContainer.innerHTML = '<div style="text-align: center; padding: 40px; color: #70757a;">Loading...</div>';
+    }
+}
+
+// Hide loading indicator
+function hideLoading() {
+    // Loading will be hidden when results are displayed
+}
+
+// Scroll to top function
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Debounce function for search optimization
+// Utility functions
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -293,12 +567,12 @@ function debounce(func, wait) {
     };
 }
 
-// Track events (placeholder for analytics)
+// Analytics tracking (placeholder)
 function trackEvent(category, action, label) {
-    console.log('Event tracked:', { category, action, label });
+    // Placeholder for analytics tracking
+    console.log(`Analytics: ${category} - ${action} - ${label}`);
 }
 
-// Track search queries
 function trackSearch(query) {
     trackEvent('Search', 'Query', query);
 }
@@ -306,42 +580,25 @@ function trackSearch(query) {
 // Initialize lazy loading for images
 function initLazyLoading() {
     const images = document.querySelectorAll('img[data-src]');
+    
     const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const img = entry.target;
                 img.src = img.dataset.src;
-                img.removeAttribute('data-src');
+                img.classList.remove('lazy');
                 imageObserver.unobserve(img);
             }
         });
     });
-
+    
     images.forEach(img => imageObserver.observe(img));
 }
 
 // Mobile menu toggle (if needed)
 function toggleMobileMenu() {
-    const menu = document.querySelector('.mobile-menu');
-    if (menu) {
-        menu.classList.toggle('active');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenu) {
+        mobileMenu.classList.toggle('active');
     }
 }
-
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    initLazyLoading();
-    
-    // Add search functionality to voice and camera icons
-    document.querySelectorAll('.mic-icon').forEach(icon => {
-        icon.addEventListener('click', function() {
-            alert('Fitur pencarian suara akan segera hadir!');
-        });
-    });
-    
-    document.querySelectorAll('.camera-icon').forEach(icon => {
-        icon.addEventListener('click', function() {
-            alert('Fitur pencarian gambar akan segera hadir!');
-        });
-    });
-});
