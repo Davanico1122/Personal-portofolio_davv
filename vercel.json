@@ -1,5 +1,6 @@
 {
   "routes": [
+     { "src": "/Color.Picker", "dest": "/project7.html" },
       { "src": "/index", "dest": "/index.html" },
     { "src": "/desain", "dest": "/project1.html" },
      { "src": "/search", "dest": "/search.html" },
