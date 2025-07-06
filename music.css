@@ -14,29 +14,29 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Panel playlist tersembunyi default */
+/* Panel playlist tersembunyi */
 .music-slide {
   position: fixed;
-  bottom: 0;
+  bottom: 80px; /* Naik agar tidak menutupi tombol */
   right: 20px;
   width: 90%;
   max-width: 360px;
   background: rgba(18, 18, 18, 0.95);
   backdrop-filter: blur(10px);
-  border-radius: 16px 16px 0 0;
+  border-radius: 16px;
   color: #fff;
   padding: 16px;
   transform: translateY(150%);
   transition: transform 0.4s ease, opacity 0.3s ease;
   z-index: 999;
-  box-shadow: 0 -4px 16px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
   overflow: hidden;
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
 }
 
-/* Tampil saat active */
+/* Panel muncul */
 .music-slide.active {
   transform: translateY(0);
   visibility: visible;
@@ -44,7 +44,7 @@
   pointer-events: auto;
 }
 
-/* Header panel */
+/* Header */
 .music-header {
   display: flex;
   justify-content: space-between;
@@ -65,7 +65,7 @@
   cursor: pointer;
 }
 
-/* Konten panel */
+/* Konten dalam panel */
 .music-content {
   display: flex;
   flex-direction: column;
