@@ -191,7 +191,7 @@ function updateSearchResults(query, tab) {
                 displayImageResults(query);
                 break;
            case 'random':
-                displayRandomProject(query);
+                displayRandomProjects(query);
                 break;
             case 'portfolio':
                 displayPortfolioResults(query);
