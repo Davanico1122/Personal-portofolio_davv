@@ -362,7 +362,7 @@ function displayDesignResults(query) {
     
     const designProjects = [
         {
-            url: 'davanico.com/design/ui-ux',
+            url: 'davanico.com/design/color',
             title: 'Color Picker',
             description: 'Aplikasi web untuk mengambil warna dari gambar menggunakan EyeDropper API. Menampilkan kode warna HEX dan RGB.',
             link: '/Color.Picker'
