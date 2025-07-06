@@ -1,9 +1,28 @@
 const toggleBtn = document.getElementById('togglePlaylist');
 const closeBtn = document.getElementById('closePlaylist');
 const musicPanel = document.getElementById('musicPanel');
+const spotifyContainer = document.getElementById('spotifyContainer');
+
+let iframeLoaded = false;
 
 toggleBtn.addEventListener('click', () => {
   musicPanel.classList.add('active');
+
+  // Render iframe hanya saat pertama kali dibuka
+  if (!iframeLoaded) {
+    const iframe = document.createElement('iframe');
+    iframe.src = "https://open.spotify.com/embed/playlist/4OYcVeIeAB9xmEyFR9ZFJk?utm_source=generator";
+    iframe.width = "100%";
+    iframe.height = "160";
+    iframe.allow = "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
+    iframe.loading = "lazy";
+    iframe.style.borderRadius = "12px";
+    iframe.style.border = "none";
+    iframe.tabIndex = "-1";
+
+    spotifyContainer.insertBefore(iframe, spotifyContainer.firstChild);
+    iframeLoaded = true;
+  }
 });
 
 closeBtn.addEventListener('click', () => {
