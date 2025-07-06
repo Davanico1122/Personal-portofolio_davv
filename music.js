@@ -1,3 +1,9 @@
+const toggleBtn = document.getElementById('togglePlaylist');
+const closeBtn = document.getElementById('closePlaylist');
+const musicPanel = document.getElementById('musicPanel');
+const spotifyContainer = document.getElementById('spotifyContainer');
+
+let iframeLoaded = false;
 let scrollY = 0;
 
 toggleBtn.addEventListener('click', () => {
@@ -9,6 +15,7 @@ toggleBtn.addEventListener('click', () => {
   document.body.style.top = `-${scrollY}px`;
   document.body.style.width = '100%';
 
+  // Masukkan iframe jika belum
   if (!iframeLoaded) {
     const wrapper = document.createElement('div');
     wrapper.classList.add('iframe-wrapper');
@@ -25,6 +32,7 @@ toggleBtn.addEventListener('click', () => {
 
     wrapper.appendChild(iframe);
     spotifyContainer.insertBefore(wrapper, spotifyContainer.firstChild);
+
     iframeLoaded = true;
   }
 });
