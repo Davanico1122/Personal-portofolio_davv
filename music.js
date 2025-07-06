@@ -1,14 +1,16 @@
-const openBtn = document.querySelector('.open-btn');
-const musicSlide = document.querySelector('.music-slide');
+const toggleBtn = document.getElementById('togglePlaylist');
+const closeBtn = document.getElementById('closePlaylist');
+const musicPanel = document.getElementById('musicPanel');
 const body = document.body;
 
-openBtn.addEventListener('click', () => {
-  musicSlide.classList.toggle('active');
+// Toggle panel
+toggleBtn.addEventListener('click', () => {
+  musicPanel.classList.add('active');
+  body.classList.add('no-scroll');
+});
 
-  // Toggle scroll website
-  if (musicSlide.classList.contains('active')) {
-    body.classList.add('no-scroll');
-  } else {
-    body.classList.remove('no-scroll');
-  }
+// Tutup panel
+closeBtn.addEventListener('click', () => {
+  musicPanel.classList.remove('active');
+  body.classList.remove('no-scroll');
 });
