@@ -14,7 +14,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Panel musik glass */
+/* Panel musik */
 .music-slide {
   position: fixed;
   bottom: 0;
@@ -33,7 +33,7 @@
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
-  max-height: 260px; /* <= agar tidak terlalu tinggi */
+  max-height: 260px;
   border-radius: 16px 16px 0 0;
 }
 
@@ -83,9 +83,4 @@
   color: #ccc;
   margin-top: 6px;
   text-align: center;
-}
-
-/* Nonaktifkan scroll saat panel aktif */
-body.no-scroll {
-  overflow: hidden;
 }
