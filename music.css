@@ -17,7 +17,7 @@
 /* Panel playlist tersembunyi default */
 .music-slide {
   position: fixed;
-  bottom: 90px;
+  bottom: 0;
   right: 20px;
   width: 90%;
   max-width: 360px;
@@ -26,15 +26,22 @@
   border-radius: 16px 16px 0 0;
   color: #fff;
   padding: 16px;
-  transform: translateY(100%);
-  transition: transform 0.4s ease;
+  transform: translateY(150%);
+  transition: transform 0.4s ease, opacity 0.3s ease;
   z-index: 999;
   box-shadow: 0 -4px 16px rgba(0,0,0,0.5);
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
-/* Tampilkan panel saat aktif */
+/* Tampil saat active */
 .music-slide.active {
   transform: translateY(0);
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* Header panel */
@@ -58,7 +65,7 @@
   cursor: pointer;
 }
 
-/* Konten player */
+/* Konten panel */
 .music-content {
   display: flex;
   flex-direction: column;
