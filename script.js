@@ -399,11 +399,13 @@ function displayRandomProjects(query) {
         }
     ];
 
-    // Filter (opsional) jika ada query pencarian
-    const filtered = allProjects.filter(project =>
-        !query || project.title.toLowerCase().includes(query.toLowerCase()) ||
-        project.description.toLowerCase().includes(query.toLowerCase())
-    );
+    // Tampilkan semua jika query kosong, filter jika ada query
+    const filtered = query.trim()
+        ? allProjects.filter(project =>
+            project.title.toLowerCase().includes(query.toLowerCase()) ||
+            project.description.toLowerCase().includes(query.toLowerCase())
+        )
+        : allProjects;
 
     if (filtered.length === 0) {
         const msg = document.createElement("p");
@@ -424,6 +426,7 @@ function displayRandomProjects(query) {
         resultsContainer.appendChild(resultItem);
     });
 }
+
 
  // portofolio
 function displayPortfolioResults(query) {
