@@ -14,22 +14,24 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Panel playlist tersembunyi */
+/* Panel playlist dengan efek kaca (glassmorphism) */
 .music-slide {
   position: fixed;
-  bottom: 80px; /* Naik agar tidak menutupi tombol */
+  bottom: 80px;
   right: 20px;
   width: 90%;
   max-width: 360px;
-  background: rgba(18, 18, 18, 0.95);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   color: #fff;
   padding: 16px;
   transform: translateY(150%);
   transition: transform 0.4s ease, opacity 0.3s ease;
   z-index: 999;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   overflow: hidden;
   visibility: hidden;
   opacity: 0;
@@ -74,7 +76,7 @@
 
 .playlist-note {
   font-size: 12px;
-  color: #bbb;
+  color: #ddd;
   margin-top: 8px;
   text-align: center;
 }
