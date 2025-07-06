@@ -356,7 +356,7 @@ function displayImageResults(query) {
 }
 
 // Display design results
-function displayRandomProjects(query) {
+function displayRandomProjects() {
     const resultsContainer = document.getElementById('searchResults');
     if (!resultsContainer) return;
 
@@ -364,58 +364,45 @@ function displayRandomProjects(query) {
         {
             url: 'davanico.com/design/color',
             title: 'Color Picker',
-            description: 'Aplikasi web untuk mengambil warna dari gambar menggunakan EyeDropper API. Menampilkan kode warna HEX dan RGB.',
+            description: 'Aplikasi web untuk mengambil warna dari gambar menggunakan EyeDropper API.',
             link: '/Color.Picker'
         },
         {
             url: 'davanico.com/design/branding',
-            title: 'Brand Identity & Visual Design - Creative Solutions',
-            description: 'Professional brand identity design services including logo creation, brand guidelines, and visual identity systems for businesses and organizations.',
+            title: 'Brand Identity & Visual Design',
+            description: 'Desain logo, panduan visual, dan branding profesional.',
             link: '/not-found'
         },
         {
             url: 'davanico.com/design/web',
-            title: 'Web Design & Development - Digital Solutions',
-            description: 'Modern web design and development services focusing on responsive design, performance optimization, and seamless user experiences across all devices.',
+            title: 'Web Design & Development',
+            description: 'Desain web modern dan responsive.',
             link: '/not-found'
         },
         {
             url: 'davanico.com/design/dashboard',
-            title: 'Dashboard Design - Data Visualization & Analytics',
-            description: 'Professional dashboard designs for social media management and analytics platforms. Clean interfaces with intuitive data visualization and user-friendly controls.',
+            title: 'Dashboard Design',
+            description: 'Antarmuka dashboard analytics & manajemen sosial media.',
             link: '/not-found'
         },
         {
             url: 'davanico.com/design/mobile-banking',
-            title: 'Mobile Banking UI - FinTech App Design',
-            description: 'Secure and user-friendly mobile banking interface design. Focus on accessibility, security features, and seamless financial transaction flows.',
+            title: 'Mobile Banking UI',
+            description: 'UI FinTech untuk transaksi dan keamanan digital.',
             link: '/not-found'
         },
         {
             url: 'davanico.com/design/education',
-            title: 'Educational Platform Design - E-Learning Interface',
-            description: 'Interactive e-learning platform design with engaging user interfaces, progress tracking, and collaborative learning tools for modern education.',
+            title: 'E-Learning Platform Design',
+            description: 'Desain interaktif untuk pendidikan daring.',
             link: '/not-found'
         }
     ];
 
-    // Tampilkan semua jika query kosong, filter jika ada query
-    const filtered = query.trim()
-        ? allProjects.filter(project =>
-            project.title.toLowerCase().includes(query.toLowerCase()) ||
-            project.description.toLowerCase().includes(query.toLowerCase())
-        )
-        : allProjects;
+    // Kosongkan hasil lama
+    resultsContainer.innerHTML = "";
 
-    if (filtered.length === 0) {
-        const msg = document.createElement("p");
-        msg.style.color = "#666";
-        msg.textContent = `Tidak ditemukan proyek untuk "${query}".`;
-        resultsContainer.appendChild(msg);
-        return;
-    }
-
-    filtered.forEach(project => {
+    allProjects.forEach(project => {
         const resultItem = document.createElement('div');
         resultItem.className = 'result-item';
         resultItem.innerHTML = `
