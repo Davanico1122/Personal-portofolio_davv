@@ -34,7 +34,6 @@
   opacity: 0;
   pointer-events: none;
 
-  /* Batas tinggi agar tidak terlalu menutupi layar */
   max-height: 280px;
   overflow-y: auto;
   border-radius: 16px 16px 0 0;
@@ -86,4 +85,9 @@
   color: #ccc;
   margin-top: 6px;
   text-align: center;
+}
+
+/* Cegah scroll saat jendela musik aktif */
+body.no-scroll {
+  overflow: hidden;
 }
