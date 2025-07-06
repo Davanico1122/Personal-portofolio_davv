@@ -356,7 +356,7 @@ function displayImageResults(query) {
 }
 
 // Display design results
-function displayRandomProject(query) {
+function displayRandomProjects(query) {
     const resultsContainer = document.getElementById('searchResults');
     if (!resultsContainer) return;
 
@@ -398,19 +398,33 @@ function displayRandomProject(query) {
             link: '/not-found'
         }
     ];
-    
-    const randomProject = allProjects[Math.floor(Math.random() * allProjects.length)];
 
-    const resultItem = document.createElement('div');
-    resultItem.className = 'result-item';
-    resultItem.innerHTML = `
-        <div class="result-url">${randomProject.url}</div>
-        <a href="${randomProject.link}" class="result-title">${randomProject.title}</a>
-        <div class="result-description">${randomProject.description}</div>
-    `;
+    // Filter (opsional) jika ada query pencarian
+    const filtered = allProjects.filter(project =>
+        !query || project.title.toLowerCase().includes(query.toLowerCase()) ||
+        project.description.toLowerCase().includes(query.toLowerCase())
+    );
 
-    resultsContainer.appendChild(resultItem);
+    if (filtered.length === 0) {
+        const msg = document.createElement("p");
+        msg.style.color = "#666";
+        msg.textContent = `Tidak ditemukan proyek untuk "${query}".`;
+        resultsContainer.appendChild(msg);
+        return;
+    }
+
+    filtered.forEach(project => {
+        const resultItem = document.createElement('div');
+        resultItem.className = 'result-item';
+        resultItem.innerHTML = `
+            <div class="result-url">${project.url}</div>
+            <a href="${project.link}" class="result-title">${project.title}</a>
+            <div class="result-description">${project.description}</div>
+        `;
+        resultsContainer.appendChild(resultItem);
+    });
 }
+
  // portofolio
 function displayPortfolioResults(query) {
     const resultsContainer = document.getElementById("searchResults");
