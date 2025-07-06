@@ -363,9 +363,9 @@ function displayDesignResults(query) {
     const designProjects = [
         {
             url: 'davanico.com/design/ui-ux',
-            title: 'UI/UX Design Portfolio - User Experience Design',
-            description: 'Comprehensive collection of user interface and user experience design projects. Featuring modern design principles, accessibility, and user-centered design approaches.',
-            link: '/not-found'
+            title: 'Color Picker',
+            description: 'Aplikasi web untuk mengambil warna dari gambar menggunakan EyeDropper API. Menampilkan kode warna HEX dan RGB.',
+            link: '/Color.Picker'
         },
         {
             url: 'davanico.com/design/branding',
