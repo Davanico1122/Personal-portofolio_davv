@@ -1,5 +1,6 @@
 {
   "routes": [
+      { "src": "/index", "dest": "/index.html" },
     { "src": "/desain", "dest": "/project1.html" },
      { "src": "/search", "dest": "/search.html" },
     { "src": "/branding", "dest": "/project2.html" },
