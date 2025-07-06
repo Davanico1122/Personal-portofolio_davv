@@ -190,8 +190,8 @@ function updateSearchResults(query, tab) {
             case 'images':
                 displayImageResults(query);
                 break;
-            case 'design':
-                displayDesignResults(query);
+           case 'random':
+                displayRandomProject(query);
                 break;
             case 'portfolio':
                 displayPortfolioResults(query);
@@ -399,18 +399,18 @@ function displayRandomProject(query) {
         }
     ];
     
-    designProjects.forEach(project => {
-        const resultItem = document.createElement('div');
-        resultItem.className = 'result-item';
-        resultItem.innerHTML = `
-            <div class="result-url">${project.url}</div>
-            <a href="${project.link}" class="result-title">${project.title}</a>
-            <div class="result-description">${project.description}</div>
-        `;
-        resultsContainer.appendChild(resultItem);
-    });
-}
+    const randomProject = allProjects[Math.floor(Math.random() * allProjects.length)];
 
+    const resultItem = document.createElement('div');
+    resultItem.className = 'result-item';
+    resultItem.innerHTML = `
+        <div class="result-url">${randomProject.url}</div>
+        <a href="${randomProject.link}" class="result-title">${randomProject.title}</a>
+        <div class="result-description">${randomProject.description}</div>
+    `;
+
+    resultsContainer.appendChild(resultItem);
+}
  // portofolio
 function displayPortfolioResults(query) {
     const resultsContainer = document.getElementById("searchResults");
