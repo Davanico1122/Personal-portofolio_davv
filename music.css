@@ -73,7 +73,7 @@
 /* Kotak Spotify besar */
 .music-content iframe {
   width: 100%;
-  height: 170px; /* Bisa kamu naikkan ke 200px jika ingin lebih tinggi */
+  height: 210px; /* Bisa kamu naikkan ke 200px jika ingin lebih tinggi */
   border: none;
   border-radius: 12px;
   margin-top: 4px;
