@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project - Image Color Picker</title>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+    body {
+      background-color: #025bee;
+    }
+    .wrapper {
+      background-color: #ffffff;
+      width: 90%;
+      max-width: 31.25em;
+      position: absolute;
+      transform: translateX(-50%);
+      left: 50%;
+      top: 3.5em;
+      padding: 1.5em;
+      border-radius: 0.8em;
+    }
+    img {
+      display: block;
+      width: 80%;
+      margin: auto;
+    }
+    .btns-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1em;
+      margin: 1em 0 1.5em 0;
+    }
+    input,
+    label,
+    button {
+      border: none;
+      outline: none;
+    }
+    input[type="file"] {
+      display: none;
+    }
+    label,
+    button {
+      display: block;
+      font-size: 1.1em;
+      background-color: #025bee;
+      color: #ffffff;
+      text-align: center;
+      padding: 0.8em 0;
+      border-radius: 0.3em;
+      cursor: pointer;
+    }
+    #result {
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 1em;
+    }
+    #result div {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    #result input {
+      background-color: transparent;
+      font-size: 1em;
+      padding: 0.5em;
+      width: 100%;
+      color: #313b4c;
+      border-bottom: 0.1em solid #021637;
+    }
+    #result button {
+      position: absolute;
+      right: 0.6em;
+      background-color: transparent;
+      color: #7c8696;
+    }
+    #picked-color-ref {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      border: 0.6em solid #d9e8ff;
+      border-radius: 0.5em;
+    }
+    #custom-alert {
+      transform: scale(0);
+      transition: 0.5s;
+      transform-origin: center;
+      background-color: #d9e8ff;
+      color: #025bee;
+      text-align: center;
+      padding: 0.5em;
+      margin-top: 1.5em;
+    }
+    .hide {
+      display: none;
+    }
+    #error {
+      color: #ff725a;
+      text-align: center;
+    }
+    .back-button {
+      display: inline-block;
+      position: fixed;
+      top: 1em;
+      left: 1em;
+      background-color: #ffffff;
+      color: #025bee;
+      padding: 0.6em 1em;
+      border-radius: 0.5em;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0.2em 0.5em rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s;
+      z-index: 999;
+    }
+    .back-button:hover {
+      background-color: #d9e8ff;
+    }
+  </style>
+</head>
+<body>
+  <!-- Tombol kembali -->
+  <a href="index.html" class="back-button">← Kembali ke Beranda</a>
+
+  <div class="wrapper">
+    <div class="image-container">
+      <img id="image" src="demo-image-3.jpg" />
+    </div>
+    <div class="btns-container">
+      <input type="file" id="file" accept="image/*" />
+      <label for="file">Open A Photo</label>
+      <button id="pick-color">Pick Color</button>
+    </div>
+    <div id="error" class="hide"></div>
+    <div id="result" class="hide">
+      <div>
+        <input type="text" id="hex-val-ref" />
+        <button onclick="copy('hex-val-ref')"><i class="fa-regular fa-copy"></i></button>
+      </div>
+      <div>
+        <input type="text" id="rgb-val-ref" />
+        <button onclick="copy('rgb-val-ref')"><i class="fa-regular fa-copy"></i></button>
+      </div>
+      <div id="picked-color-ref"></div>
+    </div>
+    <div id="custom-alert">Color Code Copied!</div>
+  </div>
+
+  <script>
+    let pickColor = document.getElementById("pick-color");
+    let error = document.getElementById("error");
+    let fileInput = document.getElementById("file");
+    let image = document.getElementById("image");
+    let hexValRef = document.getElementById("hex-val-ref");
+    let rgbValRef = document.getElementById("rgb-val-ref");
+    let customAlert = document.getElementById("custom-alert");
+    let pickedColorRef = document.getElementById("picked-color-ref");
+    let result = document.getElementById("result");
+    let eyeDropper;
+
+    window.onload = () => {
+      if ("EyeDropper" in window) {
+        pickColor.classList.remove("hide");
+        eyeDropper = new EyeDropper();
+      } else {
+        error.classList.remove("hide");
+        error.innerText = "Browser tidak mendukung Eyedropper API";
+        pickColor.classList.add("hide");
+      }
+    };
+
+    const colorSelector = async () => {
+      const color = await eyeDropper
+        .open()
+        .then((colorValue) => {
+          error.classList.add("hide");
+          let hexValue = colorValue.sRGBHex;
+          let rgbArr = [];
+          for (let i = 1; i < hexValue.length; i += 2) {
+            rgbArr.push(parseInt(hexValue[i] + hexValue[i + 1], 16));
+          }
+          let rgbValue = "rgb(" + rgbArr + ")";
+          result.style.display = "grid";
+          hexValRef.value = hexValue;
+          rgbValRef.value = rgbValue;
+          pickedColorRef.style.backgroundColor = hexValue;
+        })
+        .catch((err) => {
+          error.classList.remove("hide");
+          if (err.toString().includes("AbortError")) {
+            error.innerText = "";
+          } else {
+            error.innerText = err;
+          }
+        });
+    };
+
+    pickColor.addEventListener("click", colorSelector);
+
+    fileInput.onchange = () => {
+      result.style.display = "none";
+      let reader = new FileReader();
+      reader.readAsDataURL(fileInput.files[0]);
+      reader.onload = () => {
+        image.setAttribute("src", reader.result);
+      };
+    };
+
+    let copy = (textId) => {
+      document.getElementById(textId).select();
+      document.execCommand("copy");
+      customAlert.style.transform = "scale(1)";
+      setTimeout(() => {
+        customAlert.style.transform = "scale(0)";
+      }, 2000);
+    };
+  </script>
+</body>
+</html>
