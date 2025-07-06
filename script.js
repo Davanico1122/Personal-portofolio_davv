@@ -190,9 +190,8 @@ function updateSearchResults(query, tab) {
             case 'images':
                 displayImageResults(query);
                 break;
-           case 'random':
-                displayRandomProjects(query);
-                break;
+            case 'random':
+                displayRandomProjects(query); // ✅ ini yang penting!
             case 'portfolio':
                 displayPortfolioResults(query);
                 break;
