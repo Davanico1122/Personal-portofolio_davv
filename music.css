@@ -1,50 +1,37 @@
-/* Tombol buka playlist */
+/* Tombol pembuka */
 .open-btn {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: 1000;
+  z-index: 999;
   background: #1db954;
   color: #fff;
   border: none;
-  padding: 12px 20px;
+  padding: 12px 18px;
   border-radius: 50px;
   font-size: 16px;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
-/* Jendela musik slide */
+/* Panel musik */
 .music-slide {
   position: fixed;
-  bottom: 0;
+  bottom: -300px;
   left: 0;
   width: 100%;
-  background: rgba(33, 33, 33, 0.6);
-  backdrop-filter: blur(14px) saturate(180%);
-  -webkit-backdrop-filter: blur(14px) saturate(180%);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 400px;
+  background: rgba(0, 0, 0, 0.95);
   color: #fff;
-  padding: 16px 20px;
-  transform: translateY(100%);
-  transition: transform 0.4s ease, opacity 0.3s ease;
-  z-index: 999;
-  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.3);
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  border-radius: 16px 16px 0 0;
+  padding: 20px;
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+  transition: bottom 0.4s ease;
+  z-index: 998;
+  box-shadow: 0 -8px 24px rgba(0,0,0,0.5);
 }
 
-/* Saat aktif */
-.music-slide.active {
-  transform: translateY(0);
-  visibility: visible;
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Header playlist */
+/* Header panel */
 .music-header {
   display: flex;
   justify-content: space-between;
@@ -53,10 +40,8 @@
 }
 
 .music-header h3 {
-  font-size: 18px;
   margin: 0;
-  font-weight: 600;
-  color: #fff;
+  font-size: 18px;
 }
 
 .music-header button {
@@ -67,19 +52,7 @@
   cursor: pointer;
 }
 
-/* Konten musik */
-.music-content iframe {
-  width: 100%;
-  height: 160px;
-  border: none;
-  border-radius: 12px;
-  margin-top: 6px;
-}
-
-/* Catatan bawah */
-.playlist-note {
-  font-size: 12px;
-  color: #ccc;
-  margin-top: 6px;
-  text-align: center;
+/* Aktifkan panel */
+.music-slide.active {
+  bottom: 0;
 }
