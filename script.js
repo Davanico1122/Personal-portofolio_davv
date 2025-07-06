@@ -356,11 +356,11 @@ function displayImageResults(query) {
 }
 
 // Display design results
-function displayDesignResults(query) {
+function displayRandomProject(query) {
     const resultsContainer = document.getElementById('searchResults');
     if (!resultsContainer) return;
-    
-    const designProjects = [
+
+    const allProjects = [
         {
             url: 'davanico.com/design/color',
             title: 'Color Picker',
