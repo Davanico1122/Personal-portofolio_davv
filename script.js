@@ -192,6 +192,7 @@ function updateSearchResults(query, tab) {
                 break;
             case 'random':
                 displayRandomProjects(query); // ✅ ini yang penting!
+                 break;
             case 'portfolio':
                 displayPortfolioResults(query);
                 break;
