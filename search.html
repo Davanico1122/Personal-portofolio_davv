@@ -138,22 +138,23 @@
 
 <!-- === Contact Form Sidebar === -->
 <div class="contact-wrapper" id="contactWrapper">
-  <button class="info_more-btn" onclick="toggleContactForm()">Show Contact</button>
+  <button class="info_more-btn" id="toggleContactBtn" onclick="toggleContactForm()">Kirim Pesan</button>
   <div class="sidebar-form">
     <form id="contactForm">
       <label for="name">Nama</label>
-      <input type="text" id="name" name="name" required>
+      <input type="text" id="name" name="name" placeholder="Masukkan nama Anda" required>
 
       <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
+      <input type="email" id="email" name="email" placeholder="Masukkan email Anda" required>
 
       <label for="message">Pesan</label>
-      <textarea id="message" name="message" rows="4" required></textarea>
+      <textarea id="message" name="message" rows="4" placeholder="Tulis pesan Anda di sini" required></textarea>
 
       <button type="submit" class="submit-btn">Kirim</button>
     </form>
   </div>
 </div>
+
 
 <!-- SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
