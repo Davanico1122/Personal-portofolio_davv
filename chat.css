@@ -1,78 +1,95 @@
-/* Toggle Button */
-.contact-toggle {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #1db954;
-  color: white;
+/* Tombol Toggle */
+.info_more-btn {
+  width: 100%;
+  padding: 12px 0;
+  background: rgba(200, 200, 200, 0.8);
+  backdrop-filter: blur(10px);
+  color: #000;
+  font-weight: 500;
+  font-size: 15px;
   border: none;
-  padding: 10px 20px;
-  font-weight: bold;
-  border-radius: 40px;
-  z-index: 1000;
+  border-radius: 16px 16px 0 0;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: background 0.3s ease;
+  box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
 }
 
-/* Panel Contact */
-.contact-panel {
+.info_more-btn:hover {
+  background: rgba(220, 220, 220, 1);
+}
+
+/* Wrapper */
+.contact-wrapper {
   position: fixed;
-  bottom: -100%;
+  bottom: 0;
   left: 0;
   width: 100%;
-  background: rgba(33, 33, 33, 0.6);
-  backdrop-filter: blur(14px) saturate(180%);
-  -webkit-backdrop-filter: blur(14px) saturate(180%);
-  padding: 20px;
-  box-shadow: 0 -4px 12px rgba(0,0,0,0.3);
-  border-radius: 20px 20px 0 0;
-  z-index: 999;
-  transition: bottom 0.4s ease;
+  max-width: 420px;
+  margin: auto;
+  z-index: 9999;
+  right: 0;
 }
 
-.contact-panel.active {
-  bottom: 0;
+/* Form Box Slide */
+.contact-form-box {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(18px);
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.4s ease, opacity 0.3s ease;
 }
 
-/* Header Contact */
-.contact-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
-  margin-bottom: 10px;
+.contact-wrapper.active .contact-form-box {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
-.contact-header button {
-  background: none;
-  color: white;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
+/* Form Style */
+.form-group {
+  margin-bottom: 12px;
 }
 
-/* Form */
-#contactForm {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-#contactForm input,
-#contactForm textarea {
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
+label {
   font-size: 14px;
-  width: 100%;
+  display: block;
+  margin-bottom: 4px;
+  color: #333;
 }
 
-#contactForm button[type="submit"] {
-  background: #1db954;
-  color: white;
-  border: none;
+input, textarea {
+  width: 100%;
   padding: 10px;
+  border: 1px solid #bbb;
   border-radius: 8px;
-  cursor: pointer;
+  background: rgba(255,255,255,0.9);
+  font-size: 14px;
+  resize: vertical;
+}
+
+.send-btn {
+  width: 100%;
+  padding: 10px;
+  background: #1db954;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
   font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.send-btn:hover {
+  background: #169c47;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .contact-wrapper {
+    max-width: 100%;
+  }
 }
