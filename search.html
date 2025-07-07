@@ -136,20 +136,23 @@
 
 
 
-<!-- Toggle Show Contact -->
-<div id="contactToggle" class="contact-toggle"> Kirim Pesan</div>
+<!-- Tombol Toggle Contact -->
+<button class="contact-toggle" id="toggleContact">Show Contact</button>
 
-<!-- Form Contact -->
-<div id="contactPanel" class="contact-slide">
+<!-- Panel Form Contact -->
+<div class="contact-panel" id="contactPanel">
+  <div class="contact-header">
+    <h3>Contact Me</h3>
+    <button id="closeContact">Hide</button>
+  </div>
   <form id="contactForm">
-    <h3>Hubungi Saya</h3>
-    <input type="text" id="name" name="name" placeholder="Nama" required>
-    <input type="email" id="email" name="email" placeholder="Email" required>
-    <textarea id="message" name="message" rows="4" placeholder="Pesan kamu..." required></textarea>
-    <button type="submit">Kirim</button>
-    <p id="statusMessage" class="status-message"></p>
+    <input type="text" name="name" placeholder="Nama kamu..." required />
+    <input type="email" name="email" placeholder="Email kamu..." required />
+    <textarea name="message" placeholder="Pesan..." required></textarea>
+    <button type="submit">Kirim Pesan</button>
   </form>
 </div>
+
       <!-- === Script Files === -->
     <script src="script.js"></script>
        <script src="chat.js"></script>
