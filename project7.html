@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -6,195 +7,171 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <style>
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
-    }body {
-  background: linear-gradient(135deg, #e0ecff, #f4f7fc);
-  min-height: 100vh;
-  padding: 1em;
-}
-
-.back-button {
-  display: inline-block;
-  margin-bottom: 1em;
-  text-decoration: none;
-  background: #fff;
-  color: #025bee;
-  padding: 0.5em 1em;
-  border-radius: 8px;
-  font-weight: bold;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.container {
-  max-width: 500px;
-  margin: auto;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 12px;
-  padding: 1em;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255,255,255,0.3);
-}
-
-.drop-area {
-  border: 2px dashed #025bee;
-  padding: 1em;
-  text-align: center;
-  color: #025bee;
-  border-radius: 10px;
-  margin-bottom: 1em;
-}
-
-canvas {
-  width: 100%;
-  max-height: 300px;
-  border: 2px solid #dfe9f9;
-  border-radius: 10px;
-  background: #fff;
-}
-
-.color-info {
-  margin-top: 1em;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.color-preview {
-  height: 48px;
-  border-radius: 6px;
-  border: 2px solid #dfe9f9;
-}
-
-.color-code {
-  font-weight: bold;
-  font-size: 16px;
-}
-
-#zoom-preview {
-  position: absolute;
-  border: 2px solid #025bee;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  pointer-events: none;
-  display: none;
-  transform: translate(-50%, -50%) scale(2);
-  z-index: 99;
-  overflow: hidden;
-}
-
-#zoom-canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
+    }
+    body {
+      background: #e8f0fe;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .back-button {
+      display: inline-block;
+      margin-bottom: 1em;
+      background: #025bee;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .drop-area {
+      border: 2px dashed #025bee;
+      border-radius: 12px;
+      padding: 1em;
+      text-align: center;
+      color: #025bee;
+      margin-bottom: 1em;
+      cursor: pointer;
+    }
+    .drop-area.dragover {
+      background: #dbe9ff;
+    }
+    .image-container {
+      margin-bottom: 1em;
+    }
+    .image-container img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+    }
+    #color-result {
+      margin-top: 1em;
+      background: #f1f3f4;
+      padding: 1em;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .color-box {
+      width: 100%;
+      height: 60px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+    .code-text {
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+    input[type="file"] {
+      display: none;
+    }
   </style>
 </head>
 <body>
-  <a href="search.html" class="back-button">&larr; Kembali</a>
+
   <div class="container">
-    <div class="drop-area" id="drop-area">Tarik atau upload gambar ke sini</div>
-    <input type="file" id="file" accept="image/*" style="display:none">
-    <canvas id="canvas"></canvas>
-    <div class="color-info">
-      <div class="color-preview" id="preview"></div>
-      <div class="color-code" id="hex">#FFFFFF</div>
-      <div class="color-code" id="rgb">rgb(255, 255, 255)</div>
+    <a href="/search.html" class="back-button">← Kembali</a>
+
+    <label for="fileUpload" class="drop-area" id="drop-area">Tarik atau upload gambar ke sini</label>
+    <input type="file" id="fileUpload" accept="image/*">
+
+    <div class="image-container">
+      <canvas id="canvas" style="width: 100%; border-radius: 12px;"></canvas>
     </div>
-  </div>  <div id="zoom-preview">
-    <canvas id="zoom-canvas" width="20" height="20"></canvas>
-  </div>  <script>
+
+    <div id="color-result" style="display:none;">
+      <div class="color-box" id="color-box"></div>
+      <div class="code-text" id="hex-code">#ffffff</div>
+      <div class="code-text" id="rgb-code">rgb(255, 255, 255)</div>
+    </div>
+  </div>
+
+  <script>
+    const dropArea = document.getElementById('drop-area');
+    const fileUpload = document.getElementById('fileUpload');
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
-    const fileInput = document.getElementById('file');
-    const dropArea = document.getElementById('drop-area');
-    const previewBox = document.getElementById('preview');
-    const hexBox = document.getElementById('hex');
-    const rgbBox = document.getElementById('rgb');
-    const zoomPreview = document.getElementById('zoom-preview');
-    const zoomCanvas = document.getElementById('zoom-canvas');
-    const zoomCtx = zoomCanvas.getContext('2d');
+    const colorResult = document.getElementById('color-result');
+    const colorBox = document.getElementById('color-box');
+    const hexCode = document.getElementById('hex-code');
+    const rgbCode = document.getElementById('rgb-code');
 
-    let img = new Image();
-
-    dropArea.addEventListener('click', () => fileInput.click());
-    dropArea.addEventListener('dragover', e => {
-      e.preventDefault();
-      dropArea.style.background = '#e0edff';
-    });
-
-    dropArea.addEventListener('dragleave', () => {
-      dropArea.style.background = '';
-    });
-
-    dropArea.addEventListener('drop', e => {
-      e.preventDefault();
-      dropArea.style.background = '';
-      const file = e.dataTransfer.files[0];
-      if (file && file.type.startsWith('image/')) {
-        loadImage(file);
-      }
-    });
-
-    fileInput.addEventListener('change', e => {
-      const file = e.target.files[0];
-      if (file && file.type.startsWith('image/')) {
-        loadImage(file);
-      }
-    });
-
-    function loadImage(file) {
+    function handleFile(file) {
       const reader = new FileReader();
-      reader.onload = () => {
-        img.onload = () => {
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
           canvas.width = img.width;
           canvas.height = img.height;
           ctx.drawImage(img, 0, 0);
         };
-        img.src = reader.result;
+        img.src = e.target.result;
       };
       reader.readAsDataURL(file);
     }
 
-    function getColorAt(x, y) {
-      const pixel = ctx.getImageData(x, y, 1, 1).data;
-      const rgb = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
-      const hex = `#${pixel[0].toString(16).padStart(2, '0')}${pixel[1].toString(16).padStart(2, '0')}${pixel[2].toString(16).padStart(2, '0')}`;
-      return { rgb, hex, pixel };
-    }
+    fileUpload.addEventListener('change', () => {
+      handleFile(fileUpload.files[0]);
+    });
 
-    function updateZoom(x, y) {
-      const size = 10;
-      zoomCtx.clearRect(0, 0, zoomCanvas.width, zoomCanvas.height);
-      zoomCtx.drawImage(canvas, x - size / 2, y - size / 2, size, size, 0, 0, 20, 20);
-    }
+    dropArea.addEventListener('click', () => fileUpload.click());
 
-    function handleTouchOrMouse(e) {
+    dropArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropArea.classList.add('dragover');
+    });
+
+    dropArea.addEventListener('dragleave', () => {
+      dropArea.classList.remove('dragover');
+    });
+
+    dropArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropArea.classList.remove('dragover');
+      const files = e.dataTransfer.files;
+      if (files.length > 0) {
+        handleFile(files[0]);
+      }
+    });
+
+    // Detect color on click or tap
+    canvas.addEventListener('click', pickColor);
+    canvas.addEventListener('touchstart', function (e) {
       const rect = canvas.getBoundingClientRect();
-      const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
-      const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
-      const color = getColorAt(x, y);
-      previewBox.style.backgroundColor = color.hex;
-      hexBox.textContent = color.hex;
-      rgbBox.textContent = color.rgb;
+      const touch = e.touches[0];
+      const x = touch.clientX - rect.left;
+      const y = touch.clientY - rect.top;
+      showColorAt(x, y);
+    });
 
-      zoomPreview.style.left = `${(e.touches ? e.touches[0].clientX : e.clientX)}px`;
-      zoomPreview.style.top = `${(e.touches ? e.touches[0].clientY : e.clientY)}px`;
-      zoomPreview.style.display = 'block';
-      updateZoom(x, y);
+    function pickColor(e) {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      showColorAt(x, y);
     }
 
-    canvas.addEventListener('touchstart', handleTouchOrMouse);
-    canvas.addEventListener('touchmove', handleTouchOrMouse);
-    canvas.addEventListener('touchend', () => zoomPreview.style.display = 'none');
-
-    canvas.addEventListener('mousemove', handleTouchOrMouse);
-    canvas.addEventListener('mouseout', () => zoomPreview.style.display = 'none');
-  </script></body>
+    function showColorAt(x, y) {
+      const pixel = ctx.getImageData(x, y, 1, 1).data;
+      const r = pixel[0], g = pixel[1], b = pixel[2];
+      const hex = "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+      colorBox.style.backgroundColor = hex;
+      hexCode.textContent = hex;
+      rgbCode.textContent = `rgb(${r}, ${g}, ${b})`;
+      colorResult.style.display = "block";
+    }
+  </script>
+</body>
 </html>
