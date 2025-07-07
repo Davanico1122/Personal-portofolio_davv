@@ -5,7 +5,7 @@ function toggleContactForm() {
   const wrapper = document.getElementById("contactWrapper");
   const btn = document.getElementById("toggleContactBtn");
   wrapper.classList.toggle("active");
-  btn.innerText = wrapper.classList.contains("active") ? "Hide Contact" : "Show contact";
+  btn.innerText = wrapper.classList.contains("active") ? "Hide Contact" : "Show Contact";
 }
 
 const contactForm = document.getElementById("contactForm");
