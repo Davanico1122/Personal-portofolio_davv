@@ -62,7 +62,8 @@
       text-align: center;
       margin-bottom: 1em;
     }
-    .image-preview img {
+    .image-preview img,
+    #canvas {
       width: 100%;
       max-height: 240px;
       object-fit: contain;
@@ -149,6 +150,7 @@
   <div class="container">
     <div class="drop-area" id="drop-area">Tarik dan jatuhkan gambar di sini</div>
     <div class="image-preview">
+      <canvas id="canvas"></canvas>
       <img id="image" src="img/demo-image-3.jpg" alt="Preview Image" />
     </div>
     <div class="controls">
@@ -170,46 +172,79 @@
     </div>
     <div id="custom-alert" class="alert">Kode warna berhasil disalin!</div>
   </div>
+
   <script>
     const pickColor = document.getElementById("pick-color");
     const error = document.getElementById("error");
     const fileInput = document.getElementById("file");
     const image = document.getElementById("image");
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
     const hexValRef = document.getElementById("hex-val-ref");
     const rgbValRef = document.getElementById("rgb-val-ref");
     const customAlert = document.getElementById("custom-alert");
     const pickedColorRef = document.getElementById("picked-color-ref");
     const result = document.getElementById("result");
     const dropArea = document.getElementById("drop-area");
+
     let eyeDropper;
 
     window.onload = () => {
       if ("EyeDropper" in window) {
         eyeDropper = new EyeDropper();
       } else {
-        error.innerText = "Browser tidak mendukung EyeDropper API.";
-        pickColor.disabled = true;
+        eyeDropper = null;
+        error.innerText = "Gunakan tap pada gambar untuk memilih warna (HP Mode)";
+        pickColor.innerText = "Tap gambar";
       }
     };
 
     pickColor.addEventListener("click", async () => {
-      try {
-        const { sRGBHex } = await eyeDropper.open();
-        const rgb = hexToRGB(sRGBHex);
-        hexValRef.value = sRGBHex;
-        rgbValRef.value = rgb;
-        pickedColorRef.style.backgroundColor = sRGBHex;
-        result.style.display = "grid";
-        error.innerText = "";
-      } catch (err) {
-        if (!err.toString().includes("AbortError")) {
-          error.innerText = err;
+      if (eyeDropper) {
+        try {
+          const { sRGBHex } = await eyeDropper.open();
+          const rgb = hexToRGB(sRGBHex);
+          updateColor(sRGBHex, rgb);
+        } catch (err) {
+          if (!err.toString().includes("AbortError")) error.innerText = err;
         }
+      } else {
+        error.innerText = "Silakan tap langsung pada gambar untuk ambil warna.";
       }
     });
 
+    canvas.addEventListener("click", (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      pickColorAt(x, y);
+    });
+
+    canvas.addEventListener("touchstart", (e) => {
+      const touch = e.touches[0];
+      const rect = canvas.getBoundingClientRect();
+      const x = touch.clientX - rect.left;
+      const y = touch.clientY - rect.top;
+      pickColorAt(x, y);
+    });
+
+    function pickColorAt(x, y) {
+      const pixel = ctx.getImageData(x, y, 1, 1).data;
+      const r = pixel[0], g = pixel[1], b = pixel[2];
+      const hex = rgbToHex(r, g, b);
+      updateColor(hex, `rgb(${r}, ${g}, ${b})`);
+    }
+
+    function updateColor(hex, rgb) {
+      hexValRef.value = hex;
+      rgbValRef.value = rgb;
+      pickedColorRef.style.backgroundColor = hex;
+      result.style.display = "grid";
+      error.innerText = "";
+    }
+
     fileInput.addEventListener("change", () => {
-      handleImage(fileInput.files[0]);
+      if (fileInput.files[0]) handleImage(fileInput.files[0]);
     });
 
     function handleImage(file) {
@@ -218,7 +253,15 @@
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
-        image.src = reader.result;
+        const img = new Image();
+        img.onload = () => {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          canvas.style.display = "block";
+          image.style.display = "none";
+          ctx.drawImage(img, 0, 0);
+        };
+        img.src = reader.result;
       };
     }
 
@@ -252,6 +295,13 @@
       const g = (bigint >> 8) & 255;
       const b = bigint & 255;
       return `rgb(${r}, ${g}, ${b})`;
+    }
+
+    function rgbToHex(r, g, b) {
+      return (
+        "#" +
+        [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('')
+      );
     }
   </script>
 </body>
