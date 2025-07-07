@@ -136,11 +136,12 @@
 
 
 
- <!-- Chat Form Bubble -->
-<div class="chat-wrapper" id="chatWrapper">
-  <div class="chat-box" id="chatBox">
-    <button class="chat-toggle" onclick="toggleChat()">Kirim Pesan</button>
-    <form id="chatForm" onsubmit="sendMessage(event)">
+ <!-- Chat Form Wrapper -->
+<div class="custom-chat" id="customChat">
+  <button class="chat-toggle-btn" onclick="toggleChat()">Kirim Pesan</button>
+
+  <div class="chat-form-box" id="chatFormBox">
+    <form id="customChatForm" onsubmit="sendMessage(event)">
       <input type="text" id="name" placeholder="Nama" required />
       <input type="email" id="email" placeholder="Email" required />
       <textarea id="message" placeholder="Pesan..." required></textarea>
