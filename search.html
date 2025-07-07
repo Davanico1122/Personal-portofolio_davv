@@ -135,14 +135,22 @@
     </div>
 
 
-    <!-- Live Chat to Telegram -->
-<div class="chat-form">
-  <h3> Kirim Pesan</h3>
-  <input type="text" id="chatName" placeholder="Nama kamu" required>
-  <input type="email" id="chatEmail" placeholder="Email (opsional)">
-  <textarea id="chatMessage" placeholder="Pesan kamu..." required></textarea>
-  <button onclick="sendMessage()">Kirim</button>
-  <p id="chatStatus"></p>
+<!-- Tombol Buka Live Chat -->
+<button id="chatToggle" class="chat-toggle"></button>
+
+<!-- Panel Live Chat -->
+<div id="chatWindow" class="chat-window">
+  <div class="chat-header">
+    <span>Live Chat</span>
+    <button id="closeChat" class="close-chat">×</button>
+  </div>
+  <div class="chat-body">
+    <input type="text" id="chatName" placeholder="Nama Anda" required />
+    <input type="email" id="chatEmail" placeholder="Email (opsional)" />
+    <textarea id="chatMessage" placeholder="Tulis pesan Anda..." required></textarea>
+    <button onclick="sendMessage()">Kirim</button>
+    <p id="chatStatus"></p>
+  </div>
 </div>
 
 
