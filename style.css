@@ -94,9 +94,21 @@ body {
 
 .davanico-logo {
     font-size: 90px;
-    font-weight: 400;
+    font-weight: 500; /* ubah dari 400 ke 500 */
+    font-family: 'Roboto', sans-serif; /* tambahkan ini */
     user-select: none;
+    letter-spacing: 0; /* tambahkan ini juga */
 }
+
+.davanico-logo span {
+    display: inline-block;
+    margin-right: -4px; /* untuk merapatkan antar huruf */
+}
+
+.davanico-logo span:last-child {
+    margin-right: 0; /* huruf terakhir tanpa jarak */
+}
+
 
 /* Google color scheme for Davanico */
 .letter-d { color: #4285f4; }
@@ -840,3 +852,5 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+
