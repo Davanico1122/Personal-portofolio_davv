@@ -135,12 +135,12 @@
     </div>
 
 
-<!-- Toggle & Contact Form -->
+
+    <!-- Chat Form Floating -->
 <div class="chat-wrapper" id="chatWrapper">
-  <button class="chat-toggle" onclick="toggleChat()">Kirim Pesan</button>
   <div class="chat-box" id="chatBox">
+    <button class="chat-toggle" onclick="toggleChat()">Kirim Pesan</button>
     <form id="chatForm" onsubmit="sendMessage(event)">
-      <h3> Kirim Pesan</h3>
       <input type="text" id="name" placeholder="Nama" required />
       <input type="email" id="email" placeholder="Email" required />
       <textarea id="message" placeholder="Pesan..." required></textarea>
@@ -148,10 +148,12 @@
     </form>
   </div>
 </div>
-    
-    <!-- SweetAlert2 -->   
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    
       <!-- === Script Files === -->
     <script src="script.js"></script>
        <script src="chat.js"></script>
