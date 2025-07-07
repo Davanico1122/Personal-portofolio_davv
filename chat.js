@@ -1,43 +1,44 @@
+const toggleContact = document.getElementById("toggleContact");
+const contactPanel = document.getElementById("contactPanel");
+const closeContact = document.getElementById("closeContact");
+const contactForm = document.getElementById("contactForm");
 
-const toggle = document.getElementById('contactToggle');
-const panel = document.getElementById('contactPanel');
-const form = document.getElementById('contactForm');
-const statusMessage = document.getElementById('statusMessage');
+// Ganti dengan milikmu
+const TOKEN = "7647510633:AAHSWSstRQj3bZAmOJGFUGbqVe1gMb7Vq3M";
+const CHAT_ID = "6139440643";
 
-toggle.addEventListener('click', () => {
-  panel.classList.toggle('active');
+toggleContact.addEventListener("click", () => {
+  contactPanel.classList.add("active");
+  toggleContact.style.display = "none";
 });
 
-// Ganti token dan chat_id di sini
-const BOT_TOKEN = '7647510633:AAHSWSstRQj3bZAmOJGFUGbqVe1gMb7Vq3M';
-const CHAT_ID = '6139440643';
+closeContact.addEventListener("click", () => {
+  contactPanel.classList.remove("active");
+  toggleContact.style.display = "block";
+});
 
-form.addEventListener('submit', function (e) {
+contactForm.addEventListener("submit", function (e) {
   e.preventDefault();
+  const name = contactForm.name.value;
+  const email = contactForm.email.value;
+  const message = contactForm.message.value;
 
-  const name = form.name.value.trim();
-  const email = form.email.value.trim();
-  const message = form.message.value.trim();
+  const fullMessage = ` *Pesan Baru dari Portfolio*\n\n Nama: ${name}\n Email: ${email}\n Pesan:\n${message}`;
 
-  if (!name || !email || !message) return;
-
-  const text = ` *Pesan Baru dari Portofolio*\n\n Nama: ${name}\n Email: ${email}\n Pesan:\n${message}`;
-
-  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+  fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       chat_id: CHAT_ID,
-      text: text,
-      parse_mode: 'Markdown'
-    })
+      text: fullMessage,
+      parse_mode: "Markdown"
+    }),
   })
-    .then(res => res.json())
-    .then(data => {
-      statusMessage.textContent = ' Pesan terkirim!';
-      form.reset();
+    .then(() => {
+      alert("Pesan berhasil dikirim!");
+      contactForm.reset();
+      contactPanel.classList.remove("active");
+      toggleContact.style.display = "block";
     })
-    .catch(err => {
-      statusMessage.textContent = ' Gagal mengirim pesan.';
-    });
+    .catch(() => alert("Gagal mengirim pesan."));
 });
