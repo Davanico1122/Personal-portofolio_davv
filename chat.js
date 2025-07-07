@@ -1,50 +1,34 @@
-// Toggle chat window
-document.getElementById('chatToggle').onclick = () => {
-  document.getElementById('chatWindow').style.display = 'flex';
-};
+document.getElementById("openChatBtn").addEventListener("click", () => {
+  document.getElementById("chatWindow").classList.add("active");
+});
 
-document.getElementById('closeChat').onclick = () => {
-  document.getElementById('chatWindow').style.display = 'none';
-};
+document.getElementById("closeChatBtn").addEventListener("click", () => {
+  document.getElementById("chatWindow").classList.remove("active");
+});
 
-// Kirim pesan ke Telegram
+document.getElementById("sendChatBtn").addEventListener("click", sendMessage);
+document.getElementById("chatInput").addEventListener("keypress", function (e) {
+  if (e.key === "Enter") sendMessage();
+});
+
 function sendMessage() {
-  const name = document.getElementById('chatName').value.trim();
-  const email = document.getElementById('chatEmail').value.trim();
-  const message = document.getElementById('chatMessage').value.trim();
-  const status = document.getElementById('chatStatus');
+  const input = document.getElementById("chatInput");
+  const msg = input.value.trim();
+  if (msg) {
+    const messageBox = document.createElement("p");
+    messageBox.textContent = msg;
+    messageBox.style.background = "#1db954";
+    messageBox.style.padding = "8px 12px";
+    messageBox.style.borderRadius = "8px";
+    messageBox.style.maxWidth = "80%";
+    messageBox.style.alignSelf = "flex-end";
+    messageBox.style.marginBottom = "8px";
+    messageBox.style.color = "#fff";
 
-  if (!name || !message) {
-    status.innerText = " Nama dan pesan wajib diisi.";
-    return;
+    const container = document.getElementById("chatMessages");
+    container.appendChild(messageBox);
+    container.scrollTop = container.scrollHeight;
+
+    input.value = "";
   }
-
-  const text = ` Pesan Baru dari Website:\n Nama: ${name}\n Email: ${email || 'Tidak diisi'}\n Pesan:\n${message}`;
-
-  const token = '7647510633:AAHSWSstRQj3bZAmOJGFUGbqVe1gMb7Vq3M';
-  const chatId = '6139440643';
-
-  fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      chat_id: chatId,
-      text: text
-    })
-  })
-    .then(response => response.json())
-    .then(data => {
-      if (data.ok) {
-        status.innerText = " Pesan terkirim!";
-        document.getElementById('chatName').value = '';
-        document.getElementById('chatEmail').value = '';
-        document.getElementById('chatMessage').value = '';
-      } else {
-        status.innerText = " Gagal mengirim pesan.";
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      status.innerText = " Gagal terkoneksi.";
-    });
 }
