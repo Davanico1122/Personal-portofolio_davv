@@ -136,22 +136,24 @@
 
 
 
-<!-- Tombol Toggle Chat -->
-<button id="chatToggle" class="chat-toggle">Kirim Pesan</button>
+<!-- Toggle tombol & form kontak -->
+<div class="contact-toggle-wrapper">
+  <button id="contactToggle" class="contact-toggle">Kirim Pesan </button>
+</div>
 
-<!-- Jendela Chat -->
-<div id="chatWindow" class="chat-window">
-  <div class="chat-header">
-    <span>Hubungi Saya</span>
-    <button id="chatClose" class="close-btn">×</button>
-  </div>
-  <form id="chatForm" class="chat-form">
-    <input type="text" id="chatName" placeholder="Nama" required />
-    <input type="email" id="chatEmail" placeholder="Email" required />
-    <textarea id="chatMessage" placeholder="Pesan..." required></textarea>
-    <button type="submit">Kirim</button>
+<div id="contactFormPanel" class="contact-form-slide">
+  <form id="contactForm">
+    <div class="form-header">
+      <h3>Hubungi Saya</h3>
+      <button type="button" id="closeContact"></button>
+    </div>
+    <input type="text" id="name" placeholder="Nama Anda" required>
+    <input type="email" id="email" placeholder="Email Anda" required>
+    <textarea id="message" rows="4" placeholder="Pesan Anda..." required></textarea>
+    <button type="submit" class="send-btn">Kirim</button>
   </form>
 </div>
+
 
       <!-- === Script Files === -->
     <script src="script.js"></script>
