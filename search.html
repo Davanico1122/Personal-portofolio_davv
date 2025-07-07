@@ -136,23 +136,22 @@
 
 
 
-<!-- Toggle tombol & form kontak -->
-<div class="contact-toggle-wrapper">
-  <button id="contactToggle" class="contact-toggle">Kirim Pesan </button>
+<!-- Toggle Contact -->
+<button id="toggleContactBtn" class="contact-fab">Show Contact </button>
+
+<!-- Contact Slide Panel -->
+<div id="contactCard" class="contact-card hidden">
+  <div class="contact-card-inner">
+    <h3>Hubungi Saya</h3>
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Nama" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <textarea id="message" placeholder="Pesan" rows="4" required></textarea>
+      <button type="submit">Kirim</button>
+    </form>
+  </div>
 </div>
 
-<div id="contactFormPanel" class="contact-form-slide">
-  <form id="contactForm">
-    <div class="form-header">
-      <h3>Hubungi Saya</h3>
-      <button type="button" id="closeContact"></button>
-    </div>
-    <input type="text" id="name" placeholder="Nama Anda" required>
-    <input type="email" id="email" placeholder="Email Anda" required>
-    <textarea id="message" rows="4" placeholder="Pesan Anda..." required></textarea>
-    <button type="submit" class="send-btn">Kirim</button>
-  </form>
-</div>
 
 
       <!-- === Script Files === -->
