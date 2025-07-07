@@ -136,16 +136,21 @@
 
 
 
- <!-- Chat Form Wrapper -->
-<div class="custom-chat" id="customChat">
-  <button class="chat-toggle-btn" onclick="toggleChat()">Kirim Pesan</button>
+<!-- contact.html -->
+<div class="contact-wrapper" id="contactWrapper">
+  <button class="info_more-btn" onclick="toggleContactForm()">Kirim Pesan</button>
+  <div class="sidebar-form">
+    <form id="contactForm">
+      <label for="name">Nama</label>
+      <input type="text" id="name" name="name" required>
 
-  <div class="chat-form-box" id="chatFormBox">
-    <form id="customChatForm" onsubmit="sendMessage(event)">
-      <input type="text" id="name" placeholder="Nama" required />
-      <input type="email" id="email" placeholder="Email" required />
-      <textarea id="message" placeholder="Pesan..." required></textarea>
-      <button type="submit">Kirim</button>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="message">Pesan</label>
+      <textarea id="message" name="message" rows="4" required></textarea>
+
+      <button type="submit" class="submit-btn">Kirim</button>
     </form>
   </div>
 </div>
