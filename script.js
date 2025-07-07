@@ -485,7 +485,7 @@ function displayAboutResults(query) {
             <h2>Davanico</h2>
             <h3>Desainer Digital & Profesional Kreatif</h3>
             <p>Saya adalah siswa SMK jurusan DKV yang fokus pada desain digital yang tidak hanya fungsional,
-            tapi juga komunikatif secara visual. Saya menyukai proses membangun identitas merek,mendesain antarmuka yang nyaman, dan menciptakan pengalaman digital yang berkesan..</p>
+            tapi juga komunikatif secara visual. Saya menyukai proses membangun identitas merek, mendesain antarmuka yang nyaman, dan menciptakan pengalaman digital yang berkesan.</p>
         </div>
     </div>
         
