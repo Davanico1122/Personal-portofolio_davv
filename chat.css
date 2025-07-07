@@ -1,63 +1,80 @@
-/* Tombol Toggle */
-.contact-fab {
+/* Tombol toggle */
+.contact-toggle {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #444;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  background: #1db954;
   color: #fff;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 50px;
-  font-size: 15px;
-  z-index: 1000;
+  padding: 10px 18px;
+  border-radius: 12px 12px 0 0;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 1000;
+  font-weight: 500;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.3);
 }
 
-/* Card Kontak */
-.contact-card {
+/* Panel contact slide */
+.contact-slide {
   position: fixed;
-  bottom: 80px;
-  right: 20px;
-  background: #2f2f2f;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  background: rgba(50, 50, 50, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   color: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  padding: 20px;
-  width: 300px;
-  transform: translateY(100%);
-  transition: transform 0.4s ease;
+  padding: 24px 20px;
   z-index: 999;
+  transition: bottom 0.4s ease;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 16px 16px 0 0;
 }
 
-.contact-card.show {
-  transform: translateY(0);
-}
-
-.contact-card.hidden {
-  display: none;
+/* Aktif */
+.contact-slide.active {
+  bottom: 0;
 }
 
 /* Form Style */
-.contact-card input,
-.contact-card textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 12px;
-  border: none;
-  border-radius: 8px;
-  background: #444;
-  color: #fff;
-  font-size: 14px;
+#contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.contact-card button {
-  background: #1db954;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  font-size: 14px;
+#contactForm h3 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+#contactForm input,
+#contactForm textarea {
   width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+#contactForm input::placeholder,
+#contactForm textarea::placeholder {
+  color: #ddd;
+}
+
+#contactForm button {
+  background: #1db954;
+  color: white;
+  padding: 10px;
+  border: none;
   border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
+}
+
+.status-message {
+  font-size: 12px;
+  margin-top: 6px;
+  color: #a0ffa0;
 }
