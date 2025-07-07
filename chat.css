@@ -1,95 +1,78 @@
-/* Tombol Toggle */
-.info_more-btn {
-  width: 100%;
-  padding: 12px 0;
-  background: rgba(200, 200, 200, 0.8);
-  backdrop-filter: blur(10px);
-  color: #000;
-  font-weight: 500;
-  font-size: 15px;
-  border: none;
-  border-radius: 16px 16px 0 0;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
-}
-
-.info_more-btn:hover {
-  background: rgba(220, 220, 220, 1);
-}
-
-/* Wrapper */
-.contact-wrapper {
+.chat-toggle-wrapper {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  max-width: 420px;
-  margin: auto;
-  z-index: 9999;
-  right: 0;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
 }
 
-/* Form Box Slide */
-.contact-form-box {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(18px);
-  border-radius: 0 0 16px 16px;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
-  padding: 16px;
-  transform: translateY(100%);
-  opacity: 0;
-  pointer-events: none;
-  transition: transform 0.4s ease, opacity 0.3s ease;
-}
-
-.contact-wrapper.active .contact-form-box {
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Form Style */
-.form-group {
-  margin-bottom: 12px;
-}
-
-label {
-  font-size: 14px;
-  display: block;
-  margin-bottom: 4px;
-  color: #333;
-}
-
-input, textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #bbb;
-  border-radius: 8px;
-  background: rgba(255,255,255,0.9);
-  font-size: 14px;
-  resize: vertical;
-}
-
-.send-btn {
-  width: 100%;
-  padding: 10px;
-  background: #1db954;
+.chat-toggle {
+  background-color: #1db954;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  font-weight: bold;
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.send-btn:hover {
-  background: #169c47;
+.chat-form-wrapper {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 300px;
+  background: rgba(40, 40, 40, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  display: none;
+  flex-direction: column;
+  z-index: 999;
 }
 
-/* Responsive */
-@media (max-width: 500px) {
-  .contact-wrapper {
-    max-width: 100%;
-  }
+.chat-form-wrapper.active {
+  display: flex;
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+.chat-form-wrapper form {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.chat-form-wrapper input,
+.chat-form-wrapper textarea {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+}
+
+.chat-form-wrapper button[type="submit"] {
+  background-color: #1db954;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
 }
