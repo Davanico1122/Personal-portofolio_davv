@@ -1,85 +1,63 @@
 /* Tombol Toggle */
-.contact-toggle-wrapper {
+.contact-fab {
   position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-}
-
-.contact-toggle {
-  background: #4a4a4a;
+  bottom: 20px;
+  right: 20px;
+  background: #444;
   color: #fff;
+  padding: 10px 16px;
   border: none;
-  padding: 10px 22px;
-  border-radius: 10px 10px 0 0;
-  font-size: 16px;
+  border-radius: 50px;
+  font-size: 15px;
+  z-index: 1000;
   cursor: pointer;
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-/* Form Slide Panel */
-.contact-form-slide {
+/* Card Kontak */
+.contact-card {
   position: fixed;
-  bottom: -100%;
-  left: 0;
-  width: 100%;
+  bottom: 80px;
+  right: 20px;
   background: #2f2f2f;
+  color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
   padding: 20px;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
-  transition: bottom 0.4s ease;
+  width: 300px;
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
   z-index: 999;
 }
 
-.contact-form-slide.active {
-  bottom: 0;
+.contact-card.show {
+  transform: translateY(0);
 }
 
-.contact-form-slide form {
-  max-width: 400px;
-  margin: 0 auto;
-  color: #fff;
+.contact-card.hidden {
+  display: none;
 }
 
-.form-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.form-header h3 {
-  margin: 0;
-  font-size: 18px;
-}
-
-.form-header button {
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.contact-form-slide input,
-.contact-form-slide textarea {
+/* Form Style */
+.contact-card input,
+.contact-card textarea {
   width: 100%;
   padding: 10px;
   margin-bottom: 12px;
-  background: #444;
   border: none;
-  color: #fff;
   border-radius: 8px;
+  background: #444;
+  color: #fff;
   font-size: 14px;
 }
 
-.send-btn {
+.contact-card button {
   background: #1db954;
   color: #fff;
   border: none;
-  padding: 10px 18px;
-  font-size: 15px;
+  padding: 10px;
+  font-size: 14px;
+  width: 100%;
   border-radius: 8px;
   cursor: pointer;
-  width: 100%;
 }
