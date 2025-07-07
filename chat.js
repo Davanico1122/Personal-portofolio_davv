@@ -3,50 +3,51 @@ const CHAT_ID = '6139440643';
 
 function toggleContactForm() {
   const wrapper = document.getElementById("contactWrapper");
-  const toggleBtn = wrapper.querySelector(".info_more-btn");
-
+  const btn = document.getElementById("toggleContactBtn");
   wrapper.classList.toggle("active");
-
-  // Ganti teks tombol
-  if (wrapper.classList.contains("active")) {
-    toggleBtn.innerText = "Hide Contact";
-  } else {
-    toggleBtn.innerText = "Show Contact";
-  }
+  btn.innerText = wrapper.classList.contains("active") ? "Tutup Pesan" : "Kirim Pesan";
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const contactForm = document.getElementById("contactForm");
-  contactForm.addEventListener("submit", function (e) {
-    e.preventDefault();
+const contactForm = document.getElementById("contactForm");
+contactForm.addEventListener("submit", function (e) {
+  e.preventDefault();
 
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const message = document.getElementById("message").value.trim();
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const message = document.getElementById("message").value;
 
-    if (!name || !email || !message) {
-      alert("Harap isi semua kolom.");
-      return;
-    }
+  const fullMessage = ` Pesan Baru:\nNama: ${name}\nEmail: ${email}\nPesan: ${message}`;
 
-    const fullMessage = ` Pesan Baru:\n Nama: ${name}\n Email: ${email}\n Pesan: ${message}`;
-
-    fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: CHAT_ID,
-        text: fullMessage,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        alert(" Pesan berhasil dikirim!");
+  fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: fullMessage,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.ok) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Pesan Terkirim!',
+          text: 'Terima kasih, kami akan membalas secepatnya.',
+          timer: 3000,
+          showConfirmButton: false
+        });
         contactForm.reset();
-      })
-      .catch((err) => {
-        alert(" Gagal mengirim pesan.");
-        console.error(err);
+      } else {
+        throw new Error("Gagal kirim");
+      }
+    })
+    .catch((err) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Gagal!',
+        text: 'Terjadi kesalahan saat mengirim pesan.',
       });
-  });
+      console.error(err);
+    });
 });
+
