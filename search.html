@@ -136,24 +136,20 @@
 
 
 
-<!-- Toggle Contact -->
-<button id="toggleContactBtn" class="contact-fab">Show Contact </button>
+<!-- Toggle Show Contact -->
+<div id="contactToggle" class="contact-toggle"> Kirim Pesan</div>
 
-<!-- Contact Slide Panel -->
-<div id="contactCard" class="contact-card hidden">
-  <div class="contact-card-inner">
+<!-- Form Contact -->
+<div id="contactPanel" class="contact-slide">
+  <form id="contactForm">
     <h3>Hubungi Saya</h3>
-    <form id="contactForm">
-      <input type="text" id="name" placeholder="Nama" required>
-      <input type="email" id="email" placeholder="Email" required>
-      <textarea id="message" placeholder="Pesan" rows="4" required></textarea>
-      <button type="submit">Kirim</button>
-    </form>
-  </div>
+    <input type="text" id="name" name="name" placeholder="Nama" required>
+    <input type="email" id="email" name="email" placeholder="Email" required>
+    <textarea id="message" name="message" rows="4" placeholder="Pesan kamu..." required></textarea>
+    <button type="submit">Kirim</button>
+    <p id="statusMessage" class="status-message"></p>
+  </form>
 </div>
-
-
-
       <!-- === Script Files === -->
     <script src="script.js"></script>
        <script src="chat.js"></script>
