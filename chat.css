@@ -1,78 +1,91 @@
-.chat-toggle-wrapper {
+/* === Chat Wrapper === */
+.chat-wrapper {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: 999;
+  z-index: 9999;
 }
 
+/* === Toggle Button === */
 .chat-toggle {
-  background-color: #1db954;
+  padding: 10px 18px;
+  background: #1db954;
   color: #fff;
   border: none;
-  padding: 10px 18px;
-  border-radius: 30px;
+  border-radius: 20px 20px 0 0;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease;
 }
 
-.chat-form-wrapper {
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  width: 300px;
-  background: rgba(40, 40, 40, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 16px;
+.chat-toggle:hover {
+  background: #17a44a;
+}
+
+/* === Chat Box === */
+.chat-box {
+  width: 280px;
+  background: rgba(36, 36, 36, 0.85);
+  backdrop-filter: blur(14px);
+  border-radius: 0 0 16px 16px;
   padding: 16px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
   display: none;
-  flex-direction: column;
-  z-index: 999;
+  animation: slideUp 0.4s ease forwards;
 }
 
-.chat-form-wrapper.active {
-  display: flex;
-  animation: slideUp 0.4s ease;
-}
-
-@keyframes slideUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to   { transform: translateY(0); opacity: 1; }
-}
-
-.chat-form-wrapper form {
-  display: flex;
-  flex-direction: column;
-}
-
-.chat-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  font-weight: 600;
+.chat-box h3 {
   color: #fff;
+  margin-bottom: 12px;
+  font-size: 16px;
+  text-align: center;
 }
 
-.chat-form-wrapper input,
-.chat-form-wrapper textarea {
+/* === Form Input === */
+.chat-box input,
+.chat-box textarea {
+  width: 100%;
   padding: 10px;
   margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.08);
   border: none;
-  border-radius: 10px;
-  font-size: 14px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 13px;
   outline: none;
 }
 
-.chat-form-wrapper button[type="submit"] {
-  background-color: #1db954;
-  color: #fff;
-  border: none;
+.chat-box textarea {
+  resize: none;
+  height: 80px;
+}
+
+/* === Submit Button === */
+.chat-box button[type="submit"] {
+  width: 100%;
   padding: 10px;
-  border-radius: 12px;
-  cursor: pointer;
+  background: #1db954;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
   font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.chat-box button[type="submit"]:hover {
+  background: #169c45;
+}
+
+/* === Animations === */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
