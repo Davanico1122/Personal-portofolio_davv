@@ -1,14 +1,12 @@
-/* contact.css */
 .contact-wrapper {
   position: fixed;
-  bottom: 2rem;
+  bottom: 4rem;
   right: 1.5rem;
-  width: 280px;
-  z-index: 9999;
+  width: 260px;
+  z-index: 1000;
   transform: translateY(calc(100% - 48px));
   transition: transform 0.4s ease;
-  font-family: 'Segoe UI', sans-serif;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  font-family: 'Roboto', sans-serif;
 }
 
 .contact-wrapper.active {
@@ -25,8 +23,9 @@
   font-size: 14px;
   text-align: center;
   cursor: pointer;
-  border-radius: 12px 12px 0 0;
+  border-radius: 16px 16px 0 0;
   transition: background 0.3s ease;
+  box-shadow: 0 -1px 6px rgba(0, 0, 0, 0.2);
 }
 
 .info_more-btn:hover {
@@ -34,11 +33,12 @@
 }
 
 .sidebar-form {
-  background: rgba(36, 36, 36, 0.95);
+  background: rgba(36, 36, 36, 0.9);
   backdrop-filter: blur(12px);
   padding: 1rem;
-  border-radius: 0 0 12px 12px;
+  border-radius: 0 0 16px 16px;
   color: #fff;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .sidebar-form label {
@@ -57,6 +57,7 @@
   font-size: 0.9rem;
   background: #fff;
   color: #000;
+  box-sizing: border-box;
 }
 
 .submit-btn {
