@@ -34,14 +34,14 @@
     })
     .then((res) => {
       if (res.ok) {
-        Swal.fire("Terkirim!", "Pesan berhasil dikirim!", "success");
+        Swal.fire("Terkirim!", "Pesan berhasil dikirim ke Telegram!", "success");
         e.target.reset();
         chatBox.classList.remove("active");
       } else {
-        Swal.fire("Gagal", "Tidak bisa mengirim pesan", "error");
+        Swal.fire("Gagal", "Tidak bisa mengirim pesan!", "error");
       }
     })
     .catch(() => {
-      Swal.fire("Gagal", "Cek koneksi atau bot API!", "error");
+      Swal.fire("Error", "Cek koneksi atau token bot!", "error");
     });
   }
