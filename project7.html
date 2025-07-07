@@ -2,307 +2,136 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Color Picker - Davanico</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Color Picker - Drag Support</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
   <style>
-    * {
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
     body {
-      background: linear-gradient(135deg, #e0ecff, #f4f7fc);
-      color: #333;
+      font-family: 'Poppins', sans-serif;
+      background: #eaf2ff;
+      margin: 0;
+      padding: 2em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       min-height: 100vh;
     }
-    .back-button {
-      position: fixed;
-      top: 1em;
-      left: 1em;
-      background: white;
-      color: #025bee;
-      padding: 0.5em 1em;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: 0.2s;
-      z-index: 10;
-    }
-    .back-button:hover {
-      background-color: #e0edff;
-    }
     .container {
-      max-width: 480px;
-      margin: 6em auto;
-      background: rgba(255, 255, 255, 0.2);
+      background: white;
       padding: 2em;
       border-radius: 20px;
-      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-    }
-    .drop-area {
-      border: 2px dashed #025bee;
-      border-radius: 12px;
-      padding: 1em;
-      text-align: center;
-      color: #025bee;
-      margin-bottom: 1em;
-      cursor: pointer;
-    }
-    .drop-area.dragover {
-      background-color: #e0edff;
-    }
-    .image-preview {
-      text-align: center;
-      margin-bottom: 1em;
-    }
-    .image-preview img,
-    #canvas {
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-width: 500px;
       width: 100%;
-      max-height: 240px;
-      object-fit: contain;
+      text-align: center;
+    }
+    canvas {
+      width: 100%;
+      max-width: 100%;
       border-radius: 12px;
-      border: 2px solid #dfe9f9;
+      border: 2px solid #ccc;
+      touch-action: none;
     }
-    .controls {
+    .color-preview {
+      margin-top: 1em;
+      height: 50px;
+      border-radius: 10px;
+      border: 2px solid #ddd;
+    }
+    .code-box {
       display: flex;
-      gap: 1em;
-      margin-bottom: 1.5em;
+      justify-content: space-between;
+      margin-top: 1em;
     }
-    .controls label,
-    .controls button {
+    .code-box input {
       flex: 1;
-      padding: 0.8em;
-      font-size: 1em;
+      font-size: 16px;
+      padding: 0.5em;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-right: 8px;
+    }
+    .code-box button {
+      padding: 0.5em 1em;
+      border: none;
       background: #025bee;
       color: white;
-      border: none;
       border-radius: 8px;
       cursor: pointer;
-      text-align: center;
-      transition: background 0.2s;
     }
-    .controls label:hover,
-    .controls button:hover {
+    .code-box button:hover {
       background: #014fc4;
-    }
-    input[type="file"] {
-      display: none;
-    }
-    .color-output {
-      display: grid;
-      gap: 0.8em;
-    }
-    .color-box {
-      display: flex;
-      align-items: center;
-      background: rgba(255,255,255,0.7);
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      overflow: hidden;
-    }
-    .color-box input {
-      flex: 1;
-      padding: 0.5em;
-      border: none;
-      font-size: 1em;
-      background: transparent;
-    }
-    .color-box button {
-      padding: 0.5em 1em;
-      background: transparent;
-      border: none;
-      color: #333;
-      cursor: pointer;
-    }
-    .picked-color {
-      width: 100%;
-      height: 48px;
-      border-radius: 8px;
-      border: 2px solid #dfe9f9;
-    }
-    .alert {
-      margin-top: 1em;
-      text-align: center;
-      font-weight: bold;
-      color: #025bee;
-      transform: scale(0);
-      transition: transform 0.3s ease;
-    }
-    .alert.show {
-      transform: scale(1);
-    }
-    .error {
-      text-align: center;
-      color: #ff4444;
-      margin-bottom: 1em;
     }
   </style>
 </head>
 <body>
-  <a href="/search" class="back-button">&larr; Kembali</a>
   <div class="container">
-    <div class="drop-area" id="drop-area">Tarik dan jatuhkan gambar di sini</div>
-    <div class="image-preview">
-      <canvas id="canvas"></canvas>
-      <img id="image" src="img/demo-image-3.jpg" alt="Preview Image" />
+    <canvas id="canvas" width="400" height="300"></canvas>
+    <div class="color-preview" id="colorPreview"></div>
+    <div class="code-box">
+      <input type="text" id="hexCode" readonly>
+      <button onclick="copyColor()">Salin</button>
     </div>
-    <div class="controls">
-      <input type="file" id="file" accept="image/*" />
-      <label for="file">Upload Gambar</label>
-      <button id="pick-color">Ambil Warna</button>
-    </div>
-    <div id="error" class="error"></div>
-    <div id="result" class="color-output" style="display:none">
-      <div class="color-box">
-        <input type="text" id="hex-val-ref" readonly />
-        <button onclick="copy('hex-val-ref')"><i class="fa fa-copy"></i></button>
-      </div>
-      <div class="color-box">
-        <input type="text" id="rgb-val-ref" readonly />
-        <button onclick="copy('rgb-val-ref')"><i class="fa fa-copy"></i></button>
-      </div>
-      <div class="picked-color" id="picked-color-ref"></div>
-    </div>
-    <div id="custom-alert" class="alert">Kode warna berhasil disalin!</div>
   </div>
 
   <script>
-    const pickColor = document.getElementById("pick-color");
-    const error = document.getElementById("error");
-    const fileInput = document.getElementById("file");
-    const image = document.getElementById("image");
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
-    const hexValRef = document.getElementById("hex-val-ref");
-    const rgbValRef = document.getElementById("rgb-val-ref");
-    const customAlert = document.getElementById("custom-alert");
-    const pickedColorRef = document.getElementById("picked-color-ref");
-    const result = document.getElementById("result");
-    const dropArea = document.getElementById("drop-area");
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const preview = document.getElementById('colorPreview');
+    const hexCode = document.getElementById('hexCode');
 
-    let eyeDropper;
-
-    window.onload = () => {
-      if ("EyeDropper" in window) {
-        eyeDropper = new EyeDropper();
-      } else {
-        eyeDropper = null;
-        error.innerText = "Gunakan tap pada gambar untuk memilih warna (HP Mode)";
-        pickColor.innerText = "Tap gambar";
-      }
+    const img = new Image();
+    img.src = 'img/demo-image-3.jpg'; // Ganti jika perlu
+    img.onload = () => {
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
     };
 
-    pickColor.addEventListener("click", async () => {
-      if (eyeDropper) {
-        try {
-          const { sRGBHex } = await eyeDropper.open();
-          const rgb = hexToRGB(sRGBHex);
-          updateColor(sRGBHex, rgb);
-        } catch (err) {
-          if (!err.toString().includes("AbortError")) error.innerText = err;
-        }
-      } else {
-        error.innerText = "Silakan tap langsung pada gambar untuk ambil warna.";
-      }
-    });
-
-    canvas.addEventListener("click", (e) => {
+    function getColor(e) {
       const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      pickColorAt(x, y);
-    });
+      const x = Math.floor((e.clientX || e.touches[0].clientX) - rect.left);
+      const y = Math.floor((e.clientY || e.touches[0].clientY) - rect.top);
 
-    canvas.addEventListener("touchstart", (e) => {
-      const touch = e.touches[0];
-      const rect = canvas.getBoundingClientRect();
-      const x = touch.clientX - rect.left;
-      const y = touch.clientY - rect.top;
-      pickColorAt(x, y);
-    });
-
-    function pickColorAt(x, y) {
       const pixel = ctx.getImageData(x, y, 1, 1).data;
-      const r = pixel[0], g = pixel[1], b = pixel[2];
-      const hex = rgbToHex(r, g, b);
-      updateColor(hex, `rgb(${r}, ${g}, ${b})`);
-    }
-
-    function updateColor(hex, rgb) {
-      hexValRef.value = hex;
-      rgbValRef.value = rgb;
-      pickedColorRef.style.backgroundColor = hex;
-      result.style.display = "grid";
-      error.innerText = "";
-    }
-
-    fileInput.addEventListener("change", () => {
-      if (fileInput.files[0]) handleImage(fileInput.files[0]);
-    });
-
-    function handleImage(file) {
-      if (!file.type.startsWith("image/")) return;
-      result.style.display = "none";
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        const img = new Image();
-        img.onload = () => {
-          canvas.width = img.width;
-          canvas.height = img.height;
-          canvas.style.display = "block";
-          image.style.display = "none";
-          ctx.drawImage(img, 0, 0);
-        };
-        img.src = reader.result;
-      };
-    }
-
-    dropArea.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      dropArea.classList.add("dragover");
-    });
-
-    dropArea.addEventListener("dragleave", () => {
-      dropArea.classList.remove("dragover");
-    });
-
-    dropArea.addEventListener("drop", (e) => {
-      e.preventDefault();
-      dropArea.classList.remove("dragover");
-      if (e.dataTransfer.files.length > 0) {
-        handleImage(e.dataTransfer.files[0]);
-      }
-    });
-
-    function copy(id) {
-      document.getElementById(id).select();
-      document.execCommand("copy");
-      customAlert.classList.add("show");
-      setTimeout(() => customAlert.classList.remove("show"), 2000);
-    }
-
-    function hexToRGB(hex) {
-      const bigint = parseInt(hex.slice(1), 16);
-      const r = (bigint >> 16) & 255;
-      const g = (bigint >> 8) & 255;
-      const b = bigint & 255;
-      return `rgb(${r}, ${g}, ${b})`;
+      const hex = rgbToHex(pixel[0], pixel[1], pixel[2]);
+      preview.style.backgroundColor = hex;
+      hexCode.value = hex;
     }
 
     function rgbToHex(r, g, b) {
-      return (
-        "#" +
-        [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('')
-      );
+      return "#" + [r, g, b].map(x => x.toString(16).padStart(2, "0")).join('');
     }
+
+    function copyColor() {
+      hexCode.select();
+      document.execCommand('copy');
+    }
+
+    // Event Mouse + Touch Drag
+    let isDragging = false;
+
+    function startDraw(e) {
+      isDragging = true;
+      getColor(e);
+    }
+    function moveDraw(e) {
+      if (isDragging) getColor(e);
+    }
+    function endDraw() {
+      isDragging = false;
+    }
+
+    // Mouse
+    canvas.addEventListener("mousedown", startDraw);
+    canvas.addEventListener("mousemove", moveDraw);
+    canvas.addEventListener("mouseup", endDraw);
+    canvas.addEventListener("mouseleave", endDraw);
+
+    // Touch
+    canvas.addEventListener("touchstart", startDraw);
+    canvas.addEventListener("touchmove", moveDraw);
+    canvas.addEventListener("touchend", endDraw);
+    canvas.addEventListener("touchcancel", endDraw);
   </script>
 </body>
 </html>
