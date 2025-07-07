@@ -102,7 +102,7 @@ body {
 
 .davanico-logo span {
     display: inline-block;
-    margin-right: -4px; /* untuk merapatkan antar huruf */
+    margin-right: -6px; /* untuk merapatkan antar huruf */
 }
 
 .davanico-logo span:last-child {
