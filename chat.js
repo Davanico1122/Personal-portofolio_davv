@@ -1,5 +1,6 @@
-  const token = "7647510633:AAHSWSstRQj3bZAmOJGFUGbqVe1gMb7Vq3M";
-  const chat_id = "6139440643";
+
+  const token = "7647510633:AAHSWSstRQj3bZAmOJGFUGbqVe1gMb7Vq3M"; // Bot token
+  const chat_id = "6139440643"; // Chat ID tujuan
 
   const chatBox = document.getElementById("chatBox");
 
@@ -45,3 +46,4 @@
       Swal.fire("Error", "Cek koneksi atau token bot!", "error");
     });
   }
+
