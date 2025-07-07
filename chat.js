@@ -3,7 +3,17 @@ const TOKEN = '7647510633:AAHSWSstRQj3bZAmOJGFUGbqVe1gMb7Vq3M';
 const CHAT_ID = '6139440643';
 
 function toggleContactForm() {
-  document.getElementById("contactWrapper").classList.toggle("active");
+  const wrapper = document.getElementById("contactWrapper");
+  const toggleBtn = wrapper.querySelector(".info_more-btn");
+  
+  wrapper.classList.toggle("active");
+
+  // Ganti teks tombol
+  if (wrapper.classList.contains("active")) {
+    toggleBtn.innerText = "Hide Contact";
+  } else {
+    toggleBtn.innerText = "Show Contact";
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
