@@ -1,4 +1,3 @@
-<script>
   const chatForm = document.getElementById('chatForm');
   const toggleChat = () => {
     chatForm.classList.toggle('active');
@@ -45,4 +44,3 @@
       console.error("Telegram Error:", error);
     }
   }
-</script>
