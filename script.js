@@ -484,8 +484,8 @@ function displayAboutResults(query) {
         <div class="profile-details">
             <h2>Davanico</h2>
             <h3>Desainer Digital & Profesional Kreatif</h3>
-            <p>I'm passionate about building digital experiences that are not only functional, but also visually meaningful. 
-            I specialize in web development, UI/UX design, and brand identity.</p>
+            <p>Saya adalah siswa SMK jurusan DKV yang fokus pada desain digital yang tidak hanya fungsional,
+            tapi juga komunikatif secara visual. Saya menyukai proses membangun identitas merek,mendesain antarmuka yang nyaman, dan menciptakan pengalaman digital yang berkesan..</p>
         </div>
     </div>
         
