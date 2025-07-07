@@ -1,82 +1,90 @@
+/* Tombol toggle chat */
+.chat-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 30px;
+  border: none;
+  background-color: #1db954;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
 /* Jendela chat */
-#chatWindow {
+.chat-window {
   position: fixed;
   bottom: 0;
   right: 20px;
   width: 320px;
-  background: rgba(40, 40, 40, 0.75);
-  backdrop-filter: blur(16px);
-  color: #fff;
-  padding: 60px 20px 20px; /* space for toggle */
-  border-radius: 20px 20px 0 0;
-  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.3);
-  transform: translateY(100%);
-  opacity: 0;
-  pointer-events: none;
-  transition: transform 0.4s ease, opacity 0.3s ease;
-  z-index: 999;
+  max-width: 90%;
+  background: rgba(33, 33, 33, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px 16px 0 0;
+  padding: 16px;
+  z-index: 9998;
+  transform: translateY(110%);
+  transition: transform 0.4s ease;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.25);
 }
 
-/* Aktif */
-#chatWindow.active {
+/* Saat aktif */
+.chat-window.active {
   transform: translateY(0);
-  opacity: 1;
-  pointer-events: auto;
 }
 
-/* Tombol toggle di dalam jendela */
-#chatToggle.in-chat {
-  position: absolute;
-  top: -40px;
-  left: 20px;
-  background: #1db954;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 30px;
-  font-size: 14px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  z-index: 1001;
+/* Header */
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-/* Tombol close */
-#chatClose {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  font-size: 18px;
+.chat-header .close-btn {
   background: none;
   border: none;
   color: #fff;
+  font-size: 18px;
   cursor: pointer;
 }
 
-/* Form */
-#chatForm input,
-#chatForm textarea {
+/* Form input */
+.chat-form input,
+.chat-form textarea {
   width: 100%;
-  margin: 8px 0;
-  padding: 10px;
-  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
   border: none;
-  background: rgba(255, 255, 255, 0.1);
+  background-color: #444;
   color: #fff;
   font-family: inherit;
 }
 
-#chatForm textarea {
-  height: 80px;
+.chat-form textarea {
   resize: none;
+  height: 80px;
 }
 
-#chatForm button {
-  margin-top: 10px;
-  background: #1db954;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 10px;
-  cursor: pointer;
+.chat-form button[type="submit"] {
   width: 100%;
+  padding: 10px;
+  background-color: #1db954;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.chat-form button[type="submit"]:hover {
+  background-color: #17a14d;
 }
