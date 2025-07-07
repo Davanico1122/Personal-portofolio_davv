@@ -136,22 +136,19 @@
 
 
 
-    <!-- Tombol buka chat -->
-<button id="chatToggle" class="chat-toggle"> Kirim Pesan</button>
+<!-- Tombol toggle -->
+<button id="chatToggle"> Kirim Pesan</button>
 
-<!-- Jendela chat -->
-<div class="chat-window" id="chatWindow">
-  <div class="chat-header">
-    <span> Hubungi Saya</span>
-    <button id="chatClose"></button>
-  </div>
-  <form id="chatForm" class="chat-form">
-    <input type="text" name="name" placeholder="Nama" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <textarea name="message" placeholder="Pesan kamu..." required></textarea>
+<!-- Jendela Chat -->
+<div id="chatWindow">
+  <button id="chatClose"></button>
+  <h3 style="margin-bottom: 12px;">Kirim Pesan</h3>
+  <form id="chatForm">
+    <input type="text" id="chatName" placeholder="Nama Anda" required>
+    <input type="email" id="chatEmail" placeholder="Email Anda" required>
+    <textarea id="chatMessage" placeholder="Tulis pesan..." required></textarea>
     <button type="submit">Kirim</button>
   </form>
-  <p class="chat-note">Pesanmu akan langsung terkirim ke saya via Telegram.</p>
 </div>
 
 
