@@ -1,90 +1,85 @@
-/* Tombol toggle chat */
-.chat-toggle {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 9999;
-  padding: 12px 20px;
-  font-size: 16px;
-  border-radius: 30px;
-  border: none;
-  background-color: #1db954;
-  color: #fff;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-}
-
-/* Jendela chat */
-.chat-window {
+/* Tombol Toggle */
+.contact-toggle-wrapper {
   position: fixed;
   bottom: 0;
-  right: 20px;
-  width: 320px;
-  max-width: 90%;
-  background: rgba(33, 33, 33, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 16px 16px 0 0;
-  padding: 16px;
-  z-index: 9998;
-  transform: translateY(110%);
-  transition: transform 0.4s ease;
-  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.25);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
 }
 
-/* Saat aktif */
-.chat-window.active {
-  transform: translateY(0);
+.contact-toggle {
+  background: #4a4a4a;
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 10px 10px 0 0;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
 }
 
-/* Header */
-.chat-header {
+/* Form Slide Panel */
+.contact-form-slide {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  background: #2f2f2f;
+  padding: 20px;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+  transition: bottom 0.4s ease;
+  z-index: 999;
+}
+
+.contact-form-slide.active {
+  bottom: 0;
+}
+
+.contact-form-slide form {
+  max-width: 400px;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.form-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #fff;
-  font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
-.chat-header .close-btn {
+.form-header h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.form-header button {
   background: none;
   border: none;
   color: #fff;
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
 }
 
-/* Form input */
-.chat-form input,
-.chat-form textarea {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: none;
-  background-color: #444;
-  color: #fff;
-  font-family: inherit;
-}
-
-.chat-form textarea {
-  resize: none;
-  height: 80px;
-}
-
-.chat-form button[type="submit"] {
+.contact-form-slide input,
+.contact-form-slide textarea {
   width: 100%;
   padding: 10px;
-  background-color: #1db954;
+  margin-bottom: 12px;
+  background: #444;
   border: none;
+  color: #fff;
   border-radius: 8px;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
+  font-size: 14px;
 }
 
-.chat-form button[type="submit"]:hover {
-  background-color: #17a14d;
+.send-btn {
+  background: #1db954;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  font-size: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
 }
