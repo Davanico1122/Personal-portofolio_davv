@@ -1,3 +1,4 @@
+
 const toggle = document.getElementById('contactToggle');
 const panel = document.getElementById('contactPanel');
 const form = document.getElementById('contactForm');
