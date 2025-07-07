@@ -1,4 +1,4 @@
-<script>
+
   function toggleContact() {
     const wrapper = document.getElementById('contactWrapper');
     wrapper.classList.toggle('active');
@@ -33,4 +33,3 @@
       }
     });
   });
-</script>
