@@ -1,58 +1,36 @@
-// Ambil elemen
-const chatWindow = document.getElementById('chatWindow');
-const chatToggle = document.getElementById('chatToggle');
-const chatClose = document.getElementById('chatClose');
-const chatForm = document.getElementById('chatForm');
+const contactToggle = document.getElementById('contactToggle');
+const contactPanel = document.getElementById('contactFormPanel');
+const closeContact = document.getElementById('closeContact');
 
-// Toggle buka chat
-chatToggle.addEventListener('click', () => {
-  chatWindow.classList.toggle('active');
+contactToggle.addEventListener('click', () => {
+  contactPanel.classList.add('active');
 });
 
-// Tutup chat
-chatClose.addEventListener('click', () => {
-  chatWindow.classList.remove('active');
+closeContact.addEventListener('click', () => {
+  contactPanel.classList.remove('active');
 });
 
 // Kirim ke Telegram
-chatForm.addEventListener('submit', function (e) {
+document.getElementById('contactForm').addEventListener('submit', function (e) {
   e.preventDefault();
 
-  const name = document.getElementById('chatName').value.trim();
-  const email = document.getElementById('chatEmail').value.trim();
-  const message = document.getElementById('chatMessage').value.trim();
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
 
-  if (!name || !email || !message) {
-    alert('Isi semua kolom dulu ya!');
-    return;
-  }
+  const text = `Pesan Baru dari Website:%0A Nama: ${name}%0A Email: ${email}%0A Pesan: ${message}`;
+  const token = 'ISI_TOKEN_BOT_KAMU';
+  const chatId = 'ISI_CHAT_ID_KAMU';
 
-  //  Ganti ini dengan milikmu
-  const telegramToken = '7647510633:AAHSWSstRQj3bZAmOJGFUGbqVe1gMb7Vq3M';
-  const chatID = '6139440643'; // Ganti dengan chat ID kamu
-  const text = ` Pesan Baru:\n\n Nama: ${name}\n Email: ${email}\n Pesan:\n${message}`;
-
-  // Kirim request ke Telegram
-  fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      chat_id: chatID,
-      text: text,
-      parse_mode: 'HTML'
+  fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${text}`, {
+    method: 'GET'
+  })
+    .then(res => {
+      alert("Pesan berhasil dikirim!");
+      contactPanel.classList.remove('active');
+      document.getElementById('contactForm').reset();
     })
-  })
-  .then(response => {
-    if (response.ok) {
-      alert(' Pesan berhasil dikirim!');
-      chatForm.reset();
-      chatWindow.classList.remove('active');
-    } else {
-      alert(' Gagal mengirim pesan.');
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    alert('Terjadi kesalahan saat mengirim.');
-  });
+    .catch(err => {
+      alert("Gagal mengirim pesan.");
+    });
 });
