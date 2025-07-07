@@ -135,26 +135,22 @@
     </div>
 
 
-<!-- Tombol toggle chat -->
-<div class="chat-toggle-wrapper">
+<!-- Toggle & Contact Form -->
+<div class="chat-wrapper" id="chatWrapper">
   <button class="chat-toggle" onclick="toggleChat()">Kirim Pesan</button>
+  <div class="chat-box" id="chatBox">
+    <form id="chatForm" onsubmit="sendMessage(event)">
+      <h3> Kirim Pesan</h3>
+      <input type="text" id="name" placeholder="Nama" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <textarea id="message" placeholder="Pesan..." required></textarea>
+      <button type="submit">Kirim</button>
+    </form>
+  </div>
 </div>
-
-<!-- Jendela chat form -->
-<div id="chatForm" class="chat-form-wrapper">
-  <form onsubmit="sendMessage(event)">
-    <div class="chat-header">
-      <span>Form Pesan</span>
-      <button type="button" onclick="toggleChat()"></button>
-    </div>
-    <input type="text" id="name" placeholder="Nama" required />
-    <input type="email" id="email" placeholder="Email" required />
-    <textarea id="message" rows="4" placeholder="Pesan..." required></textarea>
-    <button type="submit">Kirim</button>
-  </form>
-</div>
-
-
+    
+    <!-- SweetAlert2 -->   
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
       <!-- === Script Files === -->
     <script src="script.js"></script>
