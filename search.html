@@ -135,23 +135,26 @@
     </div>
 
 
-<!-- Tombol Buka Live Chat -->
-<button id="chatToggle" class="chat-toggle"></button>
+<!-- Tombol Buka Chat -->
+<button id="openChatBtn" class="chat-toggle"> Kirim Pesan</button>
 
-<!-- Panel Live Chat -->
+<!-- Jendela Chat -->
 <div id="chatWindow" class="chat-window">
   <div class="chat-header">
     <span>Live Chat</span>
-    <button id="closeChat" class="close-chat">×</button>
+    <button id="closeChatBtn" class="close-chat"></button>
   </div>
   <div class="chat-body">
-    <input type="text" id="chatName" placeholder="Nama Anda" required />
-    <input type="email" id="chatEmail" placeholder="Email (opsional)" />
-    <textarea id="chatMessage" placeholder="Tulis pesan Anda..." required></textarea>
-    <button onclick="sendMessage()">Kirim</button>
-    <p id="chatStatus"></p>
+    <div class="chat-messages" id="chatMessages">
+      <p class="bot-msg">Halo! Ada yang bisa saya bantu?</p>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chatInput" placeholder="Tulis pesan..." />
+      <button id="sendChatBtn">➤</button>
+    </div>
   </div>
 </div>
+
 
 
       <!-- === Script Files === -->
