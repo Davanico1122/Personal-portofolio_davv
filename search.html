@@ -136,13 +136,14 @@
 
 
 
-<!-- Tombol toggle -->
-<button id="chatToggle"> Kirim Pesan</button>
-
-<!-- Jendela Chat -->
+<!-- Chat Window (Form Contact + Toggle Nempel) -->
 <div id="chatWindow">
   <button id="chatClose"></button>
-  <h3 style="margin-bottom: 12px;">Kirim Pesan</h3>
+
+  <!-- Tombol Toggle jadi nempel -->
+  <button id="chatToggle" class="in-chat"> Kirim Pesan</button>
+
+  <h3>Kirim Pesan</h3>
   <form id="chatForm">
     <input type="text" id="chatName" placeholder="Nama Anda" required>
     <input type="email" id="chatEmail" placeholder="Email Anda" required>
@@ -150,7 +151,6 @@
     <button type="submit">Kirim</button>
   </form>
 </div>
-
 
 
 
