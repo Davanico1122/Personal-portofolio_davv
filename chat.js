@@ -31,21 +31,21 @@ contactForm.addEventListener("submit", function (e) {
       if (data.ok) {
         Swal.fire({
           icon: 'success',
-          title: 'Pesan Terkirim!',
-          text: 'Terima kasih, kami akan membalas secepatnya.',
+          title: 'Message Sent!',
+          text: 'Thank you.',
           timer: 3000,
           showConfirmButton: false
         });
         contactForm.reset();
       } else {
-        throw new Error("Gagal kirim");
+        throw new Error("Faild To Send");
       }
     })
     .catch((err) => {
       Swal.fire({
         icon: 'error',
-        title: 'Gagal!',
-        text: 'Terjadi kesalahan saat mengirim pesan.',
+        title: 'Fail!',
+        text: 'an error occurrend while sending the message.',
       });
       console.error(err);
     });
