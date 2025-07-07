@@ -1,7 +1,7 @@
 /* Tombol toggle */
 .chat-toggle {
   position: fixed;
-  bottom: 100px;
+  bottom: 20px;
   right: 20px;
   background: #1db954;
   color: white;
