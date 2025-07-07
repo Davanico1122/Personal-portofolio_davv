@@ -1,3 +1,13 @@
+// Toggle chat window
+document.getElementById('chatToggle').onclick = () => {
+  document.getElementById('chatWindow').style.display = 'flex';
+};
+
+document.getElementById('closeChat').onclick = () => {
+  document.getElementById('chatWindow').style.display = 'none';
+};
+
+// Kirim pesan ke Telegram
 function sendMessage() {
   const name = document.getElementById('chatName').value.trim();
   const email = document.getElementById('chatEmail').value.trim();
@@ -9,37 +19,32 @@ function sendMessage() {
     return;
   }
 
-  const text = ` Pesan Baru dari Website:
- Nama: ${name}
- Email: ${email || '(tidak diisi)'}
- Pesan: ${message}`;
+  const text = ` Pesan Baru dari Website:\n Nama: ${name}\n Email: ${email || 'Tidak diisi'}\n Pesan:\n${message}`;
 
-  const token = '7647510633:AAHSWSstRQj3bZAmOJGFUGbqVe1gMb7Vq3M'; // Ganti jika perlu
-  const chatId = '6139440643'; // Ganti jika perlu
+  const token = '7647510633:AAHSWSstRQj3bZAmOJGFUGbqVe1gMb7Vq3M';
+  const chatId = '6139440643';
 
   fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       chat_id: chatId,
-      text: text,
-      parse_mode: 'HTML'
+      text: text
     })
   })
-  .then(res => res.json())
-  .then(data => {
-    if (data.ok) {
-      status.innerText = " Pesan terkirim!";
-      // Kosongkan form
-      document.getElementById('chatName').value = '';
-      document.getElementById('chatEmail').value = '';
-      document.getElementById('chatMessage').value = '';
-    } else {
-      status.innerText = " Gagal mengirim pesan.";
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    status.innerText = " Terjadi kesalahan jaringan.";
-  });
+    .then(response => response.json())
+    .then(data => {
+      if (data.ok) {
+        status.innerText = " Pesan terkirim!";
+        document.getElementById('chatName').value = '';
+        document.getElementById('chatEmail').value = '';
+        document.getElementById('chatMessage').value = '';
+      } else {
+        status.innerText = " Gagal mengirim pesan.";
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      status.innerText = " Gagal terkoneksi.";
+    });
 }
