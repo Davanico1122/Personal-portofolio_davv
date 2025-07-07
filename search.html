@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="music.css">
+    <link rel="stylesheet" href="chat.css">
     
 
       <!-- Favicon untuk berbagai perangkat -->
@@ -134,24 +134,22 @@
         </div>
     </div>
 
+
+    <!-- Live Chat to Telegram -->
+<div class="chat-form">
+  <h3> Kirim Pesan</h3>
+  <input type="text" id="chatName" placeholder="Nama kamu" required>
+  <input type="email" id="chatEmail" placeholder="Email (opsional)">
+  <textarea id="chatMessage" placeholder="Pesan kamu..." required></textarea>
+  <button onclick="sendMessage()">Kirim</button>
+  <p id="chatStatus"></p>
+</div>
+
+
       <!-- === Script Files === -->
     <script src="script.js"></script>
-
-
- <!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/686b59d8d31e93190f27c57c/1ivhn36jl';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
-
+       <script src="chat.js"></script>
+    
 
 </body>
 </html>
