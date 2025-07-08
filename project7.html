@@ -1,284 +1,780 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Color Picker - Davanico</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Picker - Davanico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      background: #eef4ff;
-      padding: 1em;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #eef4ff 0%, #e0ebff 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
 
-    a.back {
-      display: inline-block;
-      margin: 1em;
-      color: #1a73e8;
-      text-decoration: none;
-      font-weight: bold;
-    }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-    .container {
-      max-width: 500px;
-      width: 100%;
-      margin: auto;
-      background: white;
-      border-radius: 16px;
-      padding: 1em;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      flex: 1;
-    }
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: white;
+            border: none;
+            border-radius: 25px;
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
 
-    .drop-area {
-      border: 2px dashed #1a73e8;
-      border-radius: 10px;
-      padding: 1.5em;
-      text-align: center;
-      color: #1a73e8;
-      cursor: pointer;
-      margin-bottom: 1.5em;
-      transition: 0.3s;
-    }
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
 
-    .drop-area:hover {
-      background-color: #e8f1ff;
-    }
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
 
-    .image-container {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-    }
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2d3748;
+            font-weight: 600;
+            font-size: 2rem;
+        }
 
-    #preview-img {
-      width: 100%;
-      display: block;
-      touch-action: none;
-    }
+        .upload-area {
+            border: 3px dashed #cbd5e0;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            background: #f8fafc;
+            position: relative;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .zoom-box {
-      position: absolute;
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      border: 2px solid #1a73e8;
-      overflow: hidden;
-      display: none;
-      z-index: 10;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
-    }
+        .upload-area:hover {
+            border-color: #4299e1;
+            background: #ebf8ff;
+        }
 
-    .zoom-box canvas {
-      width: 100%;
-      height: 100%;
-    }
+        .upload-area.dragover {
+            border-color: #4299e1;
+            background: #ebf8ff;
+            transform: scale(1.02);
+        }
 
-    .color-result {
-      margin-top: 1.5em;
-      padding: 1em;
-      border-radius: 8px;
-      background: #f1f1f1;
-    }
+        .upload-area.has-image {
+            border: 2px solid #e2e8f0;
+            background: #f8fafc;
+            padding: 20px;
+            min-height: auto;
+            margin-bottom: 20px;
+        }
 
-    .color-box {
-      width: 100%;
-      height: 50px;
-      border-radius: 6px;
-      margin-bottom: 1em;
-      border: 1px solid #ccc;
-    }
+        .upload-area.has-image:hover {
+            border-color: #cbd5e0;
+            background: #f8fafc;
+        }
 
-    .code {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: white;
-      padding: 0.6em 1em;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      margin-bottom: 0.5em;
-    }
+        .upload-area-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
 
-    .code input {
-      border: none;
-      font-size: 1em;
-      background: transparent;
-      width: 100%;
-    }
+        .upload-button {
+            background: #4299e1;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    .code button {
-      background: #1a73e8;
-      border: none;
-      color: white;
-      padding: 0.3em 0.8em;
-      margin-left: 0.5em;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+        .upload-button:hover {
+            background: #3182ce;
+            transform: translateY(-2px);
+        }
 
-    footer {
-      text-align: center;
-      padding: 1em;
-      font-size: 0.9em;
-      color: #777;
-    }
+        .upload-icon {
+            font-size: 3rem;
+            color: #a0aec0;
+            margin-bottom: 15px;
+        }
 
-    @media (max-width: 500px) {
-      .zoom-box {
-        width: 70px;
-        height: 70px;
-      }
-    }
-  </style>
+        .upload-text {
+            color: #4a5568;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .upload-subtext {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        .image-container {
+            position: relative;
+            display: none;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .image-display {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: contain;
+            cursor: crosshair;
+            display: block;
+        }
+
+        .zoom-preview {
+            position: fixed;
+            width: 120px;
+            height: 120px;
+            border: 4px solid white;
+            border-radius: 50%;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            pointer-events: none;
+            z-index: 1000;
+            background: white;
+            display: none;
+            transform: translate(-50%, -50%);
+        }
+
+        .zoom-canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        .color-info {
+            display: none;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .color-preview {
+            width: 100%;
+            height: 80px;
+            border-radius: 10px;
+            border: 2px solid #e2e8f0;
+            margin-bottom: 20px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .color-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .color-input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            background: #f8fafc;
+            transition: border-color 0.3s ease;
+        }
+
+        .color-input:focus-within {
+            border-color: #4299e1;
+        }
+
+        .color-input label {
+            font-weight: 500;
+            color: #4a5568;
+            min-width: 50px;
+        }
+
+        .color-input input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #2d3748;
+        }
+
+        .color-input input:focus {
+            outline: none;
+        }
+
+        .copy-btn {
+            background: #4299e1;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #3182ce;
+            transform: translateY(-1px);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .color-indicator {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 3px solid white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.3);
+            display: none;
+            transform: translate(-50%, -50%);
+        }
+
+        .color-indicator::after {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 50%;
+        }
+
+        .instructions {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #e6fffa;
+            border-radius: 10px;
+            border-left: 4px solid #38b2ac;
+            color: #2d3748;
+            display: none;
+        }
+
+        .instructions.show {
+            display: block;
+        }
+
+        .instructions i {
+            color: #38b2ac;
+            margin-right: 8px;
+        }
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #48bb78;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transform: translateX(100%);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .title {
+                font-size: 1.5rem;
+            }
+
+            .color-info {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .upload-area {
+                padding: 30px 20px;
+            }
+
+            .zoom-preview {
+                width: 100px;
+                height: 100px;
+            }
+
+            .upload-area {
+                min-height: 150px;
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <a href="/search" class="back">&larr; KEMBALI</a>
+    <div class="container">
+        <a href="/search" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Kembali
+        </a>
 
-  <div class="container">
-    <div class="drop-area" id="drop-area">Tarik atau upload gambar ke sini</div>
+        <div class="card">
+            <h1 class="title">Color Picker</h1>
+            
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-area-content">
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <div class="upload-text">Drag & Drop gambar atau klik tombol di bawah</div>
+                    <div class="upload-subtext">Mendukung format: JPG, PNG, GIF, WebP</div>
+                    <button class="upload-button" onclick="fileInput.click()">
+                        <i class="fas fa-folder-open"></i>
+                        Pilih Gambar
+                    </button>
+                </div>
+            </div>
 
-    <div class="image-container">
-      <img src="img/demo-image-3.jpg" id="preview-img" alt="preview" />
-      <div class="zoom-box" id="zoom-box"><canvas id="zoom-canvas"></canvas></div>
+            <input type="file" id="fileInput" accept="image/*">
+
+            <div class="instructions" id="instructions">
+                <i class="fas fa-info-circle"></i>
+                <strong>Petunjuk:</strong> Klik atau sentuh pada gambar untuk memilih warna. Zoom preview akan muncul untuk membantu Anda memilih dengan presisi.
+            </div>
+
+            <div class="image-container" id="imageContainer">
+                <img id="imageDisplay" class="image-display" alt="Uploaded image">
+                <div class="color-indicator" id="colorIndicator"></div>
+                <div class="zoom-preview" id="zoomPreview">
+                    <canvas class="zoom-canvas" id="zoomCanvas"></canvas>
+                </div>
+            </div>
+
+            <div class="color-preview" id="colorPreview"></div>
+
+            <div class="color-info" id="colorInfo">
+                <div class="color-input-group">
+                    <div class="color-input">
+                        <label>HEX:</label>
+                        <input type="text" id="hexInput" readonly>
+                        <button class="copy-btn" onclick="copyColor('hex')">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-input-group">
+                    <div class="color-input">
+                        <label>RGB:</label>
+                        <input type="text" id="rgbInput" readonly>
+                        <button class="copy-btn" onclick="copyColor('rgb')">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Dibuat oleh Davanico © 2025
+        </div>
     </div>
 
-    <input type="file" id="file" accept="image/*" style="display:none" />
+    <div class="toast" id="toast"></div>
 
-    <div class="color-result" id="result" style="display:none">
-      <div class="color-box" id="color-box"></div>
-      <div class="code">
-        <input type="text" id="hex-code" readonly />
-        <button onclick="copyText('hex-code')"><i class="fa fa-copy"></i></button>
-      </div>
-      <div class="code">
-        <input type="text" id="rgb-code" readonly />
-        <button onclick="copyText('rgb-code')"><i class="fa fa-copy"></i></button>
-      </div>
-    </div>
-  </div>
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const imageContainer = document.getElementById('imageContainer');
+        const imageDisplay = document.getElementById('imageDisplay');
+        const colorPreview = document.getElementById('colorPreview');
+        const colorInfo = document.getElementById('colorInfo');
+        const hexInput = document.getElementById('hexInput');
+        const rgbInput = document.getElementById('rgbInput');
+        const zoomPreview = document.getElementById('zoomPreview');
+        const zoomCanvas = document.getElementById('zoomCanvas');
+        const toast = document.getElementById('toast');
 
-  <footer>
-    Dibuat oleh Davanico © 2025
-  </footer>
+        const colorIndicator = document.getElementById('colorIndicator');
+        const instructions = document.getElementById('instructions');
 
-  <script>
-    const fileInput = document.getElementById('file');
-    const dropArea = document.getElementById('drop-area');
-    const previewImg = document.getElementById('preview-img');
-    const zoomBox = document.getElementById('zoom-box');
-    const zoomCanvas = document.getElementById('zoom-canvas');
-    const ctx = zoomCanvas.getContext('2d');
-    const result = document.getElementById('result');
-    const colorBox = document.getElementById('color-box');
-    const hexCode = document.getElementById('hex-code');
-    const rgbCode = document.getElementById('rgb-code');
+        let canvas, ctx, imageData;
+        let zoomCtx = zoomCanvas.getContext('2d');
+        let isProcessing = false;
 
-    dropArea.addEventListener('click', () => fileInput.click());
-    fileInput.addEventListener('change', () => handleImage(fileInput.files[0]));
+        // Set up zoom canvas
+        zoomCanvas.width = 120;
+        zoomCanvas.height = 120;
 
-    dropArea.addEventListener("dragover", e => {
-      e.preventDefault();
-      dropArea.style.backgroundColor = "#e8f1ff";
-    });
+        // Upload area events
+        uploadArea.addEventListener('click', (e) => {
+            if (e.target.closest('.upload-button')) return;
+            fileInput.click();
+        });
+        uploadArea.addEventListener('dragover', handleDragOver);
+        uploadArea.addEventListener('dragleave', handleDragLeave);
+        uploadArea.addEventListener('drop', handleDrop);
 
-    dropArea.addEventListener("dragleave", () => {
-      dropArea.style.backgroundColor = "";
-    });
+        fileInput.addEventListener('change', handleFileSelect);
 
-    dropArea.addEventListener("drop", e => {
-      e.preventDefault();
-      dropArea.style.backgroundColor = "";
-      const file = e.dataTransfer.files[0];
-      if (file) handleImage(file);
-    });
+        // Image events
+        imageDisplay.addEventListener('mousedown', startColorPicking);
+        imageDisplay.addEventListener('mousemove', handleMouseMove);
+        imageDisplay.addEventListener('mouseup', stopColorPicking);
+        imageDisplay.addEventListener('mouseleave', stopColorPicking);
 
-    function handleImage(file) {
-      if (!file.type.startsWith('image/')) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        previewImg.src = reader.result;
-      };
-      reader.readAsDataURL(file);
-    }
+        // Touch events for mobile
+        imageDisplay.addEventListener('touchstart', handleTouchStart);
+        imageDisplay.addEventListener('touchmove', handleTouchMove);
+        imageDisplay.addEventListener('touchend', handleTouchEnd);
 
-    function handleColorPick(x, y, clientX, clientY) {
-      const canvas = document.createElement("canvas");
-      canvas.width = previewImg.naturalWidth;
-      canvas.height = previewImg.naturalHeight;
-      const context = canvas.getContext("2d");
-      context.drawImage(previewImg, 0, 0);
+        let isColorPicking = false;
+        let isTouching = false;
 
-      const scaleX = previewImg.naturalWidth / previewImg.clientWidth;
-      const scaleY = previewImg.naturalHeight / previewImg.clientHeight;
+        function handleDragOver(e) {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        }
 
-      const px = Math.floor(x * scaleX);
-      const py = Math.floor(y * scaleY);
-      const pixel = context.getImageData(px, py, 1, 1).data;
+        function handleDragLeave(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+        }
 
-      const hex = rgbToHex(pixel[0], pixel[1], pixel[2]);
-      const rgb = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
+        function handleDrop(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        }
 
-      colorBox.style.backgroundColor = hex;
-      hexCode.value = hex;
-      rgbCode.value = rgb;
-      result.style.display = "block";
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file) {
+                handleFile(file);
+            }
+        }
 
-      const zoomSize = 40;
-      zoomCanvas.width = 90;
-      zoomCanvas.height = 90;
-      ctx.imageSmoothingEnabled = false;
-      ctx.clearRect(0, 0, 90, 90);
-      ctx.drawImage(canvas, px - zoomSize / 2, py - zoomSize / 2, zoomSize, zoomSize, 0, 0, 90, 90);
+        function handleFile(file) {
+            if (!file.type.startsWith('image/')) {
+                showToast('Harap pilih file gambar yang valid!', 'error');
+                return;
+            }
 
-      zoomBox.style.left = `${clientX - 45}px`;
-      zoomBox.style.top = `${clientY - 100}px`;
-      zoomBox.style.display = "block";
-    }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imageDisplay.src = e.target.result;
+                imageDisplay.onload = function() {
+                    setupCanvas();
+                    uploadArea.classList.add('has-image');
+                    uploadArea.innerHTML = `
+                        <div class="upload-area-content">
+                            <i class="fas fa-sync-alt" style="font-size: 1.5rem; color: #4299e1; margin-bottom: 10px;"></i>
+                            <div style="font-weight: 500; color: #4a5568;">Ganti Gambar</div>
+                            <button class="upload-button" onclick="fileInput.click()">
+                                <i class="fas fa-folder-open"></i>
+                                Pilih Gambar Lain
+                            </button>
+                        </div>
+                    `;
+                    instructions.classList.add('show');
+                    imageContainer.style.display = 'block';
+                    colorInfo.style.display = 'grid';
+                    colorPreview.style.display = 'block';
+                    showToast('Gambar berhasil dimuat! Klik pada gambar untuk memilih warna.', 'success');
+                };
+            };
+            reader.readAsDataURL(file);
+        }
 
-    previewImg.addEventListener("mousemove", (e) => {
-      handleColorPick(e.offsetX, e.offsetY, e.clientX, e.clientY);
-    });
+        function setupCanvas() {
+            canvas = document.createElement('canvas');
+            ctx = canvas.getContext('2d');
+            canvas.width = imageDisplay.naturalWidth;
+            canvas.height = imageDisplay.naturalHeight;
+            ctx.drawImage(imageDisplay, 0, 0);
+            imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        }
 
-    previewImg.addEventListener("mouseleave", () => {
-      zoomBox.style.display = "none";
-    });
+        function startColorPicking(e) {
+            e.preventDefault();
+            isColorPicking = true;
+            zoomPreview.style.display = 'block';
+            colorIndicator.style.display = 'block';
+            updateColorFromEvent(e);
+        }
 
-    previewImg.addEventListener("touchmove", (e) => {
-      const touch = e.touches[0];
-      const rect = previewImg.getBoundingClientRect();
-      const x = touch.clientX - rect.left;
-      const y = touch.clientY - rect.top;
-      handleColorPick(x, y, touch.clientX, touch.clientY);
-    });
+        function handleMouseMove(e) {
+            if (isColorPicking) {
+                updateColorFromEvent(e);
+            }
+        }
 
-    previewImg.addEventListener("touchend", () => {
-      zoomBox.style.display = "none";
-    });
+        function stopColorPicking() {
+            isColorPicking = false;
+            zoomPreview.style.display = 'none';
+            // Keep color indicator visible after selection
+        }
 
-    function rgbToHex(r, g, b) {
-      return "#" + [r, g, b].map(x => x.toString(16).padStart(2, "0")).join("");
-    }
+        function handleTouchStart(e) {
+            e.preventDefault();
+            isTouching = true;
+            zoomPreview.style.display = 'block';
+            colorIndicator.style.display = 'block';
+            updateColorFromTouch(e);
+        }
 
-    function copyText(id) {
-      const input = document.getElementById(id);
-      input.select();
-      input.setSelectionRange(0, 99999);
-      document.execCommand("copy");
-    }
-  </script>
+        function handleTouchMove(e) {
+            e.preventDefault();
+            if (isTouching) {
+                updateColorFromTouch(e);
+            }
+        }
+
+        function handleTouchEnd(e) {
+            e.preventDefault();
+            isTouching = false;
+            zoomPreview.style.display = 'none';
+            // Keep color indicator visible after selection
+        }
+
+        function updateColorFromEvent(e) {
+            const rect = imageDisplay.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            updateColor(x, y, e.clientX, e.clientY);
+            
+            // Update color indicator position
+            colorIndicator.style.left = `${x}px`;
+            colorIndicator.style.top = `${y}px`;
+        }
+
+        function updateColorFromTouch(e) {
+            const rect = imageDisplay.getBoundingClientRect();
+            const touch = e.touches[0];
+            const x = touch.clientX - rect.left;
+            const y = touch.clientY - rect.top;
+            updateColor(x, y, touch.clientX, touch.clientY);
+            
+            // Update color indicator position
+            colorIndicator.style.left = `${x}px`;
+            colorIndicator.style.top = `${y}px`;
+        }
+
+        function updateColor(x, y, screenX, screenY) {
+            if (!imageData || isProcessing) return;
+
+            const rect = imageDisplay.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            
+            const pixelX = Math.floor(x * scaleX);
+            const pixelY = Math.floor(y * scaleY);
+
+            if (pixelX >= 0 && pixelX < canvas.width && pixelY >= 0 && pixelY < canvas.height) {
+                const pixelIndex = (pixelY * canvas.width + pixelX) * 4;
+                const r = imageData.data[pixelIndex];
+                const g = imageData.data[pixelIndex + 1];
+                const b = imageData.data[pixelIndex + 2];
+
+                const hex = rgbToHex(r, g, b);
+                const rgb = `rgb(${r}, ${g}, ${b})`;
+
+                hexInput.value = hex;
+                rgbInput.value = rgb;
+                colorPreview.style.backgroundColor = hex;
+                colorIndicator.style.backgroundColor = hex;
+
+                // Update zoom preview
+                updateZoomPreview(pixelX, pixelY);
+                
+                // Position zoom preview (fixed position relative to cursor)
+                zoomPreview.style.left = `${screenX + 20}px`;
+                zoomPreview.style.top = `${screenY - 80}px`;
+                
+                // Adjust position if too close to viewport edges
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+                
+                if (screenX + 140 > viewportWidth) {
+                    zoomPreview.style.left = `${screenX - 140}px`;
+                }
+                if (screenY - 140 < 0) {
+                    zoomPreview.style.top = `${screenY + 40}px`;
+                }
+            }
+        }
+
+        function updateZoomPreview(centerX, centerY) {
+            const zoomRadius = 15; // Radius in pixels for zoom area
+            const zoomScale = 4; // Scale factor for zoom
+            
+            zoomCtx.clearRect(0, 0, zoomCanvas.width, zoomCanvas.height);
+            
+            // Calculate zoom area bounds
+            const startX = Math.max(0, centerX - zoomRadius);
+            const startY = Math.max(0, centerY - zoomRadius);
+            const endX = Math.min(canvas.width, centerX + zoomRadius);
+            const endY = Math.min(canvas.height, centerY + zoomRadius);
+            
+            const width = endX - startX;
+            const height = endY - startY;
+            
+            if (width > 0 && height > 0) {
+                // Get image data for zoom area
+                const zoomImageData = ctx.getImageData(startX, startY, width, height);
+                
+                // Create temporary canvas for the zoom area
+                const tempCanvas = document.createElement('canvas');
+                const tempCtx = tempCanvas.getContext('2d');
+                tempCanvas.width = width;
+                tempCanvas.height = height;
+                tempCtx.putImageData(zoomImageData, 0, 0);
+                
+                // Disable image smoothing for pixelated effect
+                zoomCtx.imageSmoothingEnabled = false;
+                
+                // Calculate draw position to center the zoom area
+                const drawX = (zoomCanvas.width - width * zoomScale) / 2;
+                const drawY = (zoomCanvas.height - height * zoomScale) / 2;
+                
+                // Draw scaled version
+                zoomCtx.drawImage(tempCanvas, 0, 0, width, height, 
+                                 drawX, drawY, width * zoomScale, height * zoomScale);
+                
+                // Draw center crosshair
+                const centerCanvasX = zoomCanvas.width / 2;
+                const centerCanvasY = zoomCanvas.height / 2;
+                const crosshairSize = 8;
+                
+                // White crosshair with black outline
+                zoomCtx.strokeStyle = 'white';
+                zoomCtx.lineWidth = 3;
+                zoomCtx.beginPath();
+                zoomCtx.moveTo(centerCanvasX - crosshairSize, centerCanvasY);
+                zoomCtx.lineTo(centerCanvasX + crosshairSize, centerCanvasY);
+                zoomCtx.moveTo(centerCanvasX, centerCanvasY - crosshairSize);
+                zoomCtx.lineTo(centerCanvasX, centerCanvasY + crosshairSize);
+                zoomCtx.stroke();
+                
+                // Black outline
+                zoomCtx.strokeStyle = 'black';
+                zoomCtx.lineWidth = 1;
+                zoomCtx.beginPath();
+                zoomCtx.moveTo(centerCanvasX - crosshairSize, centerCanvasY);
+                zoomCtx.lineTo(centerCanvasX + crosshairSize, centerCanvasY);
+                zoomCtx.moveTo(centerCanvasX, centerCanvasY - crosshairSize);
+                zoomCtx.lineTo(centerCanvasX, centerCanvasY + crosshairSize);
+                zoomCtx.stroke();
+                
+                // Add center pixel highlight
+                const pixelSize = zoomScale;
+                const pixelX = centerCanvasX - pixelSize / 2;
+                const pixelY = centerCanvasY - pixelSize / 2;
+                
+                zoomCtx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+                zoomCtx.lineWidth = 2;
+                zoomCtx.strokeRect(pixelX, pixelY, pixelSize, pixelSize);
+            }
+        }
+
+        function rgbToHex(r, g, b) {
+            return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+        }
+
+        function copyColor(type) {
+            const input = type === 'hex' ? hexInput : rgbInput;
+            input.select();
+            document.execCommand('copy');
+            showToast(`Warna ${type.toUpperCase()} berhasil disalin!`, 'success');
+        }
+
+        function showToast(message, type = 'success') {
+            toast.textContent = message;
+            toast.style.background = type === 'success' ? '#48bb78' : '#f56565';
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Load default state
+        window.onload = function() {
+            // Show upload area by default
+            uploadArea.style.display = 'flex';
+            imageContainer.style.display = 'none';
+            colorInfo.style.display = 'none';
+            colorPreview.style.display = 'none';
+            instructions.style.display = 'none';
+        };
+    </script>
 </body>
 </html>
