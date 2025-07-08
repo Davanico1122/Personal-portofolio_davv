@@ -17,24 +17,28 @@
       background: #eef4ff;
       padding: 1em;
       color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     a.back {
       display: inline-block;
-      margin-bottom: 1em;
+      margin: 1em;
       color: #1a73e8;
       text-decoration: none;
       font-weight: bold;
-      margin-left: 1em;
     }
 
     .container {
       max-width: 500px;
+      width: 100%;
       margin: auto;
       background: white;
       border-radius: 16px;
       padding: 1em;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      flex: 1;
     }
 
     .drop-area {
@@ -44,7 +48,12 @@
       text-align: center;
       color: #1a73e8;
       cursor: pointer;
-      margin-bottom: 2em;
+      margin-bottom: 1.5em;
+      transition: 0.3s;
+    }
+
+    .drop-area:hover {
+      background-color: #e8f1ff;
     }
 
     .image-container {
@@ -63,14 +72,14 @@
 
     .zoom-box {
       position: absolute;
-      width: 80px;
-      height: 80px;
+      width: 90px;
+      height: 90px;
       border-radius: 50%;
       border: 2px solid #1a73e8;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
       overflow: hidden;
       display: none;
       z-index: 10;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
     }
 
     .zoom-box canvas {
@@ -120,10 +129,24 @@
       border-radius: 5px;
       cursor: pointer;
     }
+
+    footer {
+      text-align: center;
+      padding: 1em;
+      font-size: 0.9em;
+      color: #777;
+    }
+
+    @media (max-width: 500px) {
+      .zoom-box {
+        width: 70px;
+        height: 70px;
+      }
+    }
   </style>
 </head>
 <body>
-  <a href="/search" class="back">KEMBALI</a>
+  <a href="/search" class="back">&larr; KEMBALI</a>
 
   <div class="container">
     <div class="drop-area" id="drop-area">Tarik atau upload gambar ke sini</div>
@@ -147,6 +170,10 @@
       </div>
     </div>
   </div>
+
+  <footer>
+    Dibuat oleh Davanico © 2025
+  </footer>
 
   <script>
     const fileInput = document.getElementById('file');
@@ -188,29 +215,19 @@
       reader.readAsDataURL(file);
     }
 
-    previewImg.addEventListener("touchmove", handleTouch);
-    previewImg.addEventListener("touchstart", handleTouch);
-    previewImg.addEventListener("touchend", () => zoomBox.style.display = "none");
-
-    function handleTouch(e) {
-      const touch = e.touches[0];
-      const rect = previewImg.getBoundingClientRect();
-      const x = touch.clientX - rect.left;
-      const y = touch.clientY - rect.top;
-
+    function handleColorPick(x, y, clientX, clientY) {
       const canvas = document.createElement("canvas");
-      canvas.width = previewImg.width;
-      canvas.height = previewImg.height;
+      canvas.width = previewImg.naturalWidth;
+      canvas.height = previewImg.naturalHeight;
       const context = canvas.getContext("2d");
-      context.drawImage(previewImg, 0, 0, canvas.width, canvas.height);
-      const pixel = context.getImageData(x, y, 1, 1).data;
+      context.drawImage(previewImg, 0, 0);
 
-      const zoomSize = 40;
-      zoomCanvas.width = 80;
-      zoomCanvas.height = 80;
-      ctx.imageSmoothingEnabled = false;
-      ctx.clearRect(0, 0, 80, 80);
-      ctx.drawImage(canvas, x - zoomSize/2, y - zoomSize/2, zoomSize, zoomSize, 0, 0, 80, 80);
+      const scaleX = previewImg.naturalWidth / previewImg.clientWidth;
+      const scaleY = previewImg.naturalHeight / previewImg.clientHeight;
+
+      const px = Math.floor(x * scaleX);
+      const py = Math.floor(y * scaleY);
+      const pixel = context.getImageData(px, py, 1, 1).data;
 
       const hex = rgbToHex(pixel[0], pixel[1], pixel[2]);
       const rgb = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
@@ -220,10 +237,37 @@
       rgbCode.value = rgb;
       result.style.display = "block";
 
-      zoomBox.style.left = `${touch.clientX - 40}px`;
-      zoomBox.style.top = `${touch.clientY - 100}px`;
+      const zoomSize = 40;
+      zoomCanvas.width = 90;
+      zoomCanvas.height = 90;
+      ctx.imageSmoothingEnabled = false;
+      ctx.clearRect(0, 0, 90, 90);
+      ctx.drawImage(canvas, px - zoomSize / 2, py - zoomSize / 2, zoomSize, zoomSize, 0, 0, 90, 90);
+
+      zoomBox.style.left = `${clientX - 45}px`;
+      zoomBox.style.top = `${clientY - 100}px`;
       zoomBox.style.display = "block";
     }
+
+    previewImg.addEventListener("mousemove", (e) => {
+      handleColorPick(e.offsetX, e.offsetY, e.clientX, e.clientY);
+    });
+
+    previewImg.addEventListener("mouseleave", () => {
+      zoomBox.style.display = "none";
+    });
+
+    previewImg.addEventListener("touchmove", (e) => {
+      const touch = e.touches[0];
+      const rect = previewImg.getBoundingClientRect();
+      const x = touch.clientX - rect.left;
+      const y = touch.clientY - rect.top;
+      handleColorPick(x, y, touch.clientX, touch.clientY);
+    });
+
+    previewImg.addEventListener("touchend", () => {
+      zoomBox.style.display = "none";
+    });
 
     function rgbToHex(r, g, b) {
       return "#" + [r, g, b].map(x => x.toString(16).padStart(2, "0")).join("");
