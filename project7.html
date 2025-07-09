@@ -324,6 +324,8 @@
             color: #38b2ac;
             margin-right: 8px;
         }
+
+        .toast {
             position: fixed;
             top: 20px;
             right: 20px;
@@ -459,7 +461,6 @@
         const zoomPreview = document.getElementById('zoomPreview');
         const zoomCanvas = document.getElementById('zoomCanvas');
         const toast = document.getElementById('toast');
-
         const colorIndicator = document.getElementById('colorIndicator');
         const instructions = document.getElementById('instructions');
 
@@ -580,7 +581,6 @@
         function stopColorPicking() {
             isColorPicking = false;
             zoomPreview.style.display = 'none';
-            // Keep color indicator visible after selection
         }
 
         function handleTouchStart(e) {
@@ -602,13 +602,18 @@
             e.preventDefault();
             isTouching = false;
             zoomPreview.style.display = 'none';
-            // Keep color indicator visible after selection
         }
 
         function updateColorFromEvent(e) {
             const rect = imageDisplay.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
+            
+            // Validasi bahwa klik berada di dalam area gambar
+            if (x < 0 || x >= rect.width || y < 0 || y >= rect.height) {
+                return;
+            }
+            
             updateColor(x, y, e.clientX, e.clientY);
             
             // Update color indicator position
@@ -621,6 +626,12 @@
             const touch = e.touches[0];
             const x = touch.clientX - rect.left;
             const y = touch.clientY - rect.top;
+            
+            // Validasi bahwa touch berada di dalam area gambar
+            if (x < 0 || x >= rect.width || y < 0 || y >= rect.height) {
+                return;
+            }
+            
             updateColor(x, y, touch.clientX, touch.clientY);
             
             // Update color indicator position
@@ -638,47 +649,53 @@
             const pixelX = Math.floor(x * scaleX);
             const pixelY = Math.floor(y * scaleY);
 
-            if (pixelX >= 0 && pixelX < canvas.width && pixelY >= 0 && pixelY < canvas.height) {
-                const pixelIndex = (pixelY * canvas.width + pixelX) * 4;
-                const r = imageData.data[pixelIndex];
-                const g = imageData.data[pixelIndex + 1];
-                const b = imageData.data[pixelIndex + 2];
-
-                const hex = rgbToHex(r, g, b);
-                const rgb = `rgb(${r}, ${g}, ${b})`;
-
-                hexInput.value = hex;
-                rgbInput.value = rgb;
-                colorPreview.style.backgroundColor = hex;
-                colorIndicator.style.backgroundColor = hex;
-
-                // Update zoom preview
-                updateZoomPreview(pixelX, pixelY);
-                
-                // Position zoom preview (fixed position relative to cursor)
-                zoomPreview.style.left = `${screenX + 20}px`;
-                zoomPreview.style.top = `${screenY - 80}px`;
-                
-                // Adjust position if too close to viewport edges
-                const viewportWidth = window.innerWidth;
-                const viewportHeight = window.innerHeight;
-                
-                if (screenX + 140 > viewportWidth) {
-                    zoomPreview.style.left = `${screenX - 140}px`;
-                }
-                if (screenY - 140 < 0) {
-                    zoomPreview.style.top = `${screenY + 40}px`;
-                }
+            // Validasi bahwa pixel berada di dalam bounds canvas
+            if (pixelX < 0 || pixelX >= canvas.width || pixelY < 0 || pixelY >= canvas.height) {
+                return;
             }
+
+            const pixelIndex = (pixelY * canvas.width + pixelX) * 4;
+            const r = imageData.data[pixelIndex];
+            const g = imageData.data[pixelIndex + 1];
+            const b = imageData.data[pixelIndex + 2];
+
+            const hex = rgbToHex(r, g, b);
+            const rgb = `rgb(${r}, ${g}, ${b})`;
+
+            hexInput.value = hex;
+            rgbInput.value = rgb;
+            colorPreview.style.backgroundColor = hex;
+            colorIndicator.style.backgroundColor = hex;
+
+            // Update zoom preview
+            updateZoomPreview(pixelX, pixelY);
+            
+            // Position zoom preview dengan offset yang tepat
+            let zoomX = screenX + 30;
+            let zoomY = screenY - 90;
+            
+            // Adjust position if too close to viewport edges
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            
+            if (zoomX + 120 > viewportWidth) {
+                zoomX = screenX - 150;
+            }
+            if (zoomY < 0) {
+                zoomY = screenY + 30;
+            }
+            
+            zoomPreview.style.left = `${zoomX}px`;
+            zoomPreview.style.top = `${zoomY}px`;
         }
 
         function updateZoomPreview(centerX, centerY) {
-            const zoomRadius = 15; // Radius in pixels for zoom area
-            const zoomScale = 4; // Scale factor for zoom
+            const zoomRadius = 15;
+            const zoomScale = 4;
             
             zoomCtx.clearRect(0, 0, zoomCanvas.width, zoomCanvas.height);
             
-            // Calculate zoom area bounds
+            // Calculate zoom area bounds dengan validasi
             const startX = Math.max(0, centerX - zoomRadius);
             const startY = Math.max(0, centerY - zoomRadius);
             const endX = Math.min(canvas.width, centerX + zoomRadius);
@@ -688,60 +705,64 @@
             const height = endY - startY;
             
             if (width > 0 && height > 0) {
-                // Get image data for zoom area
-                const zoomImageData = ctx.getImageData(startX, startY, width, height);
-                
-                // Create temporary canvas for the zoom area
-                const tempCanvas = document.createElement('canvas');
-                const tempCtx = tempCanvas.getContext('2d');
-                tempCanvas.width = width;
-                tempCanvas.height = height;
-                tempCtx.putImageData(zoomImageData, 0, 0);
-                
-                // Disable image smoothing for pixelated effect
-                zoomCtx.imageSmoothingEnabled = false;
-                
-                // Calculate draw position to center the zoom area
-                const drawX = (zoomCanvas.width - width * zoomScale) / 2;
-                const drawY = (zoomCanvas.height - height * zoomScale) / 2;
-                
-                // Draw scaled version
-                zoomCtx.drawImage(tempCanvas, 0, 0, width, height, 
-                                 drawX, drawY, width * zoomScale, height * zoomScale);
-                
-                // Draw center crosshair
-                const centerCanvasX = zoomCanvas.width / 2;
-                const centerCanvasY = zoomCanvas.height / 2;
-                const crosshairSize = 8;
-                
-                // White crosshair with black outline
-                zoomCtx.strokeStyle = 'white';
-                zoomCtx.lineWidth = 3;
-                zoomCtx.beginPath();
-                zoomCtx.moveTo(centerCanvasX - crosshairSize, centerCanvasY);
-                zoomCtx.lineTo(centerCanvasX + crosshairSize, centerCanvasY);
-                zoomCtx.moveTo(centerCanvasX, centerCanvasY - crosshairSize);
-                zoomCtx.lineTo(centerCanvasX, centerCanvasY + crosshairSize);
-                zoomCtx.stroke();
-                
-                // Black outline
-                zoomCtx.strokeStyle = 'black';
-                zoomCtx.lineWidth = 1;
-                zoomCtx.beginPath();
-                zoomCtx.moveTo(centerCanvasX - crosshairSize, centerCanvasY);
-                zoomCtx.lineTo(centerCanvasX + crosshairSize, centerCanvasY);
-                zoomCtx.moveTo(centerCanvasX, centerCanvasY - crosshairSize);
-                zoomCtx.lineTo(centerCanvasX, centerCanvasY + crosshairSize);
-                zoomCtx.stroke();
-                
-                // Add center pixel highlight
-                const pixelSize = zoomScale;
-                const pixelX = centerCanvasX - pixelSize / 2;
-                const pixelY = centerCanvasY - pixelSize / 2;
-                
-                zoomCtx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
-                zoomCtx.lineWidth = 2;
-                zoomCtx.strokeRect(pixelX, pixelY, pixelSize, pixelSize);
+                try {
+                    // Get image data for zoom area
+                    const zoomImageData = ctx.getImageData(startX, startY, width, height);
+                    
+                    // Create temporary canvas for the zoom area
+                    const tempCanvas = document.createElement('canvas');
+                    const tempCtx = tempCanvas.getContext('2d');
+                    tempCanvas.width = width;
+                    tempCanvas.height = height;
+                    tempCtx.putImageData(zoomImageData, 0, 0);
+                    
+                    // Disable image smoothing for pixelated effect
+                    zoomCtx.imageSmoothingEnabled = false;
+                    
+                    // Calculate draw position to center the zoom area
+                    const drawX = (zoomCanvas.width - width * zoomScale) / 2;
+                    const drawY = (zoomCanvas.height - height * zoomScale) / 2;
+                    
+                    // Draw scaled version
+                    zoomCtx.drawImage(tempCanvas, 0, 0, width, height, 
+                                     drawX, drawY, width * zoomScale, height * zoomScale);
+                    
+                    // Draw center crosshair
+                    const centerCanvasX = zoomCanvas.width / 2;
+                    const centerCanvasY = zoomCanvas.height / 2;
+                    const crosshairSize = 8;
+                    
+                    // White crosshair with black outline
+                    zoomCtx.strokeStyle = 'white';
+                    zoomCtx.lineWidth = 3;
+                    zoomCtx.beginPath();
+                    zoomCtx.moveTo(centerCanvasX - crosshairSize, centerCanvasY);
+                    zoomCtx.lineTo(centerCanvasX + crosshairSize, centerCanvasY);
+                    zoomCtx.moveTo(centerCanvasX, centerCanvasY - crosshairSize);
+                    zoomCtx.lineTo(centerCanvasX, centerCanvasY + crosshairSize);
+                    zoomCtx.stroke();
+                    
+                    // Black outline
+                    zoomCtx.strokeStyle = 'black';
+                    zoomCtx.lineWidth = 1;
+                    zoomCtx.beginPath();
+                    zoomCtx.moveTo(centerCanvasX - crosshairSize, centerCanvasY);
+                    zoomCtx.lineTo(centerCanvasX + crosshairSize, centerCanvasY);
+                    zoomCtx.moveTo(centerCanvasX, centerCanvasY - crosshairSize);
+                    zoomCtx.lineTo(centerCanvasX, centerCanvasY + crosshairSize);
+                    zoomCtx.stroke();
+                    
+                    // Add center pixel highlight
+                    const pixelSize = zoomScale;
+                    const pixelX = centerCanvasX - pixelSize / 2;
+                    const pixelY = centerCanvasY - pixelSize / 2;
+                    
+                    zoomCtx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+                    zoomCtx.lineWidth = 2;
+                    zoomCtx.strokeRect(pixelX, pixelY, pixelSize, pixelSize);
+                } catch (error) {
+                    console.error('Error updating zoom preview:', error);
+                }
             }
         }
 
@@ -768,7 +789,6 @@
 
         // Load default state
         window.onload = function() {
-            // Show upload area by default
             uploadArea.style.display = 'flex';
             imageContainer.style.display = 'none';
             colorInfo.style.display = 'none';
