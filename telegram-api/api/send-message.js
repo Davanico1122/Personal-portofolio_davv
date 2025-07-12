@@ -1,11 +1,12 @@
 export default async function handler(req, res) {
-  // Aktifkan CORS
-  res.setHeader("Access-Control-Allow-Origin", "https://davanikoo.me"); // bisa diganti dengan "https://davanikoo.me" untuk keamanan
+  // --- CORS headers ---
+  res.setHeader("Access-Control-Allow-Origin", "https://davanikoo.me");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   if (req.method === "OPTIONS") {
-    return res.status(200).end(); // untuk menangani preflight
+    // Ini untuk menangani preflight request
+    return res.status(200).end();
   }
 
   if (req.method !== "POST") {
@@ -37,4 +38,3 @@ export default async function handler(req, res) {
     res.status(500).json({ success: false, error: error.message });
   }
 }
-
