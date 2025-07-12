@@ -224,10 +224,10 @@ function displayAllResults(query) {
     
     const projects = [
         {
-            url: 'davanico.com/projects/Design',
+            url: 'davanico.com/projects/Design.project',
             title: 'Design & Proyek saya',
             description: 'Menciptakan Solusi Visual Inovatif untuk Pengalaman Terbaik',
-            link: '/design'
+            link: '/design.project'
         },
         {
             url: 'davanico.com/projects/Branding',
