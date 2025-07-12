@@ -1,6 +1,3 @@
-const TOKEN = '7647510633:AAHSWSstRQj3bZAmOJGFUGbqVe1gMb7Vq3M';
-const CHAT_ID = '6139440643';
-
 function toggleContactForm() {
   const wrapper = document.getElementById("contactWrapper");
   const btn = document.getElementById("toggleContactBtn");
@@ -16,38 +13,38 @@ contactForm.addEventListener("submit", function (e) {
   const email = document.getElementById("email").value;
   const message = document.getElementById("message").value;
 
-  const fullMessage = ` Pesan Baru:\nNama: ${name}\nEmail: ${email}\nPesan: ${message}`;
-
-  fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+  fetch("https://kirimpesan.vercel.app/api/send-message", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      chat_id: CHAT_ID,
-      text: fullMessage,
-    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, email, message }),
   })
     .then((res) => res.json())
     .then((data) => {
-      if (data.ok) {
+      if (data.success) {
         Swal.fire({
-          icon: 'success',
-          title: 'Message Sent!',
-          text: 'Thank you.',
+          icon: "success",
+          title: "Pesan Terkirim!",
+          text: "Terima kasih sudah menghubungi.",
           timer: 3000,
-          showConfirmButton: false
+          showConfirmButton: false,
         });
         contactForm.reset();
       } else {
-        throw new Error("Faild To Send");
+        Swal.fire({
+          icon: "error",
+          title: "Gagal!",
+          text: data.error || "Pesan tidak terkirim.",
+        });
       }
     })
     .catch((err) => {
       Swal.fire({
-        icon: 'error',
-        title: 'Fail!',
-        text: 'an error occurrend while sending the message.',
+        icon: "error",
+        title: "Error!",
+        text: "Terjadi kesalahan saat mengirim.",
       });
       console.error(err);
     });
 });
-
