@@ -224,37 +224,37 @@ function displayAllResults(query) {
     
     const projects = [
         {
-            url: 'davanico.com/projects/Design',
+            url: 'davanico.com/projects/project1',
             title: 'Design & Proyek saya',
             description: 'Menciptakan Solusi Visual Inovatif untuk Pengalaman Terbaik',
             link: '/project1'
         },
         {
-            url: 'davanico.com/projects/Branding',
+            url: 'davanico.com/projects/project2',
             title: 'Branding & Identitas Visual',
             description: 'Membangun identitas merek yang kuat dan kohesif melalui eksplorasi logo, palet warna, tipografi, dan panduan gaya untuk berbagai klien dan kebutuhan.',
             link: '/project2'
         },
         {
-            url: 'davanico.com/projects/branding',
+            url: 'davanico.com/projects/project3',
             title: 'Ilustrasi & Media Promosi',
             description: 'Mengubah ide menjadi visual menarik melalui ilustrasi digital, desain poster, infografis, atau materi promosi lainnya untuk kampanye yang efektif.',
             link: '/project3'
         },
         {
-            url: 'davanico.com/projects/Game,Card',
+            url: 'davanico.com/projects/project4',
             title: 'Memory Card Flip',
             description: 'Uji daya ingatmu! Balik kartu dan cari pasangan yang cocok. Selesaikan semua pasangannya secepat mungkin dan buktikan seberapa tajam memorimu!',
             link: '/project4'
         },
         {
-            url: 'davanico.com/projects/fintech-app',
+            url: 'davanico.com/projects/project5',
             title: 'Visual Storytelling',
             description: 'Eksplorasi mendalam dalam dunia fotografi dan manipulasi digital - mengabadikan momen, menciptakan cerita, dan menghadirkan perspektif baru melalui lensa kreatif',
             link: '/project5'
         },
         {
-            url: 'davanico.com/projects/learning-platform',
+            url: 'davanico.com/projects/project6',
             title: 'Packaging Design',
             description: 'Desain kemasan yang tidak hanya melindungi produk, tetapi juga menjadi media komunikasi visual yang kuat untuk membangun identitas brand dan menarik perhatian konsumen di pasar yang kompetitif.',
             link: '/Project6'
