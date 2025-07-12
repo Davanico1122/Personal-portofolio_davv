@@ -227,37 +227,37 @@ function displayAllResults(query) {
             url: 'davanico.com/projects/Design',
             title: 'Design & Proyek saya',
             description: 'Menciptakan Solusi Visual Inovatif untuk Pengalaman Terbaik',
-            link: '/Design'
+            link: '/project1'
         },
         {
             url: 'davanico.com/projects/Branding',
             title: 'Branding & Identitas Visual',
             description: 'Membangun identitas merek yang kuat dan kohesif melalui eksplorasi logo, palet warna, tipografi, dan panduan gaya untuk berbagai klien dan kebutuhan.',
-            link: '/branding'
+            link: '/project2'
         },
         {
             url: 'davanico.com/projects/branding',
             title: 'Ilustrasi & Media Promosi',
             description: 'Mengubah ide menjadi visual menarik melalui ilustrasi digital, desain poster, infografis, atau materi promosi lainnya untuk kampanye yang efektif.',
-            link: '/ilustrasi'
+            link: '/project3'
         },
         {
             url: 'davanico.com/projects/Game,Card',
             title: 'Memory Card Flip',
             description: 'Uji daya ingatmu! Balik kartu dan cari pasangan yang cocok. Selesaikan semua pasangannya secepat mungkin dan buktikan seberapa tajam memorimu!',
-            link: '/memori.card'
+            link: '/project4'
         },
         {
             url: 'davanico.com/projects/fintech-app',
             title: 'Visual Storytelling',
             description: 'Eksplorasi mendalam dalam dunia fotografi dan manipulasi digital - mengabadikan momen, menciptakan cerita, dan menghadirkan perspektif baru melalui lensa kreatif',
-            link: '/photography'
+            link: '/project5'
         },
         {
             url: 'davanico.com/projects/learning-platform',
             title: 'Packaging Design',
             description: 'Desain kemasan yang tidak hanya melindungi produk, tetapi juga menjadi media komunikasi visual yang kuat untuk membangun identitas brand dan menarik perhatian konsumen di pasar yang kompetitif.',
-            link: '/Packaging.Design'
+            link: '/Project6'
         }
     ];
     
