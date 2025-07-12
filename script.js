@@ -227,7 +227,7 @@ function displayAllResults(query) {
             url: 'davanico.com/projects/Design',
             title: 'Design & Proyek saya',
             description: 'Menciptakan Solusi Visual Inovatif untuk Pengalaman Terbaik',
-            link: 'project1.html'
+            link: '/design'
         },
         {
             url: 'davanico.com/projects/Branding',
