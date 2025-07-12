@@ -13,7 +13,7 @@ contactForm.addEventListener("submit", function (e) {
   const email = document.getElementById("email").value;
   const message = document.getElementById("message").value;
 
-  fetch("https://kirimpesan.vercel.app/api/send-message", {
+fetch("https://dvw12.vercel.app/api/send-message", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
