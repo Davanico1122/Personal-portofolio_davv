@@ -1,18 +1,18 @@
 {
   "routes": [
-     { "src": "/Color.Picker", "dest": "/project7.html" },
+      { "src": "/Color.Picker", "dest": "/project7.html" },
       { "src": "/index", "dest": "/index.html" },
-    { "src": "/desain", "dest": "/project1.html" },
-     { "src": "/search", "dest": "/search.html" },
-    { "src": "/branding", "dest": "/project2.html" },
-    { "src": "/ilustrasi", "dest": "/project3.html" },
-     { "src": "/game-interaktif", "dest": "/game.html" },
-     { "src": "/The.Cube", "dest": "/game1.html" },
-     { "src": "/memori.card", "dest": "/project4.html" },
-     { "src": "/photography", "dest": "/project5.html" },
-     { "src": "/Space.Defender", "dest": "/game3.html" },
-    { "src": "/Packaging.Design", "dest": "/project6.html" },
-    { "handle": "filesystem" },
+      { "src": "/design.project", "dest": "/project1.html" },
+      { "src": "/search", "dest": "/search.html" },
+      { "src": "/branding", "dest": "/project2.html" },
+      { "src": "/ilustrasi", "dest": "/project3.html" },
+      { "src": "/game-interaktif", "dest": "/game.html" },
+      { "src": "/The.Cube", "dest": "/game1.html" },
+      { "src": "/memori.card", "dest": "/project4.html" },
+      { "src": "/photography", "dest": "/project5.html" },
+      { "src": "/Space.Defender", "dest": "/game3.html" },
+      { "src": "/Packaging.Design", "dest": "/project6.html" },
+      { "handle": "filesystem" },
     { "src": "/.*", "status": 404, "dest": "/not-found" }
   ]
 }
