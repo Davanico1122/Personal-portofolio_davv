@@ -224,7 +224,7 @@ function displayAllResults(query) {
     
     const projects = [
         {
-            url: 'davanico.com/projects/Design.project',
+            url: 'davanico.com/projects/Design',
             title: 'Design & Proyek saya',
             description: 'Menciptakan Solusi Visual Inovatif untuk Pengalaman Terbaik',
             link: 'project1.html'
