@@ -191,7 +191,7 @@ function updateSearchResults(query, tab) {
                 displayImageResults(query);
                 break;
             case 'random':
-                displayRandomProjects(query); // ✅ ini yang penting!
+                displayRandomProjects(query); //  ini yang penting!
                  break;
             case 'portfolio':
                 displayPortfolioResults(query);
@@ -227,7 +227,7 @@ function displayAllResults(query) {
             url: 'davanico.com/projects/Design',
             title: 'Design & Proyek saya',
             description: 'Menciptakan Solusi Visual Inovatif untuk Pengalaman Terbaik',
-            link: '/desain'
+            link: 'project1.html'
         },
         {
             url: 'davanico.com/projects/Branding',
