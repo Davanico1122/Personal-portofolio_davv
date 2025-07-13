@@ -48,7 +48,7 @@ This repository is **NOT open-source**.
 > Legal action (including DMCA takedown) may be taken if violations occur.
 
 © 2025 Davanico  
- Contact: hi@davanikoo.me
+ Contact:davaniko1122@gmail.com
 
 ---
 
