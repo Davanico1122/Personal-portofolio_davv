@@ -20,7 +20,8 @@ This site is designed to load fast, stay distraction-free, and highlight the ess
 
 ##  Preview
 
-![screenshot](preview.png)
+![screenshot](img/preview.png)
+
 
 ---
 
