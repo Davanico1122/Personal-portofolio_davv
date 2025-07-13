@@ -1,6 +1,6 @@
 {
   "routes": [
-      { "src": "/project7", "dest": "/project7.html" },
+      { "src": "/project1.c", "dest": "/project7.html" },
       { "src": "/index", "dest": "/index.html" },
       { "src": "/project1.project", "dest": "/project1.html" },
       { "src": "/search", "dest": "/search.html" },
