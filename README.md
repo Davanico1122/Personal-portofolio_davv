@@ -24,6 +24,12 @@ This site is designed to load fast, stay distraction-free, and highlight the ess
 
 
 ---
+##  Preview
+
+![screenshot](img/preview2.png)
+
+
+---
 
 ##  License & Anti-Cloning Policy
 
