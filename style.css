@@ -221,11 +221,24 @@ body {
     background-color: #f2f2f2;
     border-top: 1px solid #e4e4e4;
     margin-top: auto;
+    width: 100%;
+}
+
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+.homepage-container {
+    flex: 1;
 }
 
 .footer-content {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 30px;
+    width: 100%;
 }
 
 .footer-country {
