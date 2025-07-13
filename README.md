@@ -33,25 +33,30 @@ This site is designed to load fast, stay distraction-free, and highlight the ess
 
 ##  License & Anti-Cloning Policy
 
-This repository is **NOT open-source**.
+This repository is **NOT open-source** and is protected by a **custom copyright license**.
 
- You are **NOT allowed to**:
+###  You are **NOT permitted** to:
 - Clone or fork this repository
-- Reuse the layout, code, or structure
-- Host any derived version of this website
+- Reuse or replicate any part of the design, code, or structure
+- Host, distribute, or modify any derived version of this project
 
- You **may**:
-- View the public code strictly for personal learning
-- Ask permission if you want to reuse any part
+###  You **may**:
+- View the code for **personal learning purposes only**
+- Contact the author for **explicit written permission** if reuse is intended
 
-> This site is protected by a custom copyright license.  
-> Legal action (including DMCA takedown) may be taken if violations occur.
+>  Unauthorized copying, cloning, redistribution, or hosting will be considered a copyright violation.  
+> **DMCA takedown requests** and **legal action** may be initiated against violators.
 
-© 2025 Davanico  
- Contact:davaniko1122@gmail.com
+---
+
+© 2025 **Davanico**  
+ Contact: [davaniko1122@gmail.com](mailto:davaniko1122@gmail.com)
+
 
 ---
 
 ##  Credits
 
 Everything is built from scratch. No templates or site builders were used.
+
+
