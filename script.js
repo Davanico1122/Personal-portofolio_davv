@@ -253,7 +253,16 @@ function displayAllResults(query) {
             description: 'Eksplorasi mendalam dalam dunia fotografi dan manipulasi digital - mengabadikan momen, menciptakan cerita, dan menghadirkan perspektif baru melalui lensa kreatif',
             link: '/project5'
         },
-      
+
+
+         {
+            url: 'davanico.com/projects/project6',
+            title: 'Packaging.Design',
+            description: 'Desain kemasan yang tidak hanya melindungi produk, tetapi juga menjadi media komunikasi visual yang kuat untuk membangun identitas brand dan menarik perhatian konsumen di pasar yang kompetitif.',
+            link: '/project6'
+        },
+
+        
     ];
     
     projects.forEach(project => {
