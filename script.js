@@ -360,7 +360,7 @@ function displayRandomProjects() {
             url: 'davanico.com/design/color',
             title: 'Color Picker',
             description: 'Aplikasi web untuk mengambil warna dari gambar menggunakan EyeDropper API.',
-            link: '/Color.Picker'
+            link: '/project1.c'
         },
         {
             url: 'davanico.com/design/branding',
