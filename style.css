@@ -100,7 +100,7 @@
 /* Huruf per warna */
 .davanico-logo span {
     display: inline-block;
-    margin-right: 6px; /* spacing antar huruf */
+    margin-right: 3px; /* spacing antar huruf */
 }
 
 .davanico-logo span:last-child {
