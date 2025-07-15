@@ -267,13 +267,7 @@ function displayAllResults(query) {
             link: '/project6'
         },
 
-        {
-          url: 'davanico.com/project8',
-          title: 'QR Code Generator Neumorphism',
-          description: 'Generate QR Code dengan desain full Neumorphism yang responsif dan elegan.',
-          link: '/project8'
-        }
-
+       
     ];
     
     projects.forEach(project => {
@@ -383,35 +377,12 @@ function displayRandomProjects() {
             link: '/project7'
         },
         {
-            url: 'davanico.com/design/branding',
-            title: 'Brand Identity & Visual Design',
-            description: 'Desain logo, panduan visual, dan branding profesional.',
-            link: '/not-found'
-        },
-        {
-            url: 'davanico.com/design/web',
-            title: 'Web Design & Development',
-            description: 'Desain web modern dan responsive.',
-            link: '/not-found'
-        },
-        {
-            url: 'davanico.com/design/dashboard',
-            title: 'Dashboard Design',
-            description: 'Antarmuka dashboard analytics & manajemen sosial media.',
-            link: '/not-found'
-        },
-        {
-            url: 'davanico.com/design/mobile-banking',
-            title: 'Mobile Banking UI',
-            description: 'UI FinTech untuk transaksi dan keamanan digital.',
-            link: '/not-found'
-        },
-        {
-            url: 'davanico.com/design/education',
-            title: 'E-Learning Platform Design',
-            description: 'Desain interaktif untuk pendidikan daring.',
-            link: '/not-found'
+          url: 'davanico.com/project8',
+          title: 'QR Code Generator Neumorphism',
+          description: 'Generate QR Code dengan desain full Neumorphism yang responsif dan elegan.',
+          link: '/project8'
         }
+        
     ];
 
     // Kosongkan hasil lama
