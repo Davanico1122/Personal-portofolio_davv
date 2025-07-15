@@ -669,6 +669,27 @@ html, body {
 }
 
 
+.lightbox-prev, .lightbox-next {
+  position: absolute;
+  top: 50%;
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.lightbox-prev {
+  left: -30px;
+}
+
+.lightbox-next {
+  right: -30px;
+}
+
 
 
 /* About Me Section Styles */
