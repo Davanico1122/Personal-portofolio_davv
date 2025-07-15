@@ -10,7 +10,7 @@ This site is designed to load fast, stay distraction-free, and highlight the ess
 
 ##  Features
 
--  100/100 Performance (Lighthouse)
+-  90/90 Performance (Lighthouse)
 -  SEO optimized
 -  Fully responsive
 -  Clean, Google-inspired UI
