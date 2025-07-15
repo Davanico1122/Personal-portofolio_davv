@@ -471,7 +471,7 @@ function displaymygalleryResults(query) {
     galleryItems = [
         {
             src: 'img/gambar1.webp',
-            title: 'Davanico with Friends',
+            title: 'Davanico',
             category: 'Personal Moment'
         },
         {
