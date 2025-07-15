@@ -658,9 +658,9 @@ html, body {
 
 .lightbox img {
   max-width: 90vw;
-  max-height: 90vh;
-  border-radius: 10px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  max-height: 60vh;
+  border-radius: 12px;
+  transition: opacity 0.4s ease;
 }
 
 .lightbox.show {
@@ -688,6 +688,17 @@ html, body {
 
 .lightbox-next {
   right: -30px;
+}
+
+@media (max-width: 500px) {
+  .lightbox img {
+    max-width: 85vw;
+    max-height: 50vh;
+  }
+
+  .lightbox-info {
+    font-size: 12px;
+  }
 }
 
 
