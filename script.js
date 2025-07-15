@@ -455,6 +455,7 @@ function displayPortfolioResults(query) {
 }
 
 
+
 // Display My Gallery Results
 function displaymygalleryResults(query) {
     const resultsContainer = document.getElementById('searchResults');
@@ -465,34 +466,34 @@ function displaymygalleryResults(query) {
 
     const galleryItems = [
         {
-            src: 'img/gambar1.webp',
+            src: 'img/mpls1.webp',
             title: 'Davanico with Friends',
             category: 'Personal Moment'
         },
         {
-            src: 'img/foto2.webp',
+            src: 'img/mpls2.webp',
             title: 'Graduation Day',
             category: 'Milestone'
         },
         {
-            src: 'img/foto3.webp',
+            src: 'img/mpls3.webp',
             title: 'Behind The Scene',
             category: 'Creative Work'
         },
         {
-            src: 'img/foto4.webp',
+            src: 'img/mpls4.webp',
             title: 'My Workspace',
             category: 'Everyday Life'
         },
         {
-            src: 'img/foto5.webp',
+            src: 'img/mpls5.webp',
             title: 'Outdoor Shooting',
             category: 'Photography'
         },
         {
-        src: 'img/mpls6.webp',
-        title: 'pra MPLS',
-        category: 'Kegiatan Sekolah'
+            src: 'img/mpls6.webp',
+            title: 'pra MPLS',
+            category: 'Organisasi'
         }
     ];
 
@@ -501,7 +502,7 @@ function displaymygalleryResults(query) {
         galleryDiv.className = 'gallery-item';
 
         galleryDiv.innerHTML = `
-            <img src="${item.src}" alt="${item.title}" />
+            <img src="${item.src}" alt="${item.title}" onclick="openLightbox('${item.src}')" />
             <div class="gallery-info">
                 <div class="gallery-title">${item.title}</div>
                 <div class="gallery-category">${item.category}</div>
@@ -512,6 +513,19 @@ function displaymygalleryResults(query) {
     });
 
     resultsContainer.appendChild(galleryGrid);
+}
+
+// Lightbox functionality
+function openLightbox(src) {
+    const lightbox = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    img.src = src;
+    lightbox.classList.add('show');
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.remove('show');
 }
 
 
