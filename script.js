@@ -183,7 +183,7 @@ function updateSearchResults(query, tab) {
         resultsContainer.innerHTML = '';
         
         // Generate results based on tab
-       //  Panggil fungsi sesuai tab
+       
     switch (tab) {
       case 'all':
         displayAllResults(query);
@@ -208,6 +208,7 @@ function updateSearchResults(query, tab) {
     }
   }, 300);
 }
+
 
 // Update results info text
 function updateResultsInfo(query) {
@@ -452,13 +453,10 @@ function displayPortfolioResults(query) {
         }
     ];
 
-    let safeQuery = (query || '').toLowerCase();
-let filtered = portfolioProjects.filter(project =>
-  !safeQuery ||
-  project.title.toLowerCase().includes(safeQuery) ||
-  project.description.toLowerCase().includes(safeQuery)
-);
-
+    let filtered = portfolioProjects.filter(project =>
+        !query || project.title.toLowerCase().includes(query.toLowerCase()) ||
+        project.description.toLowerCase().includes(query.toLowerCase())
+    );
 
     // Jika tidak ada hasil cocok, tampilkan pesan dan tetap render semua project
     if (filtered.length === 0) {
