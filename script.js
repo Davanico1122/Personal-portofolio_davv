@@ -456,7 +456,11 @@ function displayPortfolioResults(query) {
 
 
 
+
 // Display My Gallery Results
+let currentGalleryIndex = 0;
+let galleryItems = [];
+
 function displaymygalleryResults(query) {
     const resultsContainer = document.getElementById('searchResults');
     if (!resultsContainer) return;
@@ -464,45 +468,45 @@ function displaymygalleryResults(query) {
     const galleryGrid = document.createElement('div');
     galleryGrid.className = 'gallery-grid';
 
-    const galleryItems = [
+    galleryItems = [
         {
-            src: 'img/gambar1.webp',
-            title: 'Davanico',
-            category: 'Personal'
+            src: 'img/foto1.webp',
+            title: 'Davanico with Friends',
+            category: 'Personal Moment'
         },
         {
-            src: 'img/gambar2.webp',
+            src: 'img/foto2.webp',
             title: 'Graduation Day',
             category: 'Milestone'
         },
         {
-            src: 'img/gambar3.webp',
+            src: 'img/foto3.webp',
             title: 'Behind The Scene',
             category: 'Creative Work'
         },
         {
-            src: 'img/gambar4.webp',
+            src: 'img/foto4.webp',
             title: 'My Workspace',
             category: 'Everyday Life'
         },
         {
-            src: 'img/gambar5.webp',
+            src: 'img/foto5.webp',
             title: 'Outdoor Shooting',
             category: 'Photography'
         },
         {
-            src: 'img/gambar6.webp',
-            title: 'pra MPLS',
-            category: 'Organisasi'
+            src: 'img/foto6.webp',
+            title: 'Exploring Nature',
+            category: 'Adventure'
         }
     ];
 
-    galleryItems.forEach(item => {
+    galleryItems.forEach((item, index) => {
         const galleryDiv = document.createElement('div');
         galleryDiv.className = 'gallery-item';
 
         galleryDiv.innerHTML = `
-            <img src="${item.src}" alt="${item.title}" onclick="openLightbox('${item.src}')" />
+            <img src="${item.src}" alt="${item.title}" onclick="openLightbox(${index})" />
             <div class="gallery-info">
                 <div class="gallery-title">${item.title}</div>
                 <div class="gallery-category">${item.category}</div>
@@ -516,17 +520,64 @@ function displaymygalleryResults(query) {
 }
 
 // Lightbox functionality
-function openLightbox(src) {
+function openLightbox(index) {
+    currentGalleryIndex = index;
     const lightbox = document.getElementById('lightbox');
     const img = document.getElementById('lightbox-img');
-    img.src = src;
+    const info = document.getElementById('lightbox-info');
+
+    const item = galleryItems[index];
+    img.classList.remove('fade');
+    void img.offsetWidth; // Trigger reflow
+    img.src = item.src;
+    img.alt = item.title;
+    info.innerHTML = `<strong>${item.title}</strong><br><small>${item.category}</small>`;
+
     lightbox.classList.add('show');
+    img.classList.add('fade');
 }
 
 function closeLightbox() {
     const lightbox = document.getElementById('lightbox');
     lightbox.classList.remove('show');
 }
+
+function nextLightbox() {
+    currentGalleryIndex = (currentGalleryIndex + 1) % galleryItems.length;
+    openLightbox(currentGalleryIndex);
+}
+
+function prevLightbox() {
+    currentGalleryIndex = (currentGalleryIndex - 1 + galleryItems.length) % galleryItems.length;
+    openLightbox(currentGalleryIndex);
+}
+
+// Swipe gesture for mobile
+let startX = 0;
+let endX = 0;
+
+document.addEventListener('DOMContentLoaded', () => {
+    const lightbox = document.getElementById('lightbox');
+
+    lightbox.addEventListener('touchstart', e => {
+        startX = e.changedTouches[0].screenX;
+    });
+
+    lightbox.addEventListener('touchend', e => {
+        endX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+});
+
+function handleSwipe() {
+    if (endX < startX - 50) {
+        nextLightbox();
+    } else if (endX > startX + 50) {
+        prevLightbox();
+    }
+}
+
+
 
 
 
