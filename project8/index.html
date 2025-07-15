@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Davanico QR Generator</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+</head>
+<body>
+  <main class="content">
+    <!-- Tombol Kembali -->
+    <a href="/search" class="neumorphic-back" aria-label="Back to Search">
+      <span>&larr;</span> Back
+    </a>
+
+    <!-- QR Generator -->
+    <div class="wrapper">
+      <header>
+        <h1>QR Code Generator</h1>
+        <p>Enter any URL or text to generate your QR code</p>
+      </header>
+
+      <div class="form">
+        <input type="text" spellcheck="false" placeholder="Enter text or URL" />
+        <button>Generate QR Code</button>
+      </div>
+
+      <div class="qr-code">
+        <img src="" alt="QR Code" />
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-box">
+        <div class="social-icons">
+          <a href="https://github.com/Davanico1122" target="_blank" aria-label="GitHub">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" />
+          </a>
+          <a href="https://instagram.com/davanico.ig" target="_blank" aria-label="Instagram">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
+          </a>
+        </div>
+        <p>&copy; <span id="year"></span> Davanico</p>
+        <p class="small">MIT Licensed — Built with love & code</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
