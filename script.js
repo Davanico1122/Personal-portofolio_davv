@@ -458,142 +458,140 @@ function displayPortfolioResults(query) {
 
 
 
-// Display My Gallery Results - Final Version with Zoom, Swipe, Drag, and Responsive
-// Display My Gallery Results
+// ========================
+//  FINAL JS (Lightbox Drag Zoom Responsive)
+// ========================
+
 let currentGalleryIndex = 0;
 let galleryItems = [];
 let zoomLevel = 1;
-let currentTranslateX = 0;
-let currentTranslateY = 0;
-let isDragging = false;
-let startDragX = 0;
-let startDragY = 0;
+let initialX = 0;
+let initialY = 0;
 
 function displaymygalleryResults(query) {
-    const resultsContainer = document.getElementById('searchResults');
-    if (!resultsContainer) return;
+  const resultsContainer = document.getElementById('searchResults');
+  if (!resultsContainer) return;
 
-    const galleryGrid = document.createElement('div');
-    galleryGrid.className = 'gallery-grid';
+  const galleryGrid = document.createElement('div');
+  galleryGrid.className = 'gallery-grid';
 
-    galleryItems = [
-        { src: 'img/gambar1.webp', title: 'Davanico', category: 'Personal foto' },
-        { src: 'img/gambar2.webp', title: 'Poster Digital', category: 'Poster' },
-        { src: 'img/gambar3.webp', title: 'Kegiatan', category: 'Day' },
-        { src: 'img/gambar4.webp', title: 'Feed Sosmed', category: 'Social Media' },
-        { src: 'img/gambar5.webp', title: 'Jalan jalan', category: 'Dokumentasi' },
-        { src: 'img/gambar6.webp', title: 'PraMpls', category: 'Teamwork' }
-    ];
+  galleryItems = [
+    { src: 'img/gambar1.webp', title: 'Davanico', category: 'Personal foto' },
+    { src: 'img/gambar2.webp', title: 'Poster Digital', category: 'Poster' },
+    { src: 'img/gambar3.webp', title: 'Kegiatan', category: 'Day' },
+    { src: 'img/gambar4.webp', title: 'Feed Sosmed', category: 'Social Media' },
+    { src: 'img/gambar5.webp', title: 'Jalan jalan', category: 'Dokumentasi' },
+    { src: 'img/gambar6.webp', title: 'PraMpls', category: 'Teamwork' }
+  ];
 
-    galleryItems.forEach((item, index) => {
-        const galleryDiv = document.createElement('div');
-        galleryDiv.className = 'gallery-item';
-        galleryDiv.innerHTML = `
-            <img src="${item.src}" alt="${item.title}" onclick="openLightbox(${index})" />
-            <div class="gallery-info">
-                <div class="gallery-title">${item.title}</div>
-                <div class="gallery-category">${item.category}</div>
-            </div>
-        `;
-        galleryGrid.appendChild(galleryDiv);
-    });
+  galleryItems.forEach((item, index) => {
+    const galleryDiv = document.createElement('div');
+    galleryDiv.className = 'gallery-item';
+    galleryDiv.innerHTML = `
+      <img src="${item.src}" alt="${item.title}" onclick="openLightbox(${index})" />
+      <div class="gallery-info">
+        <div class="gallery-title">${item.title}</div>
+        <div class="gallery-category">${item.category}</div>
+      </div>
+    `;
+    galleryGrid.appendChild(galleryDiv);
+  });
 
-    resultsContainer.appendChild(galleryGrid);
+  resultsContainer.appendChild(galleryGrid);
 }
 
 function openLightbox(index) {
-    currentGalleryIndex = index;
-    const lightbox = document.getElementById('lightbox');
-    const img = document.getElementById('lightbox-img');
-    const info = document.getElementById('lightbox-info');
-    const item = galleryItems[index];
+  currentGalleryIndex = index;
+  const lightbox = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  const info = document.getElementById('lightbox-info');
+  const item = galleryItems[index];
 
-    zoomLevel = 1;
-    currentTranslateX = 0;
-    currentTranslateY = 0;
-
-    img.style.transform = 'scale(1) translate(0, 0)';
-    img.classList.remove('portrait', 'landscape');
-
-    img.onload = () => {
-        const ratio = img.naturalWidth / img.naturalHeight;
-        img.classList.add(ratio < 1 ? 'portrait' : 'landscape');
-    };
-
-    img.src = item.src;
-    img.alt = item.title;
-    info.innerHTML = `<strong>${item.title}</strong><br><small>${item.category}</small>`;
-
-    lightbox.classList.add('show');
+  resetZoom();
+  img.src = item.src;
+  img.alt = item.title;
+  info.innerHTML = `<strong>${item.title}</strong><br><small>${item.category}</small>`;
+  lightbox.classList.add('show');
 }
 
 function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('show');
+  document.getElementById('lightbox').classList.remove('show');
 }
 
 function nextLightbox() {
-    currentGalleryIndex = (currentGalleryIndex + 1) % galleryItems.length;
-    openLightbox(currentGalleryIndex);
+  currentGalleryIndex = (currentGalleryIndex + 1) % galleryItems.length;
+  openLightbox(currentGalleryIndex);
 }
 
 function prevLightbox() {
-    currentGalleryIndex = (currentGalleryIndex - 1 + galleryItems.length) % galleryItems.length;
-    openLightbox(currentGalleryIndex);
+  currentGalleryIndex = (currentGalleryIndex - 1 + galleryItems.length) % galleryItems.length;
+  openLightbox(currentGalleryIndex);
+}
+
+function resetZoom() {
+  zoomLevel = 1;
+  initialX = 0;
+  initialY = 0;
+  const img = document.getElementById('lightbox-img');
+  if (img) img.style.transform = 'scale(1) translate(0px, 0px)';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const lightbox = document.getElementById('lightbox');
-    const wrapper = document.querySelector('.lightbox-img-wrapper');
-    const img = document.getElementById('lightbox-img');
+  const wrapper = document.querySelector('.lightbox-img-wrapper');
+  const image = document.getElementById('lightbox-img');
+  let isDragging = false;
+  let startX = 0;
+  let startY = 0;
 
-    if (wrapper && img) {
-        // Zoom scroll
-        wrapper.addEventListener('wheel', function (e) {
-            e.preventDefault();
-            zoomLevel += e.deltaY * -0.001;
-            zoomLevel = Math.min(Math.max(1, zoomLevel), 3);
-            img.style.transform = `scale(${zoomLevel}) translate(${currentTranslateX}px, ${currentTranslateY}px)`;
-        });
-
-        // Drag move
-        img.addEventListener('mousedown', e => {
-            if (zoomLevel <= 1) return;
-            isDragging = true;
-            startDragX = e.clientX - currentTranslateX;
-            startDragY = e.clientY - currentTranslateY;
-            img.style.cursor = 'grabbing';
-        });
-
-        window.addEventListener('mouseup', () => {
-            isDragging = false;
-            img.style.cursor = 'grab';
-        });
-
-        img.addEventListener('mousemove', e => {
-            if (!isDragging || zoomLevel <= 1) return;
-            const deltaX = e.clientX - startDragX;
-            const deltaY = e.clientY - startDragY;
-
-            const bounds = wrapper.getBoundingClientRect();
-            const imgRect = img.getBoundingClientRect();
-
-            const maxOffsetX = Math.max(0, (imgRect.width - bounds.width) / 2);
-            const maxOffsetY = Math.max(0, (imgRect.height - bounds.height) / 2);
-
-            currentTranslateX = Math.min(maxOffsetX, Math.max(-maxOffsetX, deltaX));
-            currentTranslateY = Math.min(maxOffsetY, Math.max(-maxOffsetY, deltaY));
-
-            img.style.transform = `scale(${zoomLevel}) translate(${currentTranslateX}px, ${currentTranslateY}px)`;
-        });
-    }
-
-    // Swipe gesture mobile
-    lightbox?.addEventListener('touchstart', e => startX = e.changedTouches[0].screenX);
-    lightbox?.addEventListener('touchend', e => {
-        const endX = e.changedTouches[0].screenX;
-        if (endX < startX - 50) nextLightbox();
-        else if (endX > startX + 50) prevLightbox();
+  if (wrapper && image) {
+    wrapper.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      zoomLevel += e.deltaY * -0.001;
+      zoomLevel = Math.min(Math.max(1, zoomLevel), 3);
+      image.style.transform = `scale(${zoomLevel}) translate(${initialX}px, ${initialY}px)`;
     });
+
+    image.addEventListener('mousedown', function (e) {
+      if (e.button !== 0) return;
+      isDragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      image.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mousemove', function (e) {
+      if (!isDragging) return;
+      const dx = (e.clientX - startX) / zoomLevel;
+      const dy = (e.clientY - startY) / zoomLevel;
+      initialX += dx;
+      initialY += dy;
+      image.style.transform = `scale(${zoomLevel}) translate(${initialX}px, ${initialY}px)`;
+      startX = e.clientX;
+      startY = e.clientY;
+    });
+
+    window.addEventListener('mouseup', function () {
+      if (isDragging) {
+        isDragging = false;
+        image.style.cursor = 'grab';
+      }
+    });
+  }
+
+  // swipe support mobile
+  const lightbox = document.getElementById('lightbox');
+  let touchStartX = 0;
+
+  if (lightbox) {
+    lightbox.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+    lightbox.addEventListener('touchend', e => {
+      const touchEndX = e.changedTouches[0].screenX;
+      if (touchEndX < touchStartX - 50) nextLightbox();
+      else if (touchEndX > touchStartX + 50) prevLightbox();
+    });
+  }
 });
 
 
