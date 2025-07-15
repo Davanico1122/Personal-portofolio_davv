@@ -125,9 +125,15 @@
       </div>
     </div>
   </div>
+  
   <!-- Lightbox Modal -->
 <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-  <img id="lightbox-img" src="" alt="Preview" />
+  <div class="lightbox-content" onclick="event.stopPropagation()">
+    <button class="lightbox-prev" onclick="prevLightbox()">‹</button>
+    <img id="lightbox-img" class="fade" src="" alt="Preview" />
+    <div id="lightbox-info" class="lightbox-info"></div>
+    <button class="lightbox-next" onclick="nextLightbox()">›</button>
+  </div>
 </div>
 
 
