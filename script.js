@@ -458,9 +458,15 @@ function displayPortfolioResults(query) {
 
 
 // Display My Gallery Results
+// Display My Gallery Results
 let currentGalleryIndex = 0;
 let galleryItems = [];
 let zoomLevel = 1;
+let isDragging = false;
+let startDragX = 0;
+let startDragY = 0;
+let currentTranslateX = 0;
+let currentTranslateY = 0;
 
 function displaymygalleryResults(query) {
     const resultsContainer = document.getElementById('searchResults');
@@ -502,7 +508,7 @@ function displaymygalleryResults(query) {
         }
     ];
 
-    galleryItems.forEach((item, index) => {
+   galleryItems.forEach((item, index) => {
         const galleryDiv = document.createElement('div');
         galleryDiv.className = 'gallery-item';
 
@@ -528,7 +534,9 @@ function openLightbox(index) {
     const item = galleryItems[index];
 
     zoomLevel = 1;
-    img.style.transform = 'scale(1)';
+    currentTranslateX = 0;
+    currentTranslateY = 0;
+    img.style.transform = 'scale(1) translate(0, 0)';
     img.classList.remove('portrait', 'landscape');
 
     img.onload = () => {
@@ -576,7 +584,30 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             zoomLevel += e.deltaY * -0.001;
             zoomLevel = Math.min(Math.max(1, zoomLevel), 3);
-            image.style.transform = `scale(${zoomLevel})`;
+            image.style.transform = `scale(${zoomLevel}) translate(${currentTranslateX}px, ${currentTranslateY}px)`;
+        });
+
+        // Drag to move image when zoomed
+        image.addEventListener('mousedown', e => {
+            if (zoomLevel <= 1) return;
+            isDragging = true;
+            startDragX = e.clientX - currentTranslateX;
+            startDragY = e.clientY - currentTranslateY;
+            image.style.cursor = 'grabbing';
+        });
+
+        window.addEventListener('mousemove', e => {
+            if (!isDragging) return;
+            currentTranslateX = e.clientX - startDragX;
+            currentTranslateY = e.clientY - startDragY;
+            image.style.transform = `scale(${zoomLevel}) translate(${currentTranslateX}px, ${currentTranslateY}px)`;
+        });
+
+        window.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                image.style.cursor = 'zoom-in';
+            }
         });
     }
 
