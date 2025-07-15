@@ -1,141 +1,131 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Davanico Search</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-   
-    
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Davanico Search</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 
-      <!-- Favicon untuk berbagai perangkat -->
-  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="img/android-chrome-512x512.png">
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="img/android-chrome-512x512.png" />
 </head>
 <body class="search-page">
-    <!-- Search Header -->
-    <div class="search-header">
-        <!-- Top section with logo and search box -->
-        <div class="search-top">
-            <div class="search-logo">
-                <a href="/index">
-                    <div class="small-logo davanico-logo">
-                        <span class="letter-d">D</span>
-                        <span class="letter-a1">a</span>
-                        <span class="letter-v">v</span>
-                        <span class="letter-a2">a</span>
-                    </div>
-                </a>
+  <!-- Search Header -->
+  <div class="search-header">
+    <div class="search-top">
+      <div class="search-logo">
+        <a href="/index">
+          <div class="small-logo davanico-logo">
+            <span class="letter-d">D</span>
+            <span class="letter-a1">a</span>
+            <span class="letter-v">v</span>
+            <span class="letter-a2">a</span>
+          </div>
+        </a>
+      </div>
+      <div class="header-search">
+        <div class="header-search-box">
+          <div class="search-icon-left">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#9aa0a6">
+              <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+            </svg>
+          </div>
+          <input type="text" id="headerSearchInput" autocomplete="off" maxlength="2048" />
+          <div class="search-icons-right">
+            <div class="mic-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#4285f4">
+                <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />
+                <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
+              </svg>
             </div>
-            <div class="header-search">
-                <div class="header-search-box">
-                    <div class="search-icon-left">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#9aa0a6">
-                            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                        </svg>
-                    </div>
-                    <input type="text" id="headerSearchInput" autocomplete="off" maxlength="2048">
-                    <div class="search-icons-right">
-                        <div class="mic-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#4285f4">
-                                <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
-                                <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
-                            </svg>
-                        </div>
-                        <div class="camera-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#4285f4">
-                                <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm-5.83 4c0-3.23 2.6-5.83 5.83-5.83s5.83 2.6 5.83 5.83-2.6 5.83-5.83 5.83S6.17 15.23 6.17 12z"/>
-                                <circle cx="12" cy="12" r="2.5"/>
-                                <path d="M8.5 5.5l-.71-.71C6.67 3.67 5.33 3.67 4.21 4.79c-1.12 1.12-1.12 2.46 0 3.58l.71.71"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
+            <div class="camera-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#4285f4">
+                <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm-5.83 4c0-3.23 2.6-5.83 5.83-5.83s5.83 2.6 5.83 5.83-2.6 5.83-5.83 5.83S6.17 15.23 6.17 12z" />
+                <circle cx="12" cy="12" r="2.5" />
+                <path d="M8.5 5.5l-.71-.71C6.67 3.67 5.33 3.67 4.21 4.79c-1.12 1.12-1.12 2.46 0 3.58l.71.71" />
+              </svg>
             </div>
+          </div>
         </div>
-        
-        <!-- Search tabs -->
-        <div class="search-tabs">
-            <div class="tabs-container">
-                <div class="tab active" data-tab="all">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                    </svg>
-                    All
-                </div>
-                <div class="tab" data-tab="images">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-                    </svg>
-                    Images
-                </div>
-                <div class="tab" data-tab="random">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                    </svg>
-                    Random Project
-                </div>
-                <div class="tab" data-tab="portfolio">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20 6h-2.5l-1.5-1.5h-5L9.5 6H7c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h13c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/>
-                    </svg>
-                    Portfolio
-                </div>
-                <div class="tab" data-tab="about">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-                    </svg>
-                    About Me
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <!-- Search Content -->
-    <div class="search-content">
-        <!-- Search info -->
-        <div class="search-info" id="searchInfo">
-            About 3,420 results (0.52 seconds)
+    <!-- Search Tabs -->
+    <div class="search-tabs">
+      <div class="tabs-container">
+        <div class="tab active" data-tab="all">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+          </svg>
+          All
         </div>
-        
-        <!-- Search results -->
-        <div class="search-results" id="searchResults">
-            <!-- Results will be dynamically populated here -->
+        <div class="tab" data-tab="images">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
+          </svg>
+          Images
         </div>
+        <div class="tab" data-tab="random">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+          </svg>
+          Random Project
+        </div>
+        <div class="tab" data-tab="portfolio">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20 6h-2.5l-1.5-1.5h-5L9.5 6H7c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h13c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z" />
+          </svg>
+          Portfolio
+        </div>
+        <div class="tab" data-tab="gallery">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M21 19V5c0-1.1-.9-2-2-2H5C3.9 3 3 3.9 3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-2 0H5V5h14v14zM8 11l2.5 3.01L14.5 10l4.5 6H5l3-4z" />
+          </svg>
+          My Gallery
+        </div>
+        <div class="tab" data-tab="about">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+          </svg>
+          About Me
+        </div>
+      </div>
     </div>
+  </div>
 
+  <!-- Search Content -->
+  <div class="search-content">
+    <div class="search-info" id="searchInfo">About 3,420 results (0.52 seconds)</div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
 
-       <!-- Footer -->
-    <div class="homepage-footer">
-        <div class="footer-content">
-            <div class="footer-country">Indonesia</div>
-            <div class="footer-divider"></div>
-            <div class="footer-links">
-                <div class="footer-left">
-                    <a href="#">About</a>
-                    <a href="#">Advertising</a>
-                    <a href="#">Business</a>
-                    <a href="#">How Search works</a>
-                     <a href="#">&copy; 2025 Davanico. All rights reserved. Unauthorized copying is prohibited.</a>
-                </div>
-                <div class="footer-right">
-                    <a href="#">Privacy</a>
-                    <a href="#">Terms</a>
-                    <a href="#">Settings</a>
-                </div>
-            </div>
+  <!-- Footer -->
+  <div class="homepage-footer">
+    <div class="footer-content">
+      <div class="footer-country">Indonesia</div>
+      <div class="footer-divider"></div>
+      <div class="footer-links">
+        <div class="footer-left">
+          <a href="#">About</a>
+          <a href="#">Advertising</a>
+          <a href="#">Business</a>
+          <a href="#">How Search works</a>
+          <a href="#">&copy; 2025 Davanico. All rights reserved.</a>
         </div>
+        <div class="footer-right">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Settings</a>
+        </div>
+      </div>
     </div>
+  </div>
 
-    
-      <!-- === Script Files === -->
-    <script src="script.js"></script>
-    
-
+  <script src="script.js"></script>
 </body>
 </html>
