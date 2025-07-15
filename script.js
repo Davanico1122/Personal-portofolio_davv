@@ -577,37 +577,143 @@ function handleSwipe() {
     }
 }
 
-
-// Zoom level tracking
+// Display My Gallery Results
+let currentGalleryIndex = 0;
+let galleryItems = [];
 let zoomLevel = 1;
 
-document.addEventListener('DOMContentLoaded', () => {
-  const wrapper = document.querySelector('.lightbox-img-wrapper');
-  const image = document.getElementById('lightbox-img');
+function displaymygalleryResults(query) {
+    const resultsContainer = document.getElementById('searchResults');
+    if (!resultsContainer) return;
 
-  wrapper.addEventListener('wheel', function (e) {
-    e.preventDefault();
-    zoomLevel += e.deltaY * -0.001;
-    zoomLevel = Math.min(Math.max(1, zoomLevel), 3); // batas zoom antara 1x dan 3x
-    image.style.transform = `scale(${zoomLevel})`;
-  });
+    const galleryGrid = document.createElement('div');
+    galleryGrid.className = 'gallery-grid';
 
-  // Reset zoom saat lightbox dibuka
-  window.openLightbox = function(index) {
+    galleryItems = [
+        {
+            src: 'img/gambar1.webp',
+            title: 'Davanico',
+            category: 'Personal foto'
+        },
+        {
+            src: 'img/gambar2.webp',
+            title: 'Poster Digital',
+            category: 'Poster'
+        },
+        {
+            src: 'img/gambar3.webp',
+            title: 'Kegiatan',
+            category: 'Day'
+        },
+        {
+            src: 'img/gambar4.webp',
+            title: 'Feed Sosmed',
+            category: 'Social Media'
+        },
+        {
+            src: 'img/gambar5.webp',
+            title: 'Jalan jalan',
+            category: 'Dokumentasi'
+        },
+        {
+            src: 'img/gambar6.webp',
+            title: 'PraMpls',
+            category: 'TeamWork'
+        }
+    ];
+
+    galleryItems.forEach((item, index) => {
+        const galleryDiv = document.createElement('div');
+        galleryDiv.className = 'gallery-item';
+
+        galleryDiv.innerHTML = `
+            <img src="${item.src}" alt="${item.title}" onclick="openLightbox(${index})" />
+            <div class="gallery-info">
+                <div class="gallery-title">${item.title}</div>
+                <div class="gallery-category">${item.category}</div>
+            </div>
+        `;
+
+        galleryGrid.appendChild(galleryDiv);
+    });
+
+    resultsContainer.appendChild(galleryGrid);
+}
+
+function openLightbox(index) {
     currentGalleryIndex = index;
     const lightbox = document.getElementById('lightbox');
     const img = document.getElementById('lightbox-img');
     const info = document.getElementById('lightbox-info');
     const item = galleryItems[index];
 
-    zoomLevel = 1; // reset zoom
-    img.style.transform = `scale(1)`;
+    zoomLevel = 1;
+    img.style.transform = 'scale(1)';
+    img.classList.remove('portrait', 'landscape');
+
+    img.onload = () => {
+        const ratio = img.naturalWidth / img.naturalHeight;
+        if (ratio < 1) {
+            img.classList.add('portrait');
+        } else {
+            img.classList.add('landscape');
+        }
+    };
+
     img.src = item.src;
     img.alt = item.title;
     info.innerHTML = `<strong>${item.title}</strong><br><small>${item.category}</small>`;
 
     lightbox.classList.add('show');
-  };
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.remove('show');
+}
+
+function nextLightbox() {
+    currentGalleryIndex = (currentGalleryIndex + 1) % galleryItems.length;
+    openLightbox(currentGalleryIndex);
+}
+
+function prevLightbox() {
+    currentGalleryIndex = (currentGalleryIndex - 1 + galleryItems.length) % galleryItems.length;
+    openLightbox(currentGalleryIndex);
+}
+
+// Swipe gesture
+let startX = 0;
+let endX = 0;
+
+document.addEventListener('DOMContentLoaded', () => {
+    const lightbox = document.getElementById('lightbox');
+    const wrapper = document.querySelector('.lightbox-img-wrapper');
+    const image = document.getElementById('lightbox-img');
+
+    if (wrapper && image) {
+        wrapper.addEventListener('wheel', function (e) {
+            e.preventDefault();
+            zoomLevel += e.deltaY * -0.001;
+            zoomLevel = Math.min(Math.max(1, zoomLevel), 3);
+            image.style.transform = `scale(${zoomLevel})`;
+        });
+    }
+
+    if (lightbox) {
+        lightbox.addEventListener('touchstart', e => {
+            startX = e.changedTouches[0].screenX;
+        });
+
+        lightbox.addEventListener('touchend', e => {
+            endX = e.changedTouches[0].screenX;
+            if (endX < startX - 50) {
+                nextLightbox();
+            } else if (endX > startX + 50) {
+                prevLightbox();
+            }
+        });
+    }
 });
 
 
