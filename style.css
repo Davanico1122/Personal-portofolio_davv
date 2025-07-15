@@ -797,11 +797,31 @@ html, body {
     font-size: 12px;
   }
 
-  .lightbox-img-wrapper {
-    max-width: 95vw;
-    max-height: 75vh;
-  }
+.lightbox-img-wrapper {
+  position: relative;
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 14px;
+  padding: 8px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  touch-action: none; /* penting untuk mobile gesture */
 }
+
+#lightbox-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+  cursor: grab;
+  user-select: none;
+  pointer-events: all;
+}
+
 
 
 /* About Me Section Styles */
