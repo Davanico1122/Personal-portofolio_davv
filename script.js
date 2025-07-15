@@ -455,7 +455,6 @@ function displayPortfolioResults(query) {
 }
 
 
-
 // Display My Gallery Results
 function displaymygalleryResults(query) {
     const resultsContainer = document.getElementById('searchResults');
@@ -466,29 +465,34 @@ function displaymygalleryResults(query) {
 
     const galleryItems = [
         {
-            src: 'img/galeri1.jpg',
-            title: 'Logo Keren',
-            category: 'Logo Design'
+            src: 'img/foto1.jpg',
+            title: 'Davanico with Friends',
+            category: 'Personal Moment'
         },
         {
-            src: 'img/galeri2.jpg',
-            title: 'Poster Event',
-            category: 'Poster'
+            src: 'img/foto2.jpg',
+            title: 'Graduation Day',
+            category: 'Milestone'
         },
         {
-            src: 'img/galeri3.jpg',
-            title: 'Feed Sosial Media',
-            category: 'Social Media'
+            src: 'img/foto3.jpg',
+            title: 'Behind The Scene',
+            category: 'Creative Work'
         },
         {
-            src: 'img/galeri4.jpg',
-            title: 'Mockup Kemasan',
-            category: 'Packaging'
+            src: 'img/foto4.jpg',
+            title: 'My Workspace',
+            category: 'Everyday Life'
         },
         {
-            src: 'img/galeri5.jpg',
-            title: 'Undangan Digital',
-            category: 'UI Design'
+            src: 'img/foto5.jpg',
+            title: 'Outdoor Shooting',
+            category: 'Photography'
+        },
+        {
+        src: 'img/mpls6.jpg',
+        title: 'pra MPLS',
+        category: 'Kegiatan Sekolah'
         }
     ];
 
