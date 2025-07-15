@@ -459,6 +459,7 @@ function displayPortfolioResults(query) {
 
 
 // Display My Gallery Results - Final Version with Zoom, Swipe, Drag, and Responsive
+// Display My Gallery Results
 let currentGalleryIndex = 0;
 let galleryItems = [];
 let zoomLevel = 1;
@@ -487,7 +488,6 @@ function displaymygalleryResults(query) {
     galleryItems.forEach((item, index) => {
         const galleryDiv = document.createElement('div');
         galleryDiv.className = 'gallery-item';
-
         galleryDiv.innerHTML = `
             <img src="${item.src}" alt="${item.title}" onclick="openLightbox(${index})" />
             <div class="gallery-info">
@@ -511,6 +511,7 @@ function openLightbox(index) {
     zoomLevel = 1;
     currentTranslateX = 0;
     currentTranslateY = 0;
+
     img.style.transform = 'scale(1) translate(0, 0)';
     img.classList.remove('portrait', 'landscape');
 
@@ -522,6 +523,7 @@ function openLightbox(index) {
     img.src = item.src;
     img.alt = item.title;
     info.innerHTML = `<strong>${item.title}</strong><br><small>${item.category}</small>`;
+
     lightbox.classList.add('show');
 }
 
@@ -540,21 +542,20 @@ function prevLightbox() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const img = document.getElementById('lightbox-img');
+    const lightbox = document.getElementById('lightbox');
     const wrapper = document.querySelector('.lightbox-img-wrapper');
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let initialTranslateX = 0;
-    let initialTranslateY = 0;
+    const img = document.getElementById('lightbox-img');
 
     if (wrapper && img) {
-        wrapper.addEventListener('wheel', e => {
+        // Zoom scroll
+        wrapper.addEventListener('wheel', function (e) {
             e.preventDefault();
             zoomLevel += e.deltaY * -0.001;
             zoomLevel = Math.min(Math.max(1, zoomLevel), 3);
             img.style.transform = `scale(${zoomLevel}) translate(${currentTranslateX}px, ${currentTranslateY}px)`;
         });
 
+        // Drag move
         img.addEventListener('mousedown', e => {
             if (zoomLevel <= 1) return;
             isDragging = true;
@@ -563,47 +564,36 @@ document.addEventListener('DOMContentLoaded', () => {
             img.style.cursor = 'grabbing';
         });
 
-        window.addEventListener('mousemove', e => {
-            if (!isDragging) return;
-            currentTranslateX = e.clientX - startDragX;
-            currentTranslateY = e.clientY - startDragY;
-            img.style.transform = `scale(${zoomLevel}) translate(${currentTranslateX}px, ${currentTranslateY}px)`;
-        });
-
         window.addEventListener('mouseup', () => {
             isDragging = false;
-            img.style.cursor = 'zoom-in';
+            img.style.cursor = 'grab';
         });
 
-        img.addEventListener('touchstart', e => {
-            if (zoomLevel <= 1) return;
-            const t = e.touches[0];
-            touchStartX = t.clientX;
-            touchStartY = t.clientY;
-            initialTranslateX = currentTranslateX;
-            initialTranslateY = currentTranslateY;
-        });
+        img.addEventListener('mousemove', e => {
+            if (!isDragging || zoomLevel <= 1) return;
+            const deltaX = e.clientX - startDragX;
+            const deltaY = e.clientY - startDragY;
 
-        img.addEventListener('touchmove', e => {
-            if (zoomLevel <= 1 || e.touches.length !== 1) return;
-            const t = e.touches[0];
-            const dx = t.clientX - touchStartX;
-            const dy = t.clientY - touchStartY;
-            currentTranslateX = initialTranslateX + dx;
-            currentTranslateY = initialTranslateY + dy;
+            const bounds = wrapper.getBoundingClientRect();
+            const imgRect = img.getBoundingClientRect();
+
+            const maxOffsetX = Math.max(0, (imgRect.width - bounds.width) / 2);
+            const maxOffsetY = Math.max(0, (imgRect.height - bounds.height) / 2);
+
+            currentTranslateX = Math.min(maxOffsetX, Math.max(-maxOffsetX, deltaX));
+            currentTranslateY = Math.min(maxOffsetY, Math.max(-maxOffsetY, deltaY));
+
             img.style.transform = `scale(${zoomLevel}) translate(${currentTranslateX}px, ${currentTranslateY}px)`;
         });
-
-        wrapper.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        wrapper.addEventListener('touchend', e => {
-            const endX = e.changedTouches[0].screenX;
-            if (endX < touchStartX - 50) nextLightbox();
-            else if (endX > touchStartX + 50) prevLightbox();
-        });
     }
+
+    // Swipe gesture mobile
+    lightbox?.addEventListener('touchstart', e => startX = e.changedTouches[0].screenX);
+    lightbox?.addEventListener('touchend', e => {
+        const endX = e.changedTouches[0].screenX;
+        if (endX < startX - 50) nextLightbox();
+        else if (endX > startX + 50) prevLightbox();
+    });
 });
 
 
