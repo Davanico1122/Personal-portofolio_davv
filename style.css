@@ -622,20 +622,52 @@ html, body {
   white-space: nowrap;
 }
 
-/* === Responsive for Gallery === */
-@media (max-width: 768px) {
-  .gallery-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 12px;
-  }
+/* === Responsive Gallery Grid === */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
 
-  .gallery-item img {
-    height: 130px;
-  }
+.gallery-item {
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
 
-  .gallery-title {
-    font-size: 13px;
-  }
+.gallery-item:hover {
+  transform: scale(1.02);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-info {
+  padding: 8px;
+  background: #fff;
+}
+
+.gallery-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #202124;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gallery-category {
+  font-size: 12px;
+  color: #70757a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 
@@ -657,14 +689,13 @@ html, body {
 }
 
 .lightbox-img-wrapper {
-  position: relative;
   max-width: 90vw;
   max-height: 80vh;
   overflow: hidden;
   background: #fff;
   border-radius: 14px;
   padding: 8px;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 25px rgba(0,0,0,0.3);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -674,12 +705,14 @@ html, body {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  transform-origin: center center;
   transition: transform 0.2s ease;
   cursor: grab;
   user-select: none;
 }
 
-.lightbox-info,
+
+/* === Lightbox Info === */
 #lightbox-info {
   margin-top: 12px;
   text-align: center;
@@ -688,7 +721,7 @@ html, body {
 }
 
 
-/* === Buttons === */
+/* === Lightbox Buttons === */
 .lightbox-nav,
 .lightbox-close {
   position: fixed;
@@ -733,8 +766,21 @@ html, body {
 }
 
 
-/* === Mobile Responsiveness === */
+/* === Mobile Optimized === */
 @media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+  }
+
+  .gallery-item img {
+    height: 120px;
+  }
+
+  .gallery-title {
+    font-size: 13px;
+  }
+
   .lightbox-nav {
     width: 36px;
     height: 36px;
@@ -747,11 +793,15 @@ html, body {
     font-size: 18px;
   }
 
-  .lightbox-info {
+  #lightbox-info {
     font-size: 12px;
   }
-}
 
+  .lightbox-img-wrapper {
+    max-width: 95vw;
+    max-height: 75vh;
+  }
+}
 
 
 /* About Me Section Styles */
