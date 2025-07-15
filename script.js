@@ -459,7 +459,7 @@ function displayPortfolioResults(query) {
 
 
 // ========================
-//  FINAL JS (Lightbox Drag Zoom Responsive)
+//  FINAL JS (Lightbox Drag Zoom Responsive with Manual Drag and Mobile Fix)
 // ========================
 
 let currentGalleryIndex = 0;
@@ -542,6 +542,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let isDragging = false;
   let startX = 0;
   let startY = 0;
+  let pinchStartDistance = 0;
+  let pinchStartZoom = 1;
 
   if (wrapper && image) {
     wrapper.addEventListener('wheel', function (e) {
@@ -552,7 +554,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     image.addEventListener('mousedown', function (e) {
-      if (e.button !== 0) return; // hanya klik kiri
+      if (e.button !== 0) return;
       isDragging = true;
       startX = e.clientX;
       startY = e.clientY;
@@ -576,28 +578,72 @@ document.addEventListener('DOMContentLoaded', () => {
         image.style.cursor = 'grab';
       }
     });
+
+    // Mobile pinch zoom
+    wrapper.addEventListener('touchstart', function (e) {
+      if (e.touches.length === 2) {
+        pinchStartDistance = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        pinchStartZoom = zoomLevel;
+      } else if (e.touches.length === 1) {
+        isDragging = true;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      }
+    });
+
+    wrapper.addEventListener('touchmove', function (e) {
+      if (e.touches.length === 2) {
+        const pinchCurrentDistance = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        zoomLevel = Math.min(Math.max(1, pinchStartZoom * (pinchCurrentDistance / pinchStartDistance)), 3);
+        image.style.transform = `scale(${zoomLevel}) translate(${initialX}px, ${initialY}px)`;
+      } else if (isDragging && e.touches.length === 1) {
+        const dx = (e.touches[0].clientX - startX) / zoomLevel;
+        const dy = (e.touches[0].clientY - startY) / zoomLevel;
+        initialX += dx;
+        initialY += dy;
+        image.style.transform = `scale(${zoomLevel}) translate(${initialX}px, ${initialY}px)`;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      }
+    });
+
+    window.addEventListener('touchend', function (e) {
+      if (e.touches.length === 0) {
+        isDragging = false;
+      }
+    });
   }
 
-  // Swipe support for mobile
+  // swipe support mobile (disable during pinch)
   const lightbox = document.getElementById('lightbox');
   let touchStartX = 0;
+  let swiping = false;
 
   if (lightbox) {
     lightbox.addEventListener('touchstart', e => {
       if (e.touches.length === 1) {
-        touchStartX = e.changedTouches[0].screenX;
+        swiping = true;
+        touchStartX = e.touches[0].screenX;
+      } else {
+        swiping = false;
       }
     });
 
     lightbox.addEventListener('touchend', e => {
+      if (!swiping) return;
       const touchEndX = e.changedTouches[0].screenX;
       if (touchEndX < touchStartX - 50) nextLightbox();
       else if (touchEndX > touchStartX + 50) prevLightbox();
+      swiping = false;
     });
   }
 });
-
-
 
 
 
