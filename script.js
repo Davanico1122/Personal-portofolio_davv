@@ -196,9 +196,11 @@ function updateSearchResults(query, tab) {
             case 'portfolio':
                 displayPortfolioResults(query);
                 break;
-            case 'gallery':
+           case 'gallery':
+                console.log(' My Gallery tab activated');
                 displaymygalleryResults(query);
-                break;
+                 break;
+
             case 'about':
                 displayAboutResults(query);
                 break;
