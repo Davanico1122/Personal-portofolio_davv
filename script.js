@@ -262,12 +262,7 @@ function displayAllResults(query) {
             link: '/project6'
         },
 
-        {
-          url: 'davanico.com/project8',
-          title: 'QR Code Generator Neumorphism',
-          description: 'Generate QR Code dengan desain full Neumorphism yang responsif dan elegan.',
-          link: '/project8'
-        }
+    
 
     ];
     
