@@ -377,11 +377,11 @@ function displayRandomProjects() {
             description: 'Aplikasi web untuk mengambil warna dari gambar menggunakan EyeDropper API.',
             link: '/project7'
         },
-        {
-            url: 'davanico.com/design/branding',
-            title: 'Brand Identity & Visual Design',
-            description: 'Desain logo, panduan visual, dan branding profesional.',
-            link: '/not-found'
+         {
+          url: 'davanico.com/project8',
+          title: 'QR Code Generator Neumorphism',
+          description: 'Generate QR Code dengan desain full Neumorphism yang responsif dan elegan.',
+          link: '/project8'
         },
         {
             url: 'davanico.com/design/web',
