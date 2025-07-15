@@ -378,31 +378,9 @@ function displayRandomProjects() {
           description: 'Generate QR Code dengan desain full Neumorphism yang responsif dan elegan.',
           link: '/project8'
         },
-        {
-            url: 'davanico.com/design/web',
-            title: 'Web Design & Development',
-            description: 'Desain web modern dan responsive.',
-            link: '/not-found'
-        },
-        {
-            url: 'davanico.com/design/dashboard',
-            title: 'Dashboard Design',
-            description: 'Antarmuka dashboard analytics & manajemen sosial media.',
-            link: '/not-found'
-        },
-        {
-            url: 'davanico.com/design/mobile-banking',
-            title: 'Mobile Banking UI',
-            description: 'UI FinTech untuk transaksi dan keamanan digital.',
-            link: '/not-found'
-        },
-        {
-            url: 'davanico.com/design/education',
-            title: 'E-Learning Platform Design',
-            description: 'Desain interaktif untuk pendidikan daring.',
-            link: '/not-found'
-        }
-    ];
+        
+
+        ];
 
     // Kosongkan hasil lama
     resultsContainer.innerHTML = "";
