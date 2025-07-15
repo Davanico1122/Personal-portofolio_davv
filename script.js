@@ -452,10 +452,13 @@ function displayPortfolioResults(query) {
         }
     ];
 
-    let filtered = portfolioProjects.filter(project =>
-        !query || project.title.toLowerCase().includes(query.toLowerCase()) ||
-        project.description.toLowerCase().includes(query.toLowerCase())
-    );
+    let safeQuery = (query || '').toLowerCase();
+let filtered = portfolioProjects.filter(project =>
+  !safeQuery ||
+  project.title.toLowerCase().includes(safeQuery) ||
+  project.description.toLowerCase().includes(safeQuery)
+);
+
 
     // Jika tidak ada hasil cocok, tampilkan pesan dan tetap render semua project
     if (filtered.length === 0) {
