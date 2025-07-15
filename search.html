@@ -130,11 +130,16 @@
 <div id="lightbox" class="lightbox" onclick="closeLightbox()">
   <div class="lightbox-content" onclick="event.stopPropagation()">
     <button class="lightbox-prev" onclick="prevLightbox()">‹</button>
-    <img id="lightbox-img" class="fade" src="" alt="Preview" />
-    <div id="lightbox-info" class="lightbox-info"></div> <!--  HARUS ADA -->
+
+    <div class="lightbox-img-wrapper">
+      <img id="lightbox-img" src="" alt="Preview" />
+    </div>
+
+    <div id="lightbox-info" class="lightbox-info"></div>
     <button class="lightbox-next" onclick="nextLightbox()">›</button>
   </div>
 </div>
+
 
 
 
