@@ -461,12 +461,13 @@ function displayPortfolioResults(query) {
 let currentGalleryIndex = 0;
 let galleryItems = [];
 let zoomLevel = 1;
+let currentTranslateX = 0;
+let currentTranslateY = 0;
 let isDragging = false;
 let startDragX = 0;
 let startDragY = 0;
-let currentTranslateX = 0;
-let currentTranslateY = 0;
 
+// Tampilkan galeri
 function displaymygalleryResults(query) {
     const resultsContainer = document.getElementById('searchResults');
     if (!resultsContainer) return;
@@ -475,44 +476,32 @@ function displaymygalleryResults(query) {
     galleryGrid.className = 'gallery-grid';
 
     galleryItems = [
-        {
-            src: 'img/gambar1.webp',
-            title: 'Davanico',
-            category: 'Personal foto'
-        },
-        {
-            src: 'img/gambar2.webp',
-            title: 'Poster Digital',
-            category: 'Poster'
-        },
-        {
-            src: 'img/gambar3.webp',
-            title: 'Kegiatan',
-            category: 'Day'
-        },
-        {
-            src: 'img/gambar4.webp',
-            title: 'Feed Sosmed',
-            category: 'Social Media'
-        },
-        {
-            src: 'img/gambar5.webp',
-            title: 'Jalan jalan',
-            category: 'Dokumentasi'
-        },
-        {
-            src: 'img/gambar6.webp',
-            title: 'PraMpls',
-            category: 'TeamWork'
-        }
+        { src: 'img/gambar1.webp', title: 'Davanico', category: 'Personal foto' },
+        { src: 'img/gambar2.webp', title: 'Poster Digital', category: 'Poster' },
+        { src: 'img/gambar3.webp', title: 'Kegiatan', category: 'Day' },
+        { src: 'img/gambar4.webp', title: 'Feed Sosmed', category: 'Social Media' },
+        { src: 'img/gambar5.webp', title: 'Jalan jalan', category: 'Dokumentasi' },
+        { src: 'img/gambar6.webp', title: 'PraMpls', category: 'Teamwork' }
     ];
 
-   galleryGrid.appendChild(galleryDiv);
- });
+    galleryItems.forEach((item, index) => {
+        const galleryDiv = document.createElement('div');
+        galleryDiv.className = 'gallery-item';
+
+        galleryDiv.innerHTML = `
+            <img src="${item.src}" alt="${item.title}" onclick="openLightbox(${index})" />
+            <div class="gallery-info">
+                <div class="gallery-title">${item.title}</div>
+                <div class="gallery-category">${item.category}</div>
+            </div>
+        `;
+        galleryGrid.appendChild(galleryDiv);
+    });
 
     resultsContainer.appendChild(galleryGrid);
 }
 
+// Lightbox
 function openLightbox(index) {
     currentGalleryIndex = index;
     const lightbox = document.getElementById('lightbox');
@@ -528,23 +517,17 @@ function openLightbox(index) {
 
     img.onload = () => {
         const ratio = img.naturalWidth / img.naturalHeight;
-        if (ratio < 1) {
-            img.classList.add('portrait');
-        } else {
-            img.classList.add('landscape');
-        }
+        img.classList.add(ratio < 1 ? 'portrait' : 'landscape');
     };
 
     img.src = item.src;
     img.alt = item.title;
     info.innerHTML = `<strong>${item.title}</strong><br><small>${item.category}</small>`;
-
     lightbox.classList.add('show');
 }
 
 function closeLightbox() {
-    const lightbox = document.getElementById('lightbox');
-    lightbox.classList.remove('show');
+    document.getElementById('lightbox').classList.remove('show');
 }
 
 function nextLightbox() {
@@ -557,87 +540,72 @@ function prevLightbox() {
     openLightbox(currentGalleryIndex);
 }
 
-// Swipe gesture
-let startX = 0;
-let endX = 0;
-
-// Touch drag gesture variables
-let touchStartX = 0;
-let touchStartY = 0;
-let initialTranslateX = 0;
-let initialTranslateY = 0;
-
-
+// Gesture & Zoom
 document.addEventListener('DOMContentLoaded', () => {
-    const lightbox = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
     const wrapper = document.querySelector('.lightbox-img-wrapper');
-    const image = document.getElementById('lightbox-img');
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let initialTranslateX = 0;
+    let initialTranslateY = 0;
 
-    if (wrapper && image) {
-        // Zoom via wheel
-        wrapper.addEventListener('wheel', function (e) {
+    if (wrapper && img) {
+        wrapper.addEventListener('wheel', e => {
             e.preventDefault();
             zoomLevel += e.deltaY * -0.001;
             zoomLevel = Math.min(Math.max(1, zoomLevel), 3);
-            image.style.transform = `scale(${zoomLevel}) translate(${currentTranslateX}px, ${currentTranslateY}px)`;
+            img.style.transform = `scale(${zoomLevel}) translate(${currentTranslateX}px, ${currentTranslateY}px)`;
         });
 
-        // Drag with mouse
-        image.addEventListener('mousedown', e => {
+        img.addEventListener('mousedown', e => {
             if (zoomLevel <= 1) return;
             isDragging = true;
             startDragX = e.clientX - currentTranslateX;
             startDragY = e.clientY - currentTranslateY;
-            image.style.cursor = 'grabbing';
+            img.style.cursor = 'grabbing';
         });
 
         window.addEventListener('mousemove', e => {
             if (!isDragging) return;
             currentTranslateX = e.clientX - startDragX;
             currentTranslateY = e.clientY - startDragY;
-            image.style.transform = `scale(${zoomLevel}) translate(${currentTranslateX}px, ${currentTranslateY}px)`;
+            img.style.transform = `scale(${zoomLevel}) translate(${currentTranslateX}px, ${currentTranslateY}px)`;
         });
 
         window.addEventListener('mouseup', () => {
-            if (isDragging) {
-                isDragging = false;
-                image.style.cursor = 'zoom-in';
-            }
+            isDragging = false;
+            img.style.cursor = 'zoom-in';
         });
 
-        // Touch drag (mobile)
-        image.addEventListener('touchstart', e => {
+        // Touch Drag
+        img.addEventListener('touchstart', e => {
             if (zoomLevel <= 1) return;
-            const touch = e.touches[0];
-            touchStartX = touch.clientX;
-            touchStartY = touch.clientY;
+            const t = e.touches[0];
+            touchStartX = t.clientX;
+            touchStartY = t.clientY;
             initialTranslateX = currentTranslateX;
             initialTranslateY = currentTranslateY;
         });
 
-        image.addEventListener('touchmove', e => {
+        img.addEventListener('touchmove', e => {
             if (zoomLevel <= 1 || e.touches.length !== 1) return;
-            const touch = e.touches[0];
-            const dx = touch.clientX - touchStartX;
-            const dy = touch.clientY - touchStartY;
+            const t = e.touches[0];
+            const dx = t.clientX - touchStartX;
+            const dy = t.clientY - touchStartY;
             currentTranslateX = initialTranslateX + dx;
             currentTranslateY = initialTranslateY + dy;
-            image.style.transform = `scale(${zoomLevel}) translate(${currentTranslateX}px, ${currentTranslateY}px)`;
-        });
-    }
-
-    if (lightbox) {
-        lightbox.addEventListener('touchstart', e => {
-            startX = e.changedTouches[0].screenX;
+            img.style.transform = `scale(${zoomLevel}) translate(${currentTranslateX}px, ${currentTranslateY}px)`;
         });
 
-        lightbox.addEventListener('touchend', e => {
-            endX = e.changedTouches[0].screenX;
-            if (endX < startX - 50) {
-                nextLightbox();
-            } else if (endX > startX + 50) {
-                prevLightbox();
-            }
+        // Swipe gesture untuk lightbox
+        wrapper.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        wrapper.addEventListener('touchend', e => {
+            const endX = e.changedTouches[0].screenX;
+            if (endX < touchStartX - 50) nextLightbox();
+            else if (endX > touchStartX + 50) prevLightbox();
         });
     }
 });
