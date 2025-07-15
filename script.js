@@ -578,6 +578,38 @@ function handleSwipe() {
 }
 
 
+// Zoom level tracking
+let zoomLevel = 1;
+
+document.addEventListener('DOMContentLoaded', () => {
+  const wrapper = document.querySelector('.lightbox-img-wrapper');
+  const image = document.getElementById('lightbox-img');
+
+  wrapper.addEventListener('wheel', function (e) {
+    e.preventDefault();
+    zoomLevel += e.deltaY * -0.001;
+    zoomLevel = Math.min(Math.max(1, zoomLevel), 3); // batas zoom antara 1x dan 3x
+    image.style.transform = `scale(${zoomLevel})`;
+  });
+
+  // Reset zoom saat lightbox dibuka
+  window.openLightbox = function(index) {
+    currentGalleryIndex = index;
+    const lightbox = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    const info = document.getElementById('lightbox-info');
+    const item = galleryItems[index];
+
+    zoomLevel = 1; // reset zoom
+    img.style.transform = `scale(1)`;
+    img.src = item.src;
+    img.alt = item.title;
+    info.innerHTML = `<strong>${item.title}</strong><br><small>${item.category}</small>`;
+
+    lightbox.classList.add('show');
+  };
+});
+
 
 
 
