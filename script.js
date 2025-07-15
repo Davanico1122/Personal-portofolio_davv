@@ -183,32 +183,30 @@ function updateSearchResults(query, tab) {
         resultsContainer.innerHTML = '';
         
         // Generate results based on tab
-        switch (tab) {
-     // Generate results based on tab
-         switch (tab) {
-             case 'all':
-             displayAllResults(query);
-             break;
-             case 'images':
-             displayImageResults(query);
-             break;
-             case 'random':
-             displayRandomProjects(query); //  ini yang penting!
-             break;
-             case 'portfolio':
-             displayPortfolioResults(query);
-             break;
-             case 'gallery':
-             displayMyGallery(); //  Tambahkan ini untuk memanggil galeri!
-             break;
-             case 'about':
-             displayAboutResults(query);
-             break;
-             default:
-             displayAllResults(query);
-       }
-
-    }, 300);
+       //  Panggil fungsi sesuai tab
+    switch (tab) {
+      case 'all':
+        displayAllResults(query);
+        break;
+      case 'images':
+        displayImageResults(query);
+        break;
+      case 'random':
+        displayRandomProjects(query);
+        break;
+      case 'portfolio':
+        displayPortfolioResults(query);
+        break;
+      case 'gallery':
+        displayMyGallery(); // ← ini untuk tab gallery
+        break;
+      case 'about':
+        displayAboutResults(query);
+        break;
+      default:
+        displayAllResults(query);
+    }
+  }, 300);
 }
 
 // Update results info text
