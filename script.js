@@ -196,6 +196,9 @@ function updateSearchResults(query, tab) {
             case 'portfolio':
                 displayPortfolioResults(query);
                 break;
+            case 'gallery':
+                displaymygalleryResults(query);
+                break;
             case 'about':
                 displayAboutResults(query);
                 break;
@@ -447,6 +450,62 @@ function displayPortfolioResults(query) {
 
         resultsContainer.appendChild(resultDiv);
     });
+}
+
+
+
+// Display My Gallery Results
+function displaymygalleryResults(query) {
+    const resultsContainer = document.getElementById('searchResults');
+    if (!resultsContainer) return;
+
+    const galleryGrid = document.createElement('div');
+    galleryGrid.className = 'gallery-grid';
+
+    const galleryItems = [
+        {
+            src: 'img/galeri1.jpg',
+            title: 'Logo Keren',
+            category: 'Logo Design'
+        },
+        {
+            src: 'img/galeri2.jpg',
+            title: 'Poster Event',
+            category: 'Poster'
+        },
+        {
+            src: 'img/galeri3.jpg',
+            title: 'Feed Sosial Media',
+            category: 'Social Media'
+        },
+        {
+            src: 'img/galeri4.jpg',
+            title: 'Mockup Kemasan',
+            category: 'Packaging'
+        },
+        {
+            src: 'img/galeri5.jpg',
+            title: 'Undangan Digital',
+            category: 'UI Design'
+        }
+    ];
+
+    galleryItems.forEach(item => {
+        const galleryDiv = document.createElement('div');
+        galleryDiv.className = 'gallery-item';
+
+        galleryDiv.innerHTML = `
+            <img src="${item.src}" alt="${item.title}" />
+            <div class="gallery-info">
+                <div class="gallery-title">${item.title}</div>
+                <div class="gallery-category">${item.category}</div>
+            </div>
+        `;
+
+        galleryGrid.appendChild(galleryDiv);
+    });
+
+    resultsContainer.appendChild(galleryGrid);
 }
 
 
