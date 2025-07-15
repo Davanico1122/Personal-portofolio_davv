@@ -198,7 +198,10 @@ function updateSearchResults(query, tab) {
                 break;
             case 'about':
                 displayAboutResults(query);
-                break;
+                 break;
+             case 'gallery':
+             displayMyGallery(); //  Tambahkan ini untuk memanggil galeri!
+                 break;
             default:
                 displayAllResults(query);
         }
@@ -476,6 +479,72 @@ function displayPortfolioResults(query) {
     });
 }
 
+/ ========================
+// FINAL JS UNTUK MY GALLERY (BERSIH, TERPISAH DARI IMAGES)
+// ========================
+
+// Array untuk menyimpan data galeri
+let galleryItems = [
+  { src: 'img/gambar1.jpg', title: 'Ekskul', category: 'Dokumentasi' },
+  { src: 'img/gambar2.jpg', title: 'Acara MPLS', category: 'Panitia' },
+  { src: 'img/gambar3.jpg', title: 'Kegiatan OSIS', category: 'Organisasi' },
+  { src: 'img/gambar4.jpg', title: 'Pentas Seni', category: 'Kegiatan Sekolah' },
+  { src: 'img/gambar5.jpg', title: 'Kelas X IPA 1', category: 'Kelas' }
+   { src: 'img/gambar6.jpg', title: 'Pra Mpls', category: 'Team Work' }
+
+];
+let currentIndex = 0;
+
+// Fungsi untuk menampilkan galeri
+function displayMyGallery() {
+  const container = document.getElementById('searchResults');
+  if (!container) return;
+  container.innerHTML = '';
+
+  // Looping setiap item galeri dan buat HTML-nya
+  galleryItems.forEach((item, index) => {
+    const div = document.createElement('div');
+    div.className = 'gallery-item';
+    div.innerHTML = `
+      <img src="${item.src}" alt="${item.title}" onclick="openLightbox(${index})">
+      <div class="gallery-info">
+        <strong>${item.title}</strong><br>
+        <small>${item.category}</small>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+// Fungsi membuka lightbox saat gambar diklik
+function openLightbox(index) {
+  currentIndex = index;
+  const item = galleryItems[index];
+  document.getElementById('lightbox-img').src = item.src;
+  document.getElementById('lightbox-img').alt = item.title;
+  document.getElementById('lightbox-info').innerHTML = `
+    <strong>${item.title}</strong><br>
+    <small>${item.category}</small>
+  `;
+  document.getElementById('lightbox').classList.add('show');
+}
+
+// Tutup lightbox
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('show');
+}
+
+// Gambar selanjutnya
+function nextLightbox() {
+  currentIndex = (currentIndex + 1) % galleryItems.length;
+  openLightbox(currentIndex);
+}
+
+// Gambar sebelumnya
+function prevLightbox() {
+  currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+  openLightbox(currentIndex);
+}
 
 
 // Display about results
