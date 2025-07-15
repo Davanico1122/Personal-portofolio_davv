@@ -457,7 +457,8 @@ function displayPortfolioResults(query) {
 
 
 
-// Display My Gallery Results
+
+// Display My Gallery Results - Final Version with Zoom, Swipe, Drag, and Responsive
 let currentGalleryIndex = 0;
 let galleryItems = [];
 let zoomLevel = 1;
@@ -467,7 +468,6 @@ let isDragging = false;
 let startDragX = 0;
 let startDragY = 0;
 
-// Tampilkan galeri
 function displaymygalleryResults(query) {
     const resultsContainer = document.getElementById('searchResults');
     if (!resultsContainer) return;
@@ -501,7 +501,6 @@ function displaymygalleryResults(query) {
     resultsContainer.appendChild(galleryGrid);
 }
 
-// Lightbox
 function openLightbox(index) {
     currentGalleryIndex = index;
     const lightbox = document.getElementById('lightbox');
@@ -540,7 +539,6 @@ function prevLightbox() {
     openLightbox(currentGalleryIndex);
 }
 
-// Gesture & Zoom
 document.addEventListener('DOMContentLoaded', () => {
     const img = document.getElementById('lightbox-img');
     const wrapper = document.querySelector('.lightbox-img-wrapper');
@@ -577,7 +575,6 @@ document.addEventListener('DOMContentLoaded', () => {
             img.style.cursor = 'zoom-in';
         });
 
-        // Touch Drag
         img.addEventListener('touchstart', e => {
             if (zoomLevel <= 1) return;
             const t = e.touches[0];
@@ -597,7 +594,6 @@ document.addEventListener('DOMContentLoaded', () => {
             img.style.transform = `scale(${zoomLevel}) translate(${currentTranslateX}px, ${currentTranslateY}px)`;
         });
 
-        // Swipe gesture untuk lightbox
         wrapper.addEventListener('touchstart', e => {
             touchStartX = e.changedTouches[0].screenX;
         });
@@ -609,6 +605,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+
+
 
 
 
