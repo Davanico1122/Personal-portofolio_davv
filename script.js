@@ -284,71 +284,29 @@ function displayAllResults(query) {
 }
 
 // Display image results
+let currentImageIndex = 0;
+let imageItems = [];
+
 function displayImageResults(query) {
     const resultsContainer = document.getElementById('searchResults');
     if (!resultsContainer) return;
-    
+
     const imagesGrid = document.createElement('div');
     imagesGrid.className = 'images-grid';
-    
-    const images = [
-        {
-            src: 'img/poster-promosi.png',
-            title: 'Poster Promosi',
-            source: 'davanico.com',
-            link: '#'
-        },
-        {
-            src: 'img/logo-sederhana.png',
-            title: 'Logo Sederhana',
-            source: 'davanico.com',
-            link: '#'
-        },
-        {
-            src: 'img/konten-sosmed.png',
-            title: 'Konten Sosial Media',
-            source: 'davanico.com',
-            link: '#'
-        },
-        {
-            src: 'https://via.placeholder.com/300x200/fbbc05/ffffff?text=Web+Design',
-            title: 'Undangan Digital',
-            source: 'davanico.com',
-            link: '#'
-        },
-        {
-            src: 'https://via.placeholder.com/300x200/4285f4/ffffff?text=UI+Components',
-            title: 'Banner & Flyer',
-            source: 'davanico.com',
-            link: '#'
-        },
-        {
-            src: 'https://via.placeholder.com/300x200/ea4335/ffffff?text=Logo+Design',
-            title: 'Template Presentasi',
-            source: 'davanico.com',
-            link: '#'
-        },
-        {
-            src: 'https://via.placeholder.com/300x200/9c27b0/ffffff?text=Social+Dashboard',
-            title: 'Social Media Dashboard',
-            source: 'davanico.com',
-            link: '#'
-        },
-        {
-            src: 'https://via.placeholder.com/300x200/1a73e8/ffffff?text=FinTech+App',
-            title: 'FinTech Mobile Banking',
-            source: 'davanico.com',
-            link: '#'
-        },
-        {
-            src: 'https://via.placeholder.com/300x200/ff6f00/ffffff?text=E-Learning',
-            title: 'E-Learning Platform',
-            source: 'davanico.com',
-            link: '#'
-        }
+
+    imageItems = [
+        { src: 'img/poster-promosi.png', title: 'Poster Promosi', source: 'davanico.com' },
+        { src: 'img/logo-sederhana.png', title: 'Logo Sederhana', source: 'davanico.com' },
+        { src: 'img/konten-sosmed.png', title: 'Konten Sosial Media', source: 'davanico.com' },
+        { src: 'https://via.placeholder.com/300x200/fbbc05/ffffff?text=Web+Design', title: 'Undangan Digital', source: 'davanico.com' },
+        { src: 'https://via.placeholder.com/300x200/4285f4/ffffff?text=UI+Components', title: 'Banner & Flyer', source: 'davanico.com' },
+        { src: 'https://via.placeholder.com/300x200/ea4335/ffffff?text=Logo+Design', title: 'Template Presentasi', source: 'davanico.com' },
+        { src: 'https://via.placeholder.com/300x200/9c27b0/ffffff?text=Social+Dashboard', title: 'Social Media Dashboard', source: 'davanico.com' },
+        { src: 'https://via.placeholder.com/300x200/1a73e8/ffffff?text=FinTech+App', title: 'FinTech Mobile Banking', source: 'davanico.com' },
+        { src: 'https://via.placeholder.com/300x200/ff6f00/ffffff?text=E-Learning', title: 'E-Learning Platform', source: 'davanico.com' }
     ];
-    
-    images.forEach(image => {
+
+    imageItems.forEach((image, index) => {
         const imageItem = document.createElement('div');
         imageItem.className = 'image-item';
         imageItem.innerHTML = `
@@ -358,11 +316,35 @@ function displayImageResults(query) {
                 <div class="image-source">${image.source}</div>
             </div>
         `;
-        imageItem.addEventListener('click', () => handleImageClick(image.link));
+        imageItem.addEventListener('click', () => openLightboxImage(index));
         imagesGrid.appendChild(imageItem);
     });
-    
+
     resultsContainer.appendChild(imagesGrid);
+}
+
+function openLightboxImage(index) {
+    currentImageIndex = index;
+    const item = imageItems[index];
+    document.getElementById('lightbox-img').src = item.src;
+    document.getElementById('lightbox-info').innerHTML = `
+        <strong>${item.title}</strong><br><small>${item.source}</small>
+    `;
+    document.getElementById('lightbox').classList.add('show');
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('show');
+}
+
+function nextLightbox() {
+    currentImageIndex = (currentImageIndex + 1) % imageItems.length;
+    openLightboxImage(currentImageIndex);
+}
+
+function prevLightbox() {
+    currentImageIndex = (currentImageIndex - 1 + imageItems.length) % imageItems.length;
+    openLightboxImage(currentImageIndex);
 }
 
 // Display design results
