@@ -458,7 +458,6 @@ function displayPortfolioResults(query) {
 
 
 // Display My Gallery Results
-// Display My Gallery Results
 let currentGalleryIndex = 0;
 let galleryItems = [];
 let zoomLevel = 1;
@@ -508,20 +507,8 @@ function displaymygalleryResults(query) {
         }
     ];
 
-   galleryItems.forEach((item, index) => {
-        const galleryDiv = document.createElement('div');
-        galleryDiv.className = 'gallery-item';
-
-        galleryDiv.innerHTML = `
-            <img src="${item.src}" alt="${item.title}" onclick="openLightbox(${index})" />
-            <div class="gallery-info">
-                <div class="gallery-title">${item.title}</div>
-                <div class="gallery-category">${item.category}</div>
-            </div>
-        `;
-
-        galleryGrid.appendChild(galleryDiv);
-    });
+   galleryGrid.appendChild(galleryDiv);
+ });
 
     resultsContainer.appendChild(galleryGrid);
 }
@@ -574,12 +561,20 @@ function prevLightbox() {
 let startX = 0;
 let endX = 0;
 
+// Touch drag gesture variables
+let touchStartX = 0;
+let touchStartY = 0;
+let initialTranslateX = 0;
+let initialTranslateY = 0;
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const lightbox = document.getElementById('lightbox');
     const wrapper = document.querySelector('.lightbox-img-wrapper');
     const image = document.getElementById('lightbox-img');
 
     if (wrapper && image) {
+        // Zoom via wheel
         wrapper.addEventListener('wheel', function (e) {
             e.preventDefault();
             zoomLevel += e.deltaY * -0.001;
@@ -587,7 +582,7 @@ document.addEventListener('DOMContentLoaded', () => {
             image.style.transform = `scale(${zoomLevel}) translate(${currentTranslateX}px, ${currentTranslateY}px)`;
         });
 
-        // Drag to move image when zoomed
+        // Drag with mouse
         image.addEventListener('mousedown', e => {
             if (zoomLevel <= 1) return;
             isDragging = true;
@@ -608,6 +603,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 isDragging = false;
                 image.style.cursor = 'zoom-in';
             }
+        });
+
+        // Touch drag (mobile)
+        image.addEventListener('touchstart', e => {
+            if (zoomLevel <= 1) return;
+            const touch = e.touches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+            initialTranslateX = currentTranslateX;
+            initialTranslateY = currentTranslateY;
+        });
+
+        image.addEventListener('touchmove', e => {
+            if (zoomLevel <= 1 || e.touches.length !== 1) return;
+            const touch = e.touches[0];
+            const dx = touch.clientX - touchStartX;
+            const dy = touch.clientY - touchStartY;
+            currentTranslateX = initialTranslateX + dx;
+            currentTranslateY = initialTranslateY + dy;
+            image.style.transform = `scale(${zoomLevel}) translate(${currentTranslateX}px, ${currentTranslateY}px)`;
         });
     }
 
