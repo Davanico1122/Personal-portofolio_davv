@@ -552,7 +552,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     image.addEventListener('mousedown', function (e) {
-      if (e.button !== 0) return;
+      if (e.button !== 0) return; // hanya klik kiri
       isDragging = true;
       startX = e.clientX;
       startY = e.clientY;
@@ -578,14 +578,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // swipe support mobile
+  // Swipe support for mobile
   const lightbox = document.getElementById('lightbox');
   let touchStartX = 0;
 
   if (lightbox) {
     lightbox.addEventListener('touchstart', e => {
-      touchStartX = e.changedTouches[0].screenX;
+      if (e.touches.length === 1) {
+        touchStartX = e.changedTouches[0].screenX;
+      }
     });
+
     lightbox.addEventListener('touchend', e => {
       const touchEndX = e.changedTouches[0].screenX;
       if (touchEndX < touchStartX - 50) nextLightbox();
