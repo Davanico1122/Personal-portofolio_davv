@@ -465,32 +465,32 @@ function displaymygalleryResults(query) {
 
     const galleryItems = [
         {
-            src: 'img/foto1.jpg',
+            src: 'img/gambar1.webp',
             title: 'Davanico with Friends',
             category: 'Personal Moment'
         },
         {
-            src: 'img/foto2.jpg',
+            src: 'img/foto2.webp',
             title: 'Graduation Day',
             category: 'Milestone'
         },
         {
-            src: 'img/foto3.jpg',
+            src: 'img/foto3.webp',
             title: 'Behind The Scene',
             category: 'Creative Work'
         },
         {
-            src: 'img/foto4.jpg',
+            src: 'img/foto4.webp',
             title: 'My Workspace',
             category: 'Everyday Life'
         },
         {
-            src: 'img/foto5.jpg',
+            src: 'img/foto5.webp',
             title: 'Outdoor Shooting',
             category: 'Photography'
         },
         {
-        src: 'img/mpls6.jpg',
+        src: 'img/mpls6.webp',
         title: 'pra MPLS',
         category: 'Kegiatan Sekolah'
         }
