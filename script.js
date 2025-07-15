@@ -496,7 +496,7 @@ function displaymygalleryResults(query) {
         },
         {
             src: 'img/gambar6.webp',
-            title: 'prampls',
+            title: 'Kolaborasi & Koordinasi Lapangan — Pra MPLS 2025',
             category: 'TeamWork'
         }
     ];
