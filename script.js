@@ -470,34 +470,34 @@ function displaymygalleryResults(query) {
 
     galleryItems = [
         {
-            src: 'img/foto1.webp',
+            src: 'img/gambar1.webp',
             title: 'Davanico with Friends',
             category: 'Personal Moment'
         },
         {
-            src: 'img/foto2.webp',
+            src: 'img/gambar2.webp',
             title: 'Graduation Day',
             category: 'Milestone'
         },
         {
-            src: 'img/foto3.webp',
+            src: 'img/gambar3.webp',
             title: 'Behind The Scene',
             category: 'Creative Work'
         },
         {
-            src: 'img/foto4.webp',
+            src: 'img/gambar4.webp',
             title: 'My Workspace',
             category: 'Everyday Life'
         },
         {
-            src: 'img/foto5.webp',
+            src: 'img/gambar5.webp',
             title: 'Outdoor Shooting',
             category: 'Photography'
         },
         {
-            src: 'img/foto6.webp',
-            title: 'Exploring Nature',
-            category: 'Adventure'
+            src: 'img/gambar6.webp',
+            title: 'prampls',
+            category: 'TeamWork'
         }
     ];
 
