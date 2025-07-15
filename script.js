@@ -472,7 +472,7 @@ function displaymygalleryResults(query) {
         {
             src: 'img/gambar1.webp',
             title: 'Davanico',
-            category: 'Personal Moment'
+            category: 'personal Moment'
         },
         {
             src: 'img/gambar2.webp',
@@ -480,7 +480,7 @@ function displaymygalleryResults(query) {
             category: 'Milestone'
         },
         {
-            src: 'img/gambar3.webp',
+            src: 'img/gambar3',
             title: 'Behind The Scene',
             category: 'Creative Work'
         },
