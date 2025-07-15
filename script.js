@@ -459,14 +459,11 @@ function displayPortfolioResults(query) {
 
 
 // ========================
-//  FINAL JS (Lightbox Drag Zoom Responsive with Manual Drag and Mobile Fix)
+//  FINAL JS (Lightbox Without Zoom/Drag)
 // ========================
 
 let currentGalleryIndex = 0;
 let galleryItems = [];
-let zoomLevel = 1;
-let initialX = 0;
-let initialY = 0;
 
 function displaymygalleryResults(query) {
   const resultsContainer = document.getElementById('searchResults');
@@ -507,7 +504,6 @@ function openLightbox(index) {
   const info = document.getElementById('lightbox-info');
   const item = galleryItems[index];
 
-  resetZoom();
   img.src = item.src;
   img.alt = item.title;
   info.innerHTML = `<strong>${item.title}</strong><br><small>${item.category}</small>`;
@@ -528,119 +524,18 @@ function prevLightbox() {
   openLightbox(currentGalleryIndex);
 }
 
-function resetZoom() {
-  zoomLevel = 1;
-  initialX = 0;
-  initialY = 0;
-  const img = document.getElementById('lightbox-img');
-  if (img) img.style.transform = 'scale(1) translate(0px, 0px)';
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-  const wrapper = document.querySelector('.lightbox-img-wrapper');
-  const image = document.getElementById('lightbox-img');
-  let isDragging = false;
-  let startX = 0;
-  let startY = 0;
-  let pinchStartDistance = 0;
-  let pinchStartZoom = 1;
-
-  if (wrapper && image) {
-    wrapper.addEventListener('wheel', function (e) {
-      e.preventDefault();
-      zoomLevel += e.deltaY * -0.001;
-      zoomLevel = Math.min(Math.max(1, zoomLevel), 3);
-      image.style.transform = `scale(${zoomLevel}) translate(${initialX}px, ${initialY}px)`;
-    });
-
-    image.addEventListener('mousedown', function (e) {
-      if (e.button !== 0) return;
-      isDragging = true;
-      startX = e.clientX;
-      startY = e.clientY;
-      image.style.cursor = 'grabbing';
-    });
-
-    window.addEventListener('mousemove', function (e) {
-      if (!isDragging) return;
-      const dx = (e.clientX - startX) / zoomLevel;
-      const dy = (e.clientY - startY) / zoomLevel;
-      initialX += dx;
-      initialY += dy;
-      image.style.transform = `scale(${zoomLevel}) translate(${initialX}px, ${initialY}px)`;
-      startX = e.clientX;
-      startY = e.clientY;
-    });
-
-    window.addEventListener('mouseup', function () {
-      if (isDragging) {
-        isDragging = false;
-        image.style.cursor = 'grab';
-      }
-    });
-
-    // Mobile pinch zoom
-    wrapper.addEventListener('touchstart', function (e) {
-      if (e.touches.length === 2) {
-        pinchStartDistance = Math.hypot(
-          e.touches[0].clientX - e.touches[1].clientX,
-          e.touches[0].clientY - e.touches[1].clientY
-        );
-        pinchStartZoom = zoomLevel;
-      } else if (e.touches.length === 1) {
-        isDragging = true;
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-      }
-    });
-
-    wrapper.addEventListener('touchmove', function (e) {
-      if (e.touches.length === 2) {
-        const pinchCurrentDistance = Math.hypot(
-          e.touches[0].clientX - e.touches[1].clientX,
-          e.touches[0].clientY - e.touches[1].clientY
-        );
-        zoomLevel = Math.min(Math.max(1, pinchStartZoom * (pinchCurrentDistance / pinchStartDistance)), 3);
-        image.style.transform = `scale(${zoomLevel}) translate(${initialX}px, ${initialY}px)`;
-      } else if (isDragging && e.touches.length === 1) {
-        const dx = (e.touches[0].clientX - startX) / zoomLevel;
-        const dy = (e.touches[0].clientY - startY) / zoomLevel;
-        initialX += dx;
-        initialY += dy;
-        image.style.transform = `scale(${zoomLevel}) translate(${initialX}px, ${initialY}px)`;
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-      }
-    });
-
-    window.addEventListener('touchend', function (e) {
-      if (e.touches.length === 0) {
-        isDragging = false;
-      }
-    });
-  }
-
-  // swipe support mobile (disable during pinch)
   const lightbox = document.getElementById('lightbox');
   let touchStartX = 0;
-  let swiping = false;
 
   if (lightbox) {
     lightbox.addEventListener('touchstart', e => {
-      if (e.touches.length === 1) {
-        swiping = true;
-        touchStartX = e.touches[0].screenX;
-      } else {
-        swiping = false;
-      }
+      touchStartX = e.changedTouches[0].screenX;
     });
-
     lightbox.addEventListener('touchend', e => {
-      if (!swiping) return;
       const touchEndX = e.changedTouches[0].screenX;
       if (touchEndX < touchStartX - 50) nextLightbox();
       else if (touchEndX > touchStartX + 50) prevLightbox();
-      swiping = false;
     });
   }
 });
