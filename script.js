@@ -302,18 +302,24 @@ function displayMyGallery() {
   if (!container) return;
   container.innerHTML = '';
 
+  const galleryGrid = document.createElement('div');
+  galleryGrid.className = 'images-grid';
+
   galleryItems.forEach((item, index) => {
-  const div = document.createElement('div');
-  div.className = 'gallery-item';
-  div.innerHTML = `
-    <img src="${item.src}" alt="${item.title}" onclick="openLightbox(${index})">
-    <div class="gallery-info">
-      <div class="gallery-title">${item.title}</div>
-      <div class="gallery-category">${item.category}</div>
-    </div>
-  `;
-  galleryGrid.appendChild(div);
-});
+    const div = document.createElement('div');
+    div.className = 'image-item';
+    div.innerHTML = `
+      <img src="${item.src}" alt="${item.title}" onclick="openLightbox(${index}, 'gallery')">
+      <div class="image-info">
+        <div class="image-title">${item.title}</div>
+        <div class="image-source">${item.category}</div>
+      </div>
+    `;
+    galleryGrid.appendChild(div);
+  });
+
+  container.appendChild(galleryGrid);
+}
 
 // === Images Tab ===
 let imageItems = [];
@@ -322,6 +328,8 @@ let currentImageIndex = 0;
 function displayImageResults(query) {
   const resultsContainer = document.getElementById('searchResults');
   if (!resultsContainer) return;
+  resultsContainer.innerHTML = '';
+
   const imagesGrid = document.createElement('div');
   imagesGrid.className = 'images-grid';
 
@@ -349,10 +357,11 @@ function displayImageResults(query) {
     `;
     imagesGrid.appendChild(imageItem);
   });
+
   resultsContainer.appendChild(imagesGrid);
 }
 
-// === Lightbox General ===
+// === Lightbox ===
 function openLightbox(index, source) {
   const img = document.getElementById('lightbox-img');
   const info = document.getElementById('lightbox-info');
@@ -382,31 +391,28 @@ function closeLightbox() {
 }
 
 function nextLightbox() {
-  const lightbox = document.getElementById('lightbox');
-  if (!lightbox.classList.contains('show')) return;
-
-  if (imageItems.length && document.getElementById('lightbox-img').alt === imageItems[currentImageIndex].title) {
+  const img = document.getElementById('lightbox-img');
+  if (img.alt === imageItems[currentImageIndex]?.title) {
     currentImageIndex = (currentImageIndex + 1) % imageItems.length;
     openLightbox(currentImageIndex, 'images');
-  } else if (galleryItems.length) {
+  } else {
     currentIndex = (currentIndex + 1) % galleryItems.length;
     openLightbox(currentIndex, 'gallery');
   }
 }
 
 function prevLightbox() {
-  const lightbox = document.getElementById('lightbox');
-  if (!lightbox.classList.contains('show')) return;
-
-  if (imageItems.length && document.getElementById('lightbox-img').alt === imageItems[currentImageIndex].title) {
+  const img = document.getElementById('lightbox-img');
+  if (img.alt === imageItems[currentImageIndex]?.title) {
     currentImageIndex = (currentImageIndex - 1 + imageItems.length) % imageItems.length;
     openLightbox(currentImageIndex, 'images');
-  } else if (galleryItems.length) {
+  } else {
     currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
     openLightbox(currentIndex, 'gallery');
   }
 }
 
+// === Swipe Gesture ===
 document.addEventListener('DOMContentLoaded', () => {
   const lightbox = document.getElementById('lightbox');
   let touchStartX = 0;
@@ -422,7 +428,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-
 
 // Display design results
 function displayRandomProjects() {
