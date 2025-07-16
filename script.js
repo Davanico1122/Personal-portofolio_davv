@@ -288,12 +288,12 @@ function displayAllResults(query) {
 
 // === My Gallery ===
 let galleryItems = [
-  { src: 'img/sample.png', title: 'Davanico', category: 'Personal moment' },
+  { src: 'img/gambar1.webp', title: 'Davanico', category: 'Personal moment' },
   { src: 'img/sample.png', title: 'jalan jalan', category: 'Day' },
   { src: 'img/sample.png', title: 'Kegiatan OSIS', category: 'Organisasi' },
   { src: 'img/sample.png', title: 'Pentas Seni', category: 'Kegiatan Sekolah' },
   { src: 'img/sample.png', title: 'KELAS XI DKV', category: 'Kelas' },
-  { src: 'img/sample.png', title: 'Pra Mpls', category: 'Team Work' }
+  { src: 'img/gambar6.webp', title: 'Pra Mpls', category: 'Team Work' }
 ];
 let currentIndex = 0;
 
