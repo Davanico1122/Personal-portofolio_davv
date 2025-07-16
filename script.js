@@ -303,18 +303,17 @@ function displayMyGallery() {
   container.innerHTML = '';
 
   galleryItems.forEach((item, index) => {
-    const div = document.createElement('div');
-    div.className = 'gallery-item';
-    div.innerHTML = `
-      <img src="${item.src}" alt="${item.title}" onclick="openLightbox(${index}, 'gallery')">
-      <div class="gallery-info">
-        <strong>${item.title}</strong><br>
-        <small>${item.category}</small>
-      </div>
-    `;
-    container.appendChild(div);
-  });
-}
+  const div = document.createElement('div');
+  div.className = 'gallery-item';
+  div.innerHTML = `
+    <img src="${item.src}" alt="${item.title}" onclick="openLightbox(${index})">
+    <div class="gallery-info">
+      <div class="gallery-title">${item.title}</div>
+      <div class="gallery-category">${item.category}</div>
+    </div>
+  `;
+  galleryGrid.appendChild(div);
+});
 
 // === Images Tab ===
 let imageItems = [];
