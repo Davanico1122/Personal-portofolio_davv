@@ -290,7 +290,7 @@ function displayAllResults(query) {
 let galleryItems = [
   { src: 'img/gambar1.webp', title: 'Davanico', category: 'Personal moment' },
   { src: 'img/sample.png', title: 'jalan jalan', category: 'Day' },
-  { src: 'img/sample.png', title: 'Kegiatan OSIS', category: 'Organisasi' },
+  { src: 'img/sample.png', title: 'Kegiatan', category: 'kegiatan' },
   { src: 'img/sample.png', title: 'Pentas Seni', category: 'Kegiatan Sekolah' },
   { src: 'img/sample.png', title: 'KELAS XI DKV', category: 'Kelas' },
   { src: 'img/gambar6.webp', title: 'Pra Mpls', category: 'Team Work' }
@@ -337,12 +337,12 @@ function displayImageResults(query) {
     { src: 'img/poster-promosi.png', title: 'Poster Promosi', source: 'davanico.com' },
     { src: 'img/logo-sederhana.png', title: 'Logo Sederhana', source: 'davanico.com' },
     { src: 'img/konten-sosmed.png', title: 'Konten Sosial Media', source: 'davanico.com' },
-    { src: 'https://via.placeholder.com/300x200/fbbc05/ffffff?text=Web+Design', title: 'Undangan Digital', source: 'davanico.com' },
-    { src: 'https://via.placeholder.com/300x200/4285f4/ffffff?text=UI+Components', title: 'Banner & Flyer', source: 'davanico.com' },
-    { src: 'https://via.placeholder.com/300x200/ea4335/ffffff?text=Logo+Design', title: 'Template Presentasi', source: 'davanico.com' },
-    { src: 'https://via.placeholder.com/300x200/9c27b0/ffffff?text=Social+Dashboard', title: 'Social Media Dashboard', source: 'davanico.com' },
-    { src: 'https://via.placeholder.com/300x200/1a73e8/ffffff?text=FinTech+App', title: 'FinTech Mobile Banking', source: 'davanico.com' },
-    { src: 'https://via.placeholder.com/300x200/ff6f00/ffffff?text=E-Learning', title: 'E-Learning Platform', source: 'davanico.com' }
+    { src: 'img/sample.png', title: 'Undangan Digital', source: 'davanico.com' },
+    { src: 'img/sample.png', title: 'Banner & Flyer', source: 'davanico.com' },
+    { src: 'img/sample.png', title: 'Template Presentasi', source: 'davanico.com' },
+    { src: 'img/sample.png', title: 'Social Media Dashboard', source: 'davanico.com' },
+    { src: 'img/sample.png', title: 'FinTech Mobile Banking', source: 'davanico.com' },
+    { src: 'img/sample.png', title: 'E-Learning Platform', source: 'davanico.com' }
   ];
 
   imageItems.forEach((image, index) => {
