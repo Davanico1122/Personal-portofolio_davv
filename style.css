@@ -658,59 +658,64 @@ html, body {
 }
 
 
-/* === My Gallery Tab === */
+/* === My Gallery Grid Style (Google Images Style) === */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 16px;
-  margin-top: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
 }
 
 .gallery-item {
-  cursor: pointer;
+  background: #fff;
   border-radius: 8px;
   overflow: hidden;
-  background: #fff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .gallery-item:hover {
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
 .gallery-item img {
   width: 100%;
   height: 140px;
-  object-fit: cover;
+  object-fit: cover; /* Penting agar potrait dan landscape tetap rapi */
   display: block;
+  border-bottom: 1px solid #eee;
 }
 
 .gallery-info {
-  padding: 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+  line-height: 1.4;
 }
 
 .gallery-info strong {
-  font-size: 14px;
+  display: block;
   color: #202124;
-  display: block;
-  margin-bottom: 4px;
-}
-
-.gallery-info small {
-  font-size: 12px;
-  color: #70757a;
-  display: block;
+  font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* === Responsive for My Gallery === */
+.gallery-info small {
+  color: #70757a;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* === Responsive Grid === */
 @media (max-width: 768px) {
   .gallery-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   }
 
   .gallery-item img {
@@ -718,13 +723,14 @@ html, body {
   }
 
   .gallery-info strong {
-    font-size: 13px;
+    font-size: 12.5px;
   }
 
   .gallery-info small {
     font-size: 11px;
   }
 }
+
 
 
 /* About Me Section Styles */
