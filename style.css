@@ -658,63 +658,67 @@ html, body {
 }
 
 
-/* === Grid Layout untuk My Gallery === */
+/* === My Gallery Tab Style === */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 16px;
-  padding: 20px;
+  margin-top: 16px;
 }
 
-/* === Setiap Item Galeri === */
 .gallery-item {
   background: #fff;
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   transition: transform 0.2s ease;
   cursor: pointer;
 }
 
 .gallery-item:hover {
-  transform: translateY(-4px);
+  transform: scale(1.02);
 }
 
-/* === Gambar === */
 .gallery-item img {
   width: 100%;
-  height: 140px;
+  height: 150px;
   object-fit: cover;
   display: block;
+  background: #f2f2f2;
 }
 
-/* === Info Teks di Bawah Gambar === */
+/* === Info (judul & kategori) === */
 .gallery-info {
-  padding: 10px;
-  text-align: center;
+  padding: 8px;
+  background: #fff;
 }
 
 .gallery-info strong {
   display: block;
   font-size: 14px;
+  color: #202124;
   margin-bottom: 4px;
-  color: #222;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .gallery-info small {
-  color: #666;
   font-size: 12px;
+  color: #70757a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* === Responsif di HP === */
+/* === Responsif di HP (Potrait/Landscape) === */
 @media (max-width: 768px) {
   .gallery-grid {
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
   }
 
   .gallery-item img {
-    height: 100px;
+    height: 120px;
   }
 
   .gallery-info strong {
@@ -725,6 +729,7 @@ html, body {
     font-size: 11px;
   }
 }
+
 
 
 /* About Me Section Styles */
