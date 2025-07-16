@@ -282,87 +282,148 @@ function displayAllResults(query) {
     });
 }
 
-// Display image results
-function displayImageResults(query) {
-    const resultsContainer = document.getElementById('searchResults');
-    if (!resultsContainer) return;
-    
-    const imagesGrid = document.createElement('div');
-    imagesGrid.className = 'images-grid';
-    
-    const images = [
-        {
-            src: 'img/poster-promosi.png',
-            title: 'Poster Promosi',
-            source: 'davanico.com',
-            link: '#'
-        },
-        {
-            src: 'img/logo-sederhana.png',
-            title: 'Logo Sederhana',
-            source: 'davanico.com',
-            link: '#'
-        },
-        {
-            src: 'img/konten-sosmed.png',
-            title: 'Konten Sosial Media',
-            source: 'davanico.com',
-            link: '#'
-        },
-        {
-            src: 'https://via.placeholder.com/300x200/fbbc05/ffffff?text=Web+Design',
-            title: 'Undangan Digital',
-            source: 'davanico.com',
-            link: '#'
-        },
-        {
-            src: 'https://via.placeholder.com/300x200/4285f4/ffffff?text=UI+Components',
-            title: 'Banner & Flyer',
-            source: 'davanico.com',
-            link: '#'
-        },
-        {
-            src: 'https://via.placeholder.com/300x200/ea4335/ffffff?text=Logo+Design',
-            title: 'Template Presentasi',
-            source: 'davanico.com',
-            link: '#'
-        },
-        {
-            src: 'https://via.placeholder.com/300x200/9c27b0/ffffff?text=Social+Dashboard',
-            title: 'Social Media Dashboard',
-            source: 'davanico.com',
-            link: '#'
-        },
-        {
-            src: 'https://via.placeholder.com/300x200/1a73e8/ffffff?text=FinTech+App',
-            title: 'FinTech Mobile Banking',
-            source: 'davanico.com',
-            link: '#'
-        },
-        {
-            src: 'https://via.placeholder.com/300x200/ff6f00/ffffff?text=E-Learning',
-            title: 'E-Learning Platform',
-            source: 'davanico.com',
-            link: '#'
-        }
-    ];
-    
-    images.forEach(image => {
-        const imageItem = document.createElement('div');
-        imageItem.className = 'image-item';
-        imageItem.innerHTML = `
-            <img src="${image.src}" alt="${image.title}">
-            <div class="image-info">
-                <div class="image-title">${image.title}</div>
-                <div class="image-source">${image.source}</div>
-            </div>
-        `;
-        imageItem.addEventListener('click', () => handleImageClick(image.link));
-        imagesGrid.appendChild(imageItem);
-    });
-    
-    resultsContainer.appendChild(imagesGrid);
+// ========================
+// FINAL JS UNTUK MY GALLERY & IMAGES PREVIEW
+// ========================
+
+// === My Gallery ===
+let galleryItems = [
+  { src: 'img/gambar1.jpg', title: 'Ekskul', category: 'Dokumentasi' },
+  { src: 'img/gambar2.jpg', title: 'Acara MPLS', category: 'Panitia' },
+  { src: 'img/gambar3.jpg', title: 'Kegiatan OSIS', category: 'Organisasi' },
+  { src: 'img/gambar4.jpg', title: 'Pentas Seni', category: 'Kegiatan Sekolah' },
+  { src: 'img/gambar5.jpg', title: 'Kelas X IPA 1', category: 'Kelas' },
+  { src: 'img/gambar6.jpg', title: 'Pra Mpls', category: 'Team Work' }
+];
+let currentIndex = 0;
+
+function displayMyGallery() {
+  const container = document.getElementById('searchResults');
+  if (!container) return;
+  container.innerHTML = '';
+
+  galleryItems.forEach((item, index) => {
+    const div = document.createElement('div');
+    div.className = 'gallery-item';
+    div.innerHTML = `
+      <img src="${item.src}" alt="${item.title}" onclick="openLightbox(${index}, 'gallery')">
+      <div class="gallery-info">
+        <strong>${item.title}</strong><br>
+        <small>${item.category}</small>
+      </div>
+    `;
+    container.appendChild(div);
+  });
 }
+
+// === Images Tab ===
+let imageItems = [];
+let currentImageIndex = 0;
+
+function displayImageResults(query) {
+  const resultsContainer = document.getElementById('searchResults');
+  if (!resultsContainer) return;
+  const imagesGrid = document.createElement('div');
+  imagesGrid.className = 'images-grid';
+
+  imageItems = [
+    { src: 'img/poster-promosi.png', title: 'Poster Promosi', source: 'davanico.com' },
+    { src: 'img/logo-sederhana.png', title: 'Logo Sederhana', source: 'davanico.com' },
+    { src: 'img/konten-sosmed.png', title: 'Konten Sosial Media', source: 'davanico.com' },
+    { src: 'https://via.placeholder.com/300x200/fbbc05/ffffff?text=Web+Design', title: 'Undangan Digital', source: 'davanico.com' },
+    { src: 'https://via.placeholder.com/300x200/4285f4/ffffff?text=UI+Components', title: 'Banner & Flyer', source: 'davanico.com' },
+    { src: 'https://via.placeholder.com/300x200/ea4335/ffffff?text=Logo+Design', title: 'Template Presentasi', source: 'davanico.com' },
+    { src: 'https://via.placeholder.com/300x200/9c27b0/ffffff?text=Social+Dashboard', title: 'Social Media Dashboard', source: 'davanico.com' },
+    { src: 'https://via.placeholder.com/300x200/1a73e8/ffffff?text=FinTech+App', title: 'FinTech Mobile Banking', source: 'davanico.com' },
+    { src: 'https://via.placeholder.com/300x200/ff6f00/ffffff?text=E-Learning', title: 'E-Learning Platform', source: 'davanico.com' }
+  ];
+
+  imageItems.forEach((image, index) => {
+    const imageItem = document.createElement('div');
+    imageItem.className = 'image-item';
+    imageItem.innerHTML = `
+      <img src="${image.src}" alt="${image.title}" onclick="openLightbox(${index}, 'images')">
+      <div class="image-info">
+        <div class="image-title">${image.title}</div>
+        <div class="image-source">${image.source}</div>
+      </div>
+    `;
+    imagesGrid.appendChild(imageItem);
+  });
+  resultsContainer.appendChild(imagesGrid);
+}
+
+// === Lightbox General ===
+function openLightbox(index, source) {
+  const img = document.getElementById('lightbox-img');
+  const info = document.getElementById('lightbox-info');
+  const lightbox = document.getElementById('lightbox');
+
+  if (source === 'gallery') {
+    currentIndex = index;
+    const item = galleryItems[index];
+    img.src = item.src;
+    img.alt = item.title;
+    info.innerHTML = `<strong>${item.title}</strong><br><small>${item.category}</small>`;
+  } else if (source === 'images') {
+    currentImageIndex = index;
+    const item = imageItems[index];
+    img.src = item.src;
+    img.alt = item.title;
+    info.innerHTML = `<strong>${item.title}</strong><br><small>${item.source}</small>`;
+  }
+
+  img.classList.remove('show');
+  setTimeout(() => img.classList.add('show'), 10);
+  lightbox.classList.add('show');
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('show');
+}
+
+function nextLightbox() {
+  const lightbox = document.getElementById('lightbox');
+  if (!lightbox.classList.contains('show')) return;
+
+  if (imageItems.length && document.getElementById('lightbox-img').alt === imageItems[currentImageIndex].title) {
+    currentImageIndex = (currentImageIndex + 1) % imageItems.length;
+    openLightbox(currentImageIndex, 'images');
+  } else if (galleryItems.length) {
+    currentIndex = (currentIndex + 1) % galleryItems.length;
+    openLightbox(currentIndex, 'gallery');
+  }
+}
+
+function prevLightbox() {
+  const lightbox = document.getElementById('lightbox');
+  if (!lightbox.classList.contains('show')) return;
+
+  if (imageItems.length && document.getElementById('lightbox-img').alt === imageItems[currentImageIndex].title) {
+    currentImageIndex = (currentImageIndex - 1 + imageItems.length) % imageItems.length;
+    openLightbox(currentImageIndex, 'images');
+  } else if (galleryItems.length) {
+    currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+    openLightbox(currentIndex, 'gallery');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const lightbox = document.getElementById('lightbox');
+  let touchStartX = 0;
+
+  if (lightbox) {
+    lightbox.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+    lightbox.addEventListener('touchend', e => {
+      const touchEndX = e.changedTouches[0].screenX;
+      if (touchEndX < touchStartX - 50) nextLightbox();
+      else if (touchEndX > touchStartX + 50) prevLightbox();
+    });
+  }
+});
+
 
 // Display design results
 function displayRandomProjects() {
