@@ -99,13 +99,15 @@
 
 
 /* Google color scheme for Davanico */
-.letter-p { color: #4285f4; } /* Biru */
-.letter-r { color: #ea4335; } /* Merah */
-.letter-o { color: #fbbc05; } /* Kuning */
-.letter-j { color: #4285f4; } /* Biru */
-.letter-e { color: #34a853; } /* Hijau */
-.letter-c { color: #ea4335; } /* Merah */
-.letter-t { color: #4285f4; } /* Biru */
+/* Warna huruf ala Google */
+.letter-d { color: #4285f4; }  /* Biru */
+.letter-a1 { color: #ea4335; } /* Merah */
+.letter-v { color: #fbbc05; }  /* Kuning */
+.letter-a2 { color: #4285f4; } /* Biru */
+.letter-n { color: #34a853; }  /* Hijau */
+.letter-i { color: #ea4335; }  /* Merah */
+.letter-c { color: #4285f4; }  /* Biru */
+
 
 .search-section {
     width: 100%;
