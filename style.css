@@ -99,14 +99,13 @@
 
 
 /* Google color scheme for Davanico */
-.letter-d { color: #4285f4; }
-.letter-a1 { color: #ea4335; }
-.letter-v { color: #fbbc05; }
-.letter-a2 { color: #4285f4; }
-.letter-n { color: #34a853; }
-.letter-i { color: #ea4335; }
-.letter-c { color: #4285f4; }
-.letter-o { color: #34a853; }
+.letter-p { color: #4285f4; } /* Biru */
+.letter-r { color: #ea4335; } /* Merah */
+.letter-o { color: #fbbc05; } /* Kuning */
+.letter-j { color: #4285f4; } /* Biru */
+.letter-e { color: #34a853; } /* Hijau */
+.letter-c { color: #ea4335; } /* Merah */
+.letter-t { color: #4285f4; } /* Biru */
 
 .search-section {
     width: 100%;
