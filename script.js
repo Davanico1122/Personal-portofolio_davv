@@ -293,7 +293,7 @@ let galleryItems = [
   { src: 'img/sample.png', title: 'Kegiatan', category: 'kegiatan' },
   { src: 'img/sample.png', title: 'Pentas Seni', category: 'Kegiatan Sekolah' },
   { src: 'img/sample.png', title: 'KELAS XI DKV', category: 'Kelas' },
-  { src: 'img/gambar6.webp', title: 'Pra Mpls', category: 'Team Work' }
+  { src: 'img/sample.png', title: 'soon', category: 'soon' },
 ];
 let currentIndex = 0;
 
