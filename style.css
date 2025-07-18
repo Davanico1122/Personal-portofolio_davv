@@ -1,9 +1,9 @@
-
 /* Homepage Styles */
 .homepage-body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    font-family: 'Roboto', sans-serif;
 }
 
 .top-nav {
@@ -45,24 +45,16 @@
 .signin-btn {
     background: #1a73e8;
     border: 1px solid transparent;
-    font-family: Google Sans,Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
     font-weight: 500;
     font-size: 14px;
-    letter-spacing: .25px;
-    line-height: 16px;
-    margin-left: 10px;
-    margin-right: 8px;
-    min-width: 76px;
     padding: 9px 23px;
-    text-align: center;
-    cursor: pointer;
     color: #fff;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 .signin-btn:hover {
     background: #1557b0;
-    box-shadow: 0 1px 2px 0 rgba(66,133,244,.3), 0 1px 3px 1px rgba(66,133,244,.15);
 }
 
 .homepage-container {
@@ -73,41 +65,31 @@
     justify-content: center;
     padding: 0 20px;
     margin-top: -56px;
-}
-
-.logo-container {
     text-align: center;
-    margin-bottom: 25px;
 }
 
 .davanico-logo {
     font-size: 90px;
-    font-weight: 500; /* ubah dari 400 ke 500 */
-    font-family: 'Roboto', sans-serif; /* tambahkan ini */
-    user-select: none;
-    letter-spacing: 0; /* tambahkan ini juga */
+    font-weight: 500;
+    letter-spacing: 0;
 }
 
 .davanico-logo span {
     display: inline-block;
-    margin-right: 6px; /* untuk merapatkan antar huruf */
+    margin-right: 6px;
 }
 
 .davanico-logo span:last-child {
-    margin-right: 0; /* huruf terakhir tanpa jarak */
+    margin-right: 0;
 }
 
-
-/* Google color scheme for Davanico */
-/* Warna huruf ala Google */
-.letter-d { color: #4285f4; }  /* Biru */
-.letter-a1 { color: #ea4335; } /* Merah */
-.letter-v { color: #fbbc05; }  /* Kuning */
-.letter-a2 { color: #4285f4; } /* Biru */
-.letter-n { color: #34a853; }  /* Hijau */
-.letter-i { color: #ea4335; }  /* Merah */
-.letter-c { color: #4285f4; }  /* Biru */
-
+.letter-d { color: #4285f4; }
+.letter-a1 { color: #ea4335; }
+.letter-v { color: #fbbc05; }
+.letter-a2 { color: #4285f4; }
+.letter-n { color: #34a853; }
+.letter-i { color: #ea4335; }
+.letter-c { color: #4285f4; }
 
 .search-section {
     width: 100%;
@@ -125,44 +107,22 @@
     padding: 0 14px;
     width: 100%;
     position: relative;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.16);
-}
-
-.search-box-container:hover {
-    border-color: rgba(223,225,229,0);
-    box-shadow: 0 2px 8px 0 rgba(0,0,0,.24);
-}
-
-.search-box-container:focus-within {
-    border-color: rgba(223,225,229,0);
-    box-shadow: 0 2px 8px 0 rgba(0,0,0,.24);
-}
-
-.search-icon-left {
-    margin-right: 12px;
-    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .16);
 }
 
 #searchInput {
     background: transparent;
     border: none;
-    margin: 0;
     padding: 0;
     color: rgba(0,0,0,.87);
-    word-wrap: break-word;
-    outline: none;
-    display: flex;
-    flex: 100%;
     font-size: 16px;
-    line-height: 34px;
     height: 34px;
+    outline: none;
 }
 
 .search-icons-right {
     display: flex;
-    align-items: center;
     gap: 12px;
-    flex-shrink: 0;
 }
 
 .mic-icon, .camera-icon {
@@ -178,8 +138,8 @@
 .buttons-section {
     display: flex;
     gap: 11px;
-    flex-wrap: wrap;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .google-search-btn, .lucky-btn {
@@ -187,102 +147,54 @@
     border: 1px solid #f8f9fa;
     border-radius: 4px;
     color: #3c4043;
-    font-family: arial,sans-serif;
     font-size: 14px;
-    margin: 11px 4px;
     padding: 0 20px;
-    line-height: 27px;
     height: 36px;
-    min-width: 54px;
-    text-align: center;
     cursor: pointer;
-    user-select: none;
 }
 
 .google-search-btn:hover, .lucky-btn:hover {
-    box-shadow: 0 1px 1px rgba(0,0,0,.1);
-    background-color: #f8f9fa;
-    border: 1px solid #dadce0;
-    color: #202124;
+    background-color: #e0e0e0;
 }
 
-/* === RESET & GLOBAL STYLES === */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html, body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: 'Roboto', Arial, sans-serif;
-  font-size: 14px;
-  color: #202124;
-  background: #fff;
-}
-
-/* === FOOTER === */
 .homepage-footer {
-  background-color: #f2f2f2;
-  border-top: 1px solid #e4e4e4;
-  width: 100%;
-  margin-top: 40px;
-}
-
-.footer-content {
-  width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
-}
-
-.footer-country {
-  padding: 15px;
-  border-bottom: 1px solid #dadce0;
-  font-size: 15px;
-  color: rgba(0, 0, 0, 0.54);
+    background-color: #f2f2f2;
+    border-top: 1px solid #e4e4e4;
+    width: 100%;
+    margin-top: 40px;
 }
 
 .footer-links {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  width: 100%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
-.footer-left,
-.footer-right {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 10px 15px;
+.footer-left, .footer-right {
+    display: flex;
+    gap: 20px;
+    padding: 10px 15px;
 }
 
 .footer-links a {
-  color: rgba(0, 0, 0, 0.54);
-  text-decoration: none;
-  font-size: 14px;
+    color: rgba(0, 0, 0, 0.54);
+    text-decoration: none;
 }
 
 .footer-links a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
-/* === RESPONSIVE (MOBILE) === */
 @media (max-width: 768px) {
-  .footer-links {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+    .footer-links {
+        flex-direction: column;
+        text-align: center;
+    }
 
-  .footer-left,
-  .footer-right {
-    justify-content: center;
-    padding: 10px 0;
-  }
+    .footer-left, .footer-right {
+        justify-content: center;
+        padding: 10px 0;
+    }
 }
 
 
